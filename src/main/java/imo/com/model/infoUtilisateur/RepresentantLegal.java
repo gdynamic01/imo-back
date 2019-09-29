@@ -1,7 +1,7 @@
 /**
  * 
  */
-package imo.com.model.typeUtilisateur;
+package imo.com.model.infoUtilisateur;
 
 import java.io.Serializable;
 

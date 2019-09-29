@@ -19,10 +19,11 @@ import imo.com.response.ImoResponse;
 @RequestMapping(path = "/immo")
 public interface IUserPhysiqueApi {
 
-	/**
-	 * Creation compte utilisateur
-	 * @param responseEntity
-	 */
-	@PostMapping(path = "/inscription/client", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ImoResponse<UserPhysiqueDto>> creationCompte(@RequestBody UserPhysiqueDto userPhysiqueDto);
+    /**
+     * Creation compte utilisateur
+     * 
+     * @param responseEntity
+     */
+    @PostMapping(path = "/inscription/particulier", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ImoResponse<UserPhysiqueDto>> creationCompte(@RequestBody UserPhysiqueDto userPhysiqueDto);
 }

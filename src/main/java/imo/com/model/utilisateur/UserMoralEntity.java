@@ -13,7 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import imo.com.model.adresse.Adresse;
-import imo.com.model.typeUtilisateur.RepresentantLegal;
+import imo.com.model.infoUtilisateur.RepresentantLegal;
 
 /**
  * Entity entreprise ou promotteur

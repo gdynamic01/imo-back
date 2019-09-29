@@ -23,6 +23,6 @@ public interface IUserMoralApi {
      * @param userMoralDto
      * @return responseEntity
      */
-    @PostMapping(path = "/inscription/promoteur", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/inscription/professionnel", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ImoResponse<UserMoralDto>> creationCompte(@RequestBody UserMoralDto userMoralDto);
 }

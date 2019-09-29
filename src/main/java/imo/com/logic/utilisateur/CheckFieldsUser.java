@@ -9,7 +9,7 @@ import imo.com.general.IFonctionaliteCommune;
 import imo.com.logic.utilisateur.moral.dto.UserMoralDto;
 import imo.com.logic.utilisateur.physique.dto.UserPhysiqueDto;
 import imo.com.model.adresse.Adresse;
-import imo.com.model.typeUtilisateur.RepresentantLegal;
+import imo.com.model.infoUtilisateur.RepresentantLegal;
 import imo.com.response.ImoResponse;
 
 /**

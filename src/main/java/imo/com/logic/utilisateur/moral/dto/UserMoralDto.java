@@ -5,7 +5,7 @@ package imo.com.logic.utilisateur.moral.dto;
 
 import imo.com.logic.utilisateur.UserDto;
 import imo.com.model.adresse.Adresse;
-import imo.com.model.typeUtilisateur.RepresentantLegal;
+import imo.com.model.infoUtilisateur.RepresentantLegal;
 import imo.com.model.typeUtilisateur.TypeUtilisateurEnum;
 
 /**
