@@ -6,7 +6,7 @@ package imo.com.logic.utilisateur;
 import java.util.ArrayList;
 import java.util.List;
 
-import imo.com.model.typeUtilisateur.TypeUtilisateurEnum;
+import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 import imo.com.model.utilisateur.RoleUserEnum;
 
 /**

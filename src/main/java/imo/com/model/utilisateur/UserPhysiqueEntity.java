@@ -15,7 +15,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import imo.com.model.adresse.Adresse;
-import imo.com.model.infoUtilisateur.RepresentantLegal;
+import imo.com.model.info.RepresentantLegal;
 
 /**
  * L'entity client

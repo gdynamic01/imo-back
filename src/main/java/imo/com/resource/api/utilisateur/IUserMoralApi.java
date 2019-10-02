@@ -1,7 +1,7 @@
 /**
  * 
  */
-package imo.com.resource.api.user;
+package imo.com.resource.api.utilisateur;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

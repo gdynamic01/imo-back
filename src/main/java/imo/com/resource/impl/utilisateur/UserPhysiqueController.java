@@ -1,4 +1,4 @@
-package imo.com.resource.apiImpl.utilisateur;
+package imo.com.resource.impl.utilisateur;
 
 import javax.inject.Inject;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import imo.com.logic.utilisateur.physique.IUserPhysique;
 import imo.com.logic.utilisateur.physique.dto.UserPhysiqueDto;
-import imo.com.resource.api.user.IUserPhysiqueApi;
+import imo.com.resource.api.utilisateur.IUserPhysiqueApi;
 import imo.com.response.ImoResponse;
 
 /**

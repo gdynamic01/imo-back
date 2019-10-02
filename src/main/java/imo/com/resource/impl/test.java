@@ -1,7 +1,7 @@
 /**
  * 
  */
-package imo.com.resource.apiImpl;
+package imo.com.resource.impl;
 
 /**
  * @author mbalde

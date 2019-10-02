@@ -21,7 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import imo.com.model.AbstractEntity;
-import imo.com.model.typeUtilisateur.TypeUtilisateurEnum;
+import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 
 /**
  * @author mbalde

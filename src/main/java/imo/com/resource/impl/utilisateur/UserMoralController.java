@@ -1,4 +1,4 @@
-package imo.com.resource.apiImpl.utilisateur;
+package imo.com.resource.impl.utilisateur;
 
 import javax.inject.Inject;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import imo.com.logic.utilisateur.moral.IUserMoral;
 import imo.com.logic.utilisateur.moral.dto.UserMoralDto;
-import imo.com.resource.api.user.IUserMoralApi;
+import imo.com.resource.api.utilisateur.IUserMoralApi;
 import imo.com.response.ImoResponse;
 
 /**
