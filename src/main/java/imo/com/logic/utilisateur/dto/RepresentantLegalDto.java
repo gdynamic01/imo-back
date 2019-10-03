@@ -1,7 +1,7 @@
 /**
  * 
  */
-package imo.com.logic.utilisateur.physique.dto;
+package imo.com.logic.utilisateur.dto;
 
 /**
  * @author mbalde

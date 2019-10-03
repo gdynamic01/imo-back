@@ -16,11 +16,15 @@ import imo.com.model.utilisateur.RoleUserEnum;
  */
 public interface RoleRepository extends CrudRepository<Role, Long> {
 
-    /**
-     * @param role
-     * @return Role
-     */
-    Role findByRoleEnum(RoleUserEnum role);
+	/**
+	 * @param role
+	 * @return Role
+	 */
+	Role findByRoleEnum(RoleUserEnum role);
 
-    List<Role> findByRoleEnumIn(List<RoleUserEnum> roleEnum);
+	/**
+	 * @param roleEnum
+	 * @return liste role
+	 */
+	List<Role> findByRoleEnumIn(List<RoleUserEnum> roleEnum);
 }

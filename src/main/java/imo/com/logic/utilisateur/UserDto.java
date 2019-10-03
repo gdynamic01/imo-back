@@ -6,6 +6,8 @@ package imo.com.logic.utilisateur;
 import java.util.ArrayList;
 import java.util.List;
 
+import imo.com.logic.utilisateur.dto.AdresseDto;
+import imo.com.logic.utilisateur.dto.RepresentantLegalDto;
 import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 import imo.com.model.utilisateur.RoleUserEnum;
 
@@ -15,76 +17,110 @@ import imo.com.model.utilisateur.RoleUserEnum;
  */
 public abstract class UserDto {
 
-    /** email */
-    private String email;
+	/** adresse */
+	private AdresseDto adresse;
 
-    /** password */
-    private String password;
+	/** email */
+	private String email;
 
-    /** Role utilisateur */
-    private List<RoleUserEnum> roles = new ArrayList<>();
+	/** password */
+	private String password;
 
-    /** type utilisateur */
-    private TypeUtilisateurEnum typeUtilisateur;
+	/** representant legal */
+	private RepresentantLegalDto representantLegal;
 
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
+	/** Role utilisateur */
+	private List<RoleUserEnum> roles = new ArrayList<>();
 
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
+	/** type utilisateur */
+	private TypeUtilisateurEnum typeUtilisateur;
 
-    /**
-     * @return the roles
-     */
-    public List<RoleUserEnum> getRoles() {
-        return roles;
-    }
+	/**
+	 * @return the adresse
+	 */
+	public AdresseDto getAdresse() {
+		return adresse;
+	}
 
-    /**
-     * @return the typeUtilisateur
-     */
-    public TypeUtilisateurEnum getTypeUtilisateur() {
-        return typeUtilisateur;
-    }
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
 
-    /**
-     * @param email
-     *              the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
 
-    /**
-     * @param password
-     *                 the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	/**
+	 * @return the representantLegal
+	 */
+	public RepresentantLegalDto getRepresentantLegal() {
+		return representantLegal;
+	}
 
-    /**
-     * @param roles
-     *              the roles to set
-     */
-    public void setRoles(List<RoleUserEnum> roles) {
-        this.roles = roles;
-    }
+	/**
+	 * @return the roles
+	 */
+	public List<RoleUserEnum> getRoles() {
+		return roles;
+	}
 
-    /**
-     * @param typeUtilisateur
-     *                        the typeUtilisateur to set
-     */
-    public void setTypeUtilisateur(TypeUtilisateurEnum typeUtilisateur) {
-        this.typeUtilisateur = typeUtilisateur;
-    }
+	/**
+	 * @return the typeUtilisateur
+	 */
+	public TypeUtilisateurEnum getTypeUtilisateur() {
+		return typeUtilisateur;
+	}
+
+	/**
+	 * @param adresse the adresse to set
+	 */
+	public void setAdresse(AdresseDto adresse) {
+		this.adresse = adresse;
+	}
+
+	/**
+	 * @param email
+	 *              the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @param password
+	 *                 the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @param representantLegal the representantLegal to set
+	 */
+	public void setRepresentantLegal(RepresentantLegalDto representantLegal) {
+		this.representantLegal = representantLegal;
+	}
+
+	/**
+	 * @param roles
+	 *              the roles to set
+	 */
+	public void setRoles(List<RoleUserEnum> roles) {
+		this.roles = roles;
+	}
+
+	/**
+	 * @param typeUtilisateur
+	 *                        the typeUtilisateur to set
+	 */
+	public void setTypeUtilisateur(TypeUtilisateurEnum typeUtilisateur) {
+		this.typeUtilisateur = typeUtilisateur;
+	}
 
 }

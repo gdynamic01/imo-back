@@ -4,9 +4,6 @@
 package imo.com.logic.utilisateur.moral.dto;
 
 import imo.com.logic.utilisateur.UserDto;
-import imo.com.model.adresse.Adresse;
-import imo.com.model.info.RepresentantLegal;
-import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 
 /**
  * @author mbalde
@@ -14,111 +11,58 @@ import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
  */
 public class UserMoralDto extends UserDto {
 
-    /** adresse */
-    private Adresse adresse;
+	/** kbis */
+	private String kbis;
 
-    /** kbis */
-    private String kbis;
+	/** raison social */
+	private String raisonSocial;
 
-    /** raison social */
-    private String raisonSocial;
+	/** siret */
+	private String siret;
 
-    /** representant legal */
-    private RepresentantLegal representantLegal;
+	/**
+	 * @return the kbis
+	 */
+	public String getKbis() {
+		return kbis;
+	}
 
-    /** siret */
-    private String siret;
+	/**
+	 * @return the raisonSocial
+	 */
+	public String getRaisonSocial() {
+		return raisonSocial;
+	}
 
-    /** type promoteur */
-    private TypeUtilisateurEnum typePromoteur;
+	/**
+	 * @return the siret
+	 */
+	public String getSiret() {
+		return siret;
+	}
 
-    /**
-     * @return the adresse
-     */
-    public Adresse getAdresse() {
-        return adresse;
-    }
+	/**
+	 * @param kbis
+	 *             the kbis to set
+	 */
+	public void setKbis(String kbis) {
+		this.kbis = kbis;
+	}
 
-    /**
-     * @return the kbis
-     */
-    public String getKbis() {
-        return kbis;
-    }
+	/**
+	 * @param raisonSocial
+	 *                     the raisonSocial to set
+	 */
+	public void setRaisonSocial(String raisonSocial) {
+		this.raisonSocial = raisonSocial;
+	}
 
-    /**
-     * @return the raisonSocial
-     */
-    public String getRaisonSocial() {
-        return raisonSocial;
-    }
+	/**
+	 * @param siret
+	 *              the siret to set
+	 */
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
-    /**
-     * @return the representantLegal
-     */
-    public RepresentantLegal getRepresentantLegal() {
-        return representantLegal;
-    }
-
-    /**
-     * @return the siret
-     */
-    public String getSiret() {
-        return siret;
-    }
-
-    /**
-     * @return the typePromoteur
-     */
-    public TypeUtilisateurEnum getTypePromoteur() {
-        return typePromoteur;
-    }
-
-    /**
-     * @param adresse
-     *                the adresse to set
-     */
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
-
-    /**
-     * @param kbis
-     *             the kbis to set
-     */
-    public void setKbis(String kbis) {
-        this.kbis = kbis;
-    }
-
-    /**
-     * @param raisonSocial
-     *                     the raisonSocial to set
-     */
-    public void setRaisonSocial(String raisonSocial) {
-        this.raisonSocial = raisonSocial;
-    }
-
-    /**
-     * @param representantLegal
-     *                          the representantLegal to set
-     */
-    public void setRepresentantLegal(RepresentantLegal representantLegal) {
-        this.representantLegal = representantLegal;
-    }
-
-    /**
-     * @param siret
-     *              the siret to set
-     */
-    public void setSiret(String siret) {
-        this.siret = siret;
-    }
-
-    /**
-     * @param typePromoteur
-     *                      the typePromoteur to set
-     */
-    public void setTypePromoteur(TypeUtilisateurEnum typePromoteur) {
-        this.typePromoteur = typePromoteur;
-    }
 }

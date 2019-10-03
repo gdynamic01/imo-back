@@ -10,6 +10,16 @@ create table IF NOT EXISTS users(
     email varchar(500) not null CONSTRAINT email_unique UNIQUE,
     password varchar(500) not null,
     type_user varchar(13) not null,
+    code_postal varchar(8),
+    ville text not null,
+    pays text not null,
+    complement_adresse text,
+    libelle_rue varchar(70),
+    numero_rue varchar(5),
+    poste_occupe varchar(100),
+    prenom varchar(50) not null,
+    nom varchar(50) not null,
+    telephone varchar(15),
     enabled boolean,
     user_type varchar(100),
     PRIMARY KEY(id)
@@ -37,16 +47,6 @@ create table IF NOT EXISTS user_moral(
     id BIGSERIAL NOT NULL,
     kbis text,
     raison_social text,
-    code_postal varchar(8),
-    ville text not null,
-    pays text not null,
-    complement_adresse text,
-    libelle_rue varchar(70),
-    numero_rue varchar(5),
-    poste_occupe varchar(100),
-    prenom varchar(50) not null,
-    nom varchar(50) not null,
-    telephone varchar(15),
     siret varchar(20),
      PRIMARY KEY(id)
 );
@@ -54,16 +54,6 @@ create table IF NOT EXISTS user_moral(
 -- create table user_physique
 create table IF NOT EXISTS user_physique(
     id BIGSERIAL NOT NULL,
-    code_postal varchar(8),
-    ville text not null,
-    pays text not null,
-    complement_adresse text,
-    libelle_rue varchar(70),
-    numero_rue varchar(5),
-    poste_occupe varchar(100),
-    prenom varchar(50) not null,
-    nom varchar(50) not null,
-    telephone varchar(15),
     sexe varchar(2) not null,
      PRIMARY KEY(id)
 );
