@@ -6,7 +6,6 @@ package imo.com.model.utilisateur;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,7 +19,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_moral")
 @PrimaryKeyJoinColumn(name = "id")
-@DiscriminatorValue("promotteur")
 public class UserMoralEntity extends User implements Serializable {
 
 	/** Serial ID */

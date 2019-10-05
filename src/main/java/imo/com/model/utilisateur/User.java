@@ -8,7 +8,6 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,7 +32,6 @@ import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "user_type")
 public abstract class User extends AbstractEntity implements Serializable {
 
 	/** Serial ID */
@@ -49,7 +47,7 @@ public abstract class User extends AbstractEntity implements Serializable {
 
 	/** activation et desactivation */
 	@Column(name = "enabled")
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	/** mot de passe utilisateur */
 	@Column(name = "password", nullable = false)

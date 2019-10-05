@@ -12,9 +12,9 @@ public enum RoleUserEnum {
 	/** Administateur */
 	ADMIN ("Administrateur"), //
 	/** client user moral */
-	USER_MORAL ("client qui recherche une offre"), //
+	USER_MORAL ("entreprise"), //
 	/** Role promotteur immobilier */
-	USER_PHYSIQUE ("offre de propositon (entreprise, particulier)");
+	USER_PHYSIQUE ("particulier");
 
 	private String libelle;
 

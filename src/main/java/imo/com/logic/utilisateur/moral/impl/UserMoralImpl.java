@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -31,50 +30,44 @@ import imo.com.response.ImoResponse;
 @Component
 public class UserMoralImpl implements IUserMoral {
 
-    /** mapper userMoral */
-    @Inject
-    private UserMoralMapper mapper;
+	/** mapper userMoral */
+	@Inject
+	private UserMoralMapper mapper;
 
-    /** role repo */
-    @Inject
-    private RoleRepository roleRepository;
+	/** role repo */
+	@Inject
+	private RoleRepository roleRepository;
 
-    /** repo userMoral */
-    @Inject
-    private UserMoralRepository userMoralrepo;
+	/** repo userMoral */
+	@Inject
+	private UserMoralRepository userMoralrepo;
 
-    @Override
-    public ImoResponse<UserMoralDto> registration(UserMoralDto dto) {
+	@Override
+	public ImoResponse<UserMoralDto> registration(UserMoralDto dto) {
 
-        CheckFieldsUser checkUser = new CheckFieldsUser();
-        List<UserMoralDto> results = new ArrayList<>();
-        ImoResponse<UserMoralDto> imoResponse = new ImoResponse<>();
-        if (checkUser.checkObjectDto(dto, imoResponse)) {
-            FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
-                    ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, results);
-        } else {
-            UserMoralEntity entity = this.mapper.asObjectEntity(dto);
-            List<Role> roles = new ArrayList<>();
-            if (dto.getRoles() != null && !dto.getRoles().isEmpty()) {
-                roles = roleRepository.findByRoleEnumIn(dto.getRoles());
-            }
-            entity.setRoles(roles);
-            try {
-                this.userMoralrepo.save(entity);
-                FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
-                        ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, results);
-            } catch (Exception e) {
-                if (StringUtils.contains(e.getMessage(), "email")) {
-                    FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            ConstantesUtils.contrainteMessage(e.getMessage(), "email"), results);
-                } else {
-                    FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            ConstantesUtils.contrainteMessage(e.getMessage(), ""), results);
-                }
-            }
-        }
+		CheckFieldsUser checkUser = new CheckFieldsUser();
+		List<UserMoralDto> results = new ArrayList<>();
+		ImoResponse<UserMoralDto> imoResponse = new ImoResponse<>();
+		if (checkUser.checkObjectDto(dto, imoResponse))
+			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
+					ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, results);
+		else {
+			UserMoralEntity entity = this.mapper.asObjectEntity(dto);
+			List<Role> roles = new ArrayList<>();
+			if (dto.getRoles() != null && !dto.getRoles().isEmpty())
+				roles = roleRepository.findByRoleEnumIn(dto.getRoles());
+			entity.setRoles(roles);
+			try {
+				this.userMoralrepo.save(entity);
+				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
+						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, results);
+			} catch (Exception e) {
+				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
+						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), results);
+			}
+		}
 
-        return imoResponse;
-    }
+		return imoResponse;
+	}
 
 }

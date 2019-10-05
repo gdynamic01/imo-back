@@ -6,7 +6,6 @@ package imo.com.model.utilisateur;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,7 +21,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_physique")
 @PrimaryKeyJoinColumn(name = "id")
-@DiscriminatorValue("Client")
 public class UserPhysiqueEntity extends User implements Serializable {
 
 	/** Serial ID */

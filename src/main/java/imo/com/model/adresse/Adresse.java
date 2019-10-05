@@ -35,11 +35,11 @@ public class Adresse implements Serializable{
 	private String numeroRue;
 
 	/** pays */
-	@Column(name="pays", nullable = false)
+	@Column(name="pays")
 	private String pays;
 
 	/** ville */
-	@Column(name="ville", nullable = false)
+	@Column(name="ville")
 	private String ville;
 
 	/**
