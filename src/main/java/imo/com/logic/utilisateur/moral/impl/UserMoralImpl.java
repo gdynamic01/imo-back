@@ -9,6 +9,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import imo.com.general.ConstantesUtils;
@@ -29,6 +30,10 @@ import imo.com.response.ImoResponse;
  */
 @Component
 public class UserMoralImpl implements IUserMoral {
+
+	/** algo de crypto */
+	@Inject
+	private BCryptPasswordEncoder bcrypte;
 
 	/** mapper userMoral */
 	@Inject
@@ -58,10 +63,12 @@ public class UserMoralImpl implements IUserMoral {
 				roles = roleRepository.findByRoleEnumIn(dto.getRoles());
 			entity.setRoles(roles);
 			try {
+				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
 				this.userMoralrepo.save(entity);
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
 						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, results);
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), results);
 			}
