@@ -33,7 +33,7 @@ public class Role extends AbstractEntity implements Serializable{
 
 	/** liste user */
 	@ManyToMany(mappedBy="roles", fetch=FetchType.LAZY)
-	private Collection<User> user;
+	private Collection<AppUser> user;
 
 	/**
 	 * @return the role
@@ -45,7 +45,7 @@ public class Role extends AbstractEntity implements Serializable{
 	/**
 	 * @return the user
 	 */
-	public Collection<User> getUser() {
+	public Collection<AppUser> getUser() {
 		return user;
 	}
 
@@ -59,7 +59,7 @@ public class Role extends AbstractEntity implements Serializable{
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(Collection<User> user) {
+	public void setUser(Collection<AppUser> user) {
 		this.user = user;
 	}
 

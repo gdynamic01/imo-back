@@ -32,7 +32,7 @@ import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User extends AbstractEntity implements Serializable {
+public abstract class AppUser extends AbstractEntity implements Serializable {
 
 	/** Serial ID */
 	private static final long serialVersionUID = -716142150922491844L;
@@ -59,7 +59,11 @@ public abstract class User extends AbstractEntity implements Serializable {
 
 	/** liste des roles */
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+	@JoinTable(
+			name = "user_roles", joinColumns = @JoinColumn(
+					name = "user_id", referencedColumnName = "id", nullable = false
+			), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+	)
 	private Collection<Role> roles;
 
 	/** type utilisateur */

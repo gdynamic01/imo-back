@@ -9,6 +9,9 @@ package imo.com;
  */
 public class ErreurRequeteSql extends Exception {
 
+	/** ID */
+	private static final long serialVersionUID = 1597232615586838755L;
+
 	/** message */
 	private String message;
 

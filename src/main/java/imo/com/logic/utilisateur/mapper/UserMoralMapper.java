@@ -1,14 +1,14 @@
 /**
  * 
  */
-package imo.com.logic.utilisateur.moral.mapper;
+package imo.com.logic.utilisateur.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import imo.com.logic.IGeneriqueMapper;
-import imo.com.logic.utilisateur.moral.dto.UserMoralDto;
+import imo.com.logic.utilisateur.dto.UserMoralDto;
 import imo.com.model.utilisateur.UserMoralEntity;
 
 /**

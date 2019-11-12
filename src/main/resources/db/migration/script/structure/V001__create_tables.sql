@@ -19,6 +19,7 @@ create table IF NOT EXISTS users(
     poste_occupe varchar(100),
     prenom varchar(50) not null,
     nom varchar(50) not null,
+    sexe varchar(2) not null,
     telephone varchar(15),
     enabled boolean,
     user_type varchar(100),
@@ -54,7 +55,6 @@ create table IF NOT EXISTS user_moral(
 -- create table user_physique
 create table IF NOT EXISTS user_physique(
     id BIGSERIAL NOT NULL,
-    sexe varchar(2) not null,
      PRIMARY KEY(id)
 );
 

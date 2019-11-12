@@ -8,7 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import imo.com.general.IFonctionaliteCommune;
 import imo.com.logic.utilisateur.dto.AdresseDto;
 import imo.com.logic.utilisateur.dto.RepresentantLegalDto;
-import imo.com.logic.utilisateur.moral.dto.UserMoralDto;
+import imo.com.logic.utilisateur.dto.UserDto;
+import imo.com.logic.utilisateur.dto.UserMoralDto;
 import imo.com.response.ImoResponse;
 
 /**
@@ -95,6 +96,9 @@ public class CheckFieldsUser implements IFonctionaliteCommune {
 				message += "nom ";
 			if (StringUtils.isBlank(repL.getPrenom()))
 				message += "prenom ";
+			if (repL.getSexe() == null) {
+				message += "sexe ";
+			}
 		}
 		return message;
 	}
