@@ -1,13 +1,11 @@
 /**
  * 
  */
-package imo.com.logic.utilisateur;
+package imo.com.logic.utilisateur.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import imo.com.logic.utilisateur.dto.AdresseDto;
-import imo.com.logic.utilisateur.dto.RepresentantLegalDto;
 import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 import imo.com.model.utilisateur.RoleUserEnum;
 
@@ -15,7 +13,7 @@ import imo.com.model.utilisateur.RoleUserEnum;
  * @author mbalde
  *
  */
-public abstract class UserDto {
+public class UserDto {
 
 	/** adresse */
 	private AdresseDto adresse;

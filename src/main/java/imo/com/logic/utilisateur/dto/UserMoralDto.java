@@ -1,9 +1,7 @@
 /**
  * 
  */
-package imo.com.logic.utilisateur.moral.dto;
-
-import imo.com.logic.utilisateur.UserDto;
+package imo.com.logic.utilisateur.dto;
 
 /**
  * @author mbalde

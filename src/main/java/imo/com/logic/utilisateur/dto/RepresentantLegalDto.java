@@ -3,6 +3,8 @@
  */
 package imo.com.logic.utilisateur.dto;
 
+import imo.com.model.utilisateur.SexeEnum;
+
 /**
  * @author mbalde
  *
@@ -19,6 +21,9 @@ public class RepresentantLegalDto {
 
 	/** telephone */
 	private String telephone;
+
+	/** sexe */
+	private SexeEnum sexe;
 
 	/**
 	 * @return the nom
@@ -75,4 +80,19 @@ public class RepresentantLegalDto {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+
+	/**
+	 * @return the sexe
+	 */
+	public SexeEnum getSexe() {
+		return sexe;
+	}
+
+	/**
+	 * @param sexe the sexe to set
+	 */
+	public void setSexe(SexeEnum sexe) {
+		this.sexe = sexe;
+	}
+
 }

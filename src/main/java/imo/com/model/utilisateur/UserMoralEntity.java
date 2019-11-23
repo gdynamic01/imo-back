@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user_moral")
 @PrimaryKeyJoinColumn(name = "id")
-public class UserMoralEntity extends User implements Serializable {
+public class UserMoralEntity extends AppUser implements Serializable {
 
 	/** Serial ID */
 	private static final long serialVersionUID = -2506000331138240803L;
