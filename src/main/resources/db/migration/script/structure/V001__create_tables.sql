@@ -1,4 +1,4 @@
--- create schema
+kos^^$-- create schema
 CREATE SCHEMA IF NOT EXISTS public;
 
 -- create table users
