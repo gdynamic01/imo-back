@@ -21,18 +21,18 @@ import imo.com.model.AbstractEntity;
  *
  */
 @Entity
-@Table(name="role")
-public class Role extends AbstractEntity implements Serializable{
+@Table(name = "imo_role")
+public class Role extends AbstractEntity implements Serializable {
 
 	/** Serial ID */
 	private static final long serialVersionUID = -6488120240535583232L;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name="role", nullable = false, unique = true)
+	@Column(name = "role", nullable = false, unique = true)
 	private RoleUserEnum roleEnum;
 
 	/** liste user */
-	@ManyToMany(mappedBy="roles", fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	private Collection<AppUser> user;
 
 	/**
@@ -62,6 +62,5 @@ public class Role extends AbstractEntity implements Serializable{
 	public void setUser(Collection<AppUser> user) {
 		this.user = user;
 	}
-
 
 }

@@ -11,6 +11,7 @@ public enum TypeUtilisateurEnum {
 
 	/** Entreprise */
 	ENTREPRISE("Entreprise"), //
+
 	/** Particulier */
 	PARTICULIER("Particulier");
 
@@ -20,6 +21,7 @@ public enum TypeUtilisateurEnum {
 	private TypeUtilisateurEnum(String libelle) {
 		this.libelle = libelle;
 	}
+
 	/**
 	 * retourne le libelle
 	 * @return libelle

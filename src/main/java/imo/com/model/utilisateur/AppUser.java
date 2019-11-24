@@ -18,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import imo.com.model.AbstractEntity;
 import imo.com.model.adresse.Adresse;
 import imo.com.model.info.RepresentantLegal;
@@ -28,7 +30,7 @@ import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
  *
  */
 @Entity
-@Table(name = "users")
+@Table(name = "imo_users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class AppUser extends AbstractEntity implements Serializable {
 
@@ -41,6 +43,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 
 	/** email utilisateur */
 	@Column(name = "email", nullable = false, unique = true)
+	@JsonIgnore
 	private String email;
 
 	/** activation et desactivation */
@@ -49,6 +52,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 
 	/** mot de passe utilisateur */
 	@Column(name = "password", nullable = false)
+	@JsonIgnore
 	private String password;
 
 	/** representant legal */
@@ -58,7 +62,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	/** liste des roles */
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(
-			name = "user_roles", joinColumns = @JoinColumn(
+			name = "imo_user_roles", joinColumns = @JoinColumn(
 					name = "user_id", referencedColumnName = "id", nullable = false
 			), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
 	)
@@ -79,6 +83,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	/**
 	 * @return the email
 	 */
+	@JsonIgnore
 	public String getEmail() {
 		return email;
 	}
@@ -86,6 +91,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	/**
 	 * @return the password
 	 */
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -129,6 +135,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	 * @param email
 	 *              the email to set
 	 */
+	@JsonIgnore
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -145,6 +152,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	 * @param password
 	 *                 the password to set
 	 */
+	@JsonIgnore
 	public void setPassword(String password) {
 		this.password = password;
 	}

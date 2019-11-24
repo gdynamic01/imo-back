@@ -25,7 +25,6 @@ import imo.com.response.ImoResponse;
  * @author balde
  *
  */
-
 public class UserControllerTest extends ConfigTestImo {
 
 	private UserMoralDto userMoralDto = new UserMoralDto();

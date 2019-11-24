@@ -16,7 +16,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "user_physique")
+@Table(name = "imo_user_physique")
 @PrimaryKeyJoinColumn(name = "id")
 public class UserPhysiqueEntity extends AppUser implements Serializable {
 
