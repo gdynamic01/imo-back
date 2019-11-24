@@ -160,5 +160,4 @@ public abstract class Offre extends AbstractEntity implements Serializable {
 	public void setUser(AppUser user) {
 		this.user = user;
 	}
-
 }

@@ -1,5 +1,10 @@
 package imo.com.model.TypeMobile;
 
+/**
+ * 
+ * @author balde
+ *
+ */
 public enum TypeMobileEnum {
 
 	/** Voiture */

@@ -142,5 +142,4 @@ public abstract class MobileMoteur extends Mobile implements Serializable {
 	public void setTypeMobile(TypeMobileMoteurEnum typeMobile) {
 		this.typeMobileMoteur = typeMobile;
 	}
-
 }

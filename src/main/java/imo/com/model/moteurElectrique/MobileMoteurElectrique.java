@@ -54,5 +54,4 @@ public class MobileMoteurElectrique extends MobileMoteur implements Serializable
 	public void setDureebaterie(LocalTime dureebaterie) {
 		this.dureeBaterie = dureebaterie;
 	}
-
 }

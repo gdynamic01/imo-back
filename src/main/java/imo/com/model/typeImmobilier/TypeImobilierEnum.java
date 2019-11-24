@@ -1,5 +1,10 @@
 package imo.com.model.typeImmobilier;
 
+/**
+ * 
+ * @author balde
+ *
+ */
 public enum TypeImobilierEnum {
 
 	/** Maison */

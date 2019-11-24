@@ -1,5 +1,10 @@
 package imo.com.model;
 
+/**
+ * 
+ * @author balde
+ *
+ */
 public enum TypeMobileMoteurEnum {
 
 	/** Electrique */
