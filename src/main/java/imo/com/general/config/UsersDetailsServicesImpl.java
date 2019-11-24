@@ -22,6 +22,7 @@ import imo.com.repo.utilisateur.UserRepository;
  * @author balde
  *
  */
+
 @Service
 public class UsersDetailsServicesImpl implements UserDetailsService {
 
@@ -29,10 +30,11 @@ public class UsersDetailsServicesImpl implements UserDetailsService {
 	UserRepository repository;
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) {
+
 		AppUser user = this.repository.findByEnabledTrueAndEmail(email);
 		if (user == null) {
-			throw new UsernameNotFoundException("L'adresse " + email + " N'existe pas ou n'est pas activé");
+			throw new UsernameNotFoundException("L'adresse " + email + " N'existe pas");
 		}
 
 		Collection<GrantedAuthority> authories = new ArrayList<>();

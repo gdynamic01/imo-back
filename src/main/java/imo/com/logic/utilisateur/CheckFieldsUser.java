@@ -72,6 +72,8 @@ public class CheckFieldsUser implements IFonctionaliteCommune {
 			champsObligatoires += "email ";
 		if (StringUtils.isBlank(((UserDto) dto).getPassword()))
 			champsObligatoires += "password ";
+		if (((UserDto) dto).getTypeUtilisateur() == null)
+			champsObligatoires += "type_utilisateur ";
 		// Traitement resultat
 		if (!StringUtils.isBlank(champsObligatoires)) {
 			imoResponse.setChampsObligatoires(champsObligatoires.split(" "));

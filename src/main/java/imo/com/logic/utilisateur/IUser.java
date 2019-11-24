@@ -21,7 +21,7 @@ public interface IUser {
 	 * @param userDto
 	 * @return ResponseEntity token
 	 */
-	public ResponseEntity<JwtTokenResponse> authentification(UserDto userDto) throws Exception;
+	public ResponseEntity<JwtTokenResponse> authentification(UserDto userDto);
 
 	/**
 	 * @param dto

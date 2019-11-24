@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package imo.com.model.utilisateur;
 
 import java.io.Serializable;

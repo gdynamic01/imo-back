@@ -18,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import imo.com.general.ConstantesUtils;
 import imo.com.general.config.JwtTokenUtil;
@@ -29,10 +30,12 @@ import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
 import imo.com.logic.utilisateur.mapper.UserMapper;
 import imo.com.logic.utilisateur.mapper.UserMoralMapper;
+import imo.com.model.utilisateur.AppUser;
 import imo.com.model.utilisateur.Role;
 import imo.com.model.utilisateur.UserMoralEntity;
 import imo.com.model.utilisateur.UserPhysiqueEntity;
 import imo.com.repo.utilisateur.RoleRepository;
+import imo.com.repo.utilisateur.UserRepository;
 import imo.com.repo.utilisateur.moral.UserMoralRepository;
 import imo.com.repo.utilisateur.physique.UserPhysiqueRepository;
 import imo.com.response.ImoResponse;
@@ -43,6 +46,7 @@ import imo.com.response.JwtTokenResponse;
  *
  */
 @Component
+@Transactional
 public class UserImpl implements IUser {
 
 	@Autowired
@@ -72,6 +76,9 @@ public class UserImpl implements IUser {
 	@Inject
 	private UserMoralRepository userMoralrepo;
 
+	@Inject
+	private UserRepository userRepo;
+
 	/** mapper userPhysique */
 	@Inject
 	private UserMapper mapperParticulier;
@@ -81,8 +88,14 @@ public class UserImpl implements IUser {
 	private UserPhysiqueRepository userPhysiqueRepo;
 
 	@Override
-	public ResponseEntity<JwtTokenResponse> authentification(UserDto userDto) throws Exception {
+	public ResponseEntity<JwtTokenResponse> authentification(UserDto userDto) {
 
+		AppUser user = this.userRepo.findByEmail(userDto.getEmail());
+		if (user != null && !user.isEnabled()) {
+			return new ResponseEntity<>(
+					new JwtTokenResponse(null, "Votre compte n'est pas activé !!!", HttpStatus.UNAUTHORIZED.value()),
+					HttpStatus.UNAUTHORIZED);
+		}
 		authenticate(userDto.getEmail(), userDto.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(userDto.getEmail());
 
@@ -108,11 +121,10 @@ public class UserImpl implements IUser {
 	public ImoResponse<UserMoralDto> registration(UserMoralDto dto) {
 
 		CheckFieldsUser checkUser = new CheckFieldsUser();
-		List<UserMoralDto> results = new ArrayList<>();
 		ImoResponse<UserMoralDto> imoResponse = new ImoResponse<>();
 		if (checkUser.checkObjectDto(dto, imoResponse))
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
-					ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, results);
+					ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, null);
 		else {
 			UserMoralEntity entity = this.mapperProfessionnel.asObjectEntity(dto);
 			List<Role> roles = new ArrayList<>();
@@ -123,11 +135,11 @@ public class UserImpl implements IUser {
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
 				this.userMoralrepo.save(entity);
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
-						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, results);
+						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
 			}
 			catch (Exception e) {
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
-						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), results);
+						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), null);
 			}
 		}
 
@@ -138,11 +150,10 @@ public class UserImpl implements IUser {
 	public ImoResponse<UserDto> registration(UserDto dto) {
 
 		CheckFieldsUser checkUser = new CheckFieldsUser();
-		List<UserDto> results = new ArrayList<>();
 		ImoResponse<UserDto> imoResponse = new ImoResponse<>();
 		if (checkUser.checkObjectDto(dto, imoResponse))
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
-					ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, results);
+					ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, null);
 		else {
 			UserPhysiqueEntity entity = this.mapperParticulier.asObjectEntity(dto);
 			List<Role> roles = new ArrayList<>();
@@ -153,11 +164,11 @@ public class UserImpl implements IUser {
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
 				this.userPhysiqueRepo.save(entity);
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
-						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, results);
+						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
 			}
 			catch (Exception e) {
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
-						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), results);
+						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), null);
 			}
 		}
 		return imoResponse;

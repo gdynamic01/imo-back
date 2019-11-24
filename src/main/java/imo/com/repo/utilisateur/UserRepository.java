@@ -21,4 +21,6 @@ public interface UserRepository extends UserBaseRepository<AppUser> {
 	 */
 	public AppUser findByEnabledTrueAndEmail(String email);
 
+	public AppUser findByEmail(String email);
+
 }

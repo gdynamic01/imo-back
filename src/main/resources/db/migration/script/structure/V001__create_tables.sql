@@ -4,12 +4,11 @@ CREATE SCHEMA IF NOT EXISTS public;
 -- create table users
 create table IF NOT EXISTS users(
     id BIGSERIAL NOT NULL,
-    create_at timestamp without time zone,
-    update_at timestamp without time zone,
+    create_at date,
+    update_at date,
     modificationcounter integer,
     email varchar(500) not null CONSTRAINT email_unique UNIQUE,
     password varchar(500) not null,
-    type_user varchar(13) not null,
     code_postal varchar(8),
     ville text,
     pays text,
@@ -22,15 +21,15 @@ create table IF NOT EXISTS users(
     sexe varchar(2) not null,
     telephone varchar(15),
     enabled boolean,
-    user_type varchar(100),
+    type_user varchar(13) not null,
     PRIMARY KEY(id)
 );
 
 -- create table role
 create table IF NOT EXISTS role(
     id BIGSERIAL NOT NULL,
-    create_at timestamp without time zone,
-    update_at timestamp without time zone,
+    create_at date,
+    update_at date,
     modificationcounter integer,
     role varchar(60) not null CONSTRAINT role_unique UNIQUE,
     PRIMARY KEY(id)
