@@ -13,14 +13,14 @@ import javax.persistence.Embeddable;
  *
  */
 @Embeddable
-public class Adresse implements Serializable{
+public class Adresse implements Serializable {
 
 	/** Serial ID */
 	private static final long serialVersionUID = -5048414399607886867L;
 
 	/** le code postal */
 	@Column(name = "code_postal")
-	private String codePostal;
+	private int codePostal;
 
 	/** complement adresse */
 	@Column(name = "complement_adresse")
@@ -35,17 +35,17 @@ public class Adresse implements Serializable{
 	private String numeroRue;
 
 	/** pays */
-	@Column(name="pays")
+	@Column(name = "pays")
 	private String pays;
 
 	/** ville */
-	@Column(name="ville")
+	@Column(name = "ville")
 	private String ville;
 
 	/**
 	 * @return the codePostal
 	 */
-	public String getCodePostal() {
+	public int getCodePostal() {
 		return codePostal;
 	}
 
@@ -87,7 +87,7 @@ public class Adresse implements Serializable{
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(String codePostal) {
+	public void setCodePostal(int codePostal) {
 		this.codePostal = codePostal;
 	}
 

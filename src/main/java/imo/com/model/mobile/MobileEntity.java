@@ -1,7 +1,8 @@
-package imo.com.model.mobileMoteur;
+package imo.com.model.mobile;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,23 +10,28 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import imo.com.model.TypeMobileMoteurEnum;
-import imo.com.model.mobile.Mobile;
+import imo.com.model.enums.TypeMobileMoteurEnum;
+import imo.com.model.offre.OffreEntity;
 
 /**
  * @author rahime
  *
  */
-
 @Entity
-@Table(name = "imo_mobile_moteur")
+@Table(name = "imo_mobile")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class MobileMoteur extends Mobile implements Serializable {
+@PrimaryKeyJoinColumn(name = "id")
+public class MobileEntity extends OffreEntity implements Serializable {
 
 	/** Serial ID */
 	private static final long serialVersionUID = -716142150922491844L;
+
+	/** moteur*/
+	@Column(name = "motoriser", nullable = false)
+	private Boolean motoriser;
 
 	/** Kilometrage */
 	@Column(name = "kilometrage", nullable = false)
@@ -45,12 +51,34 @@ public abstract class MobileMoteur extends Mobile implements Serializable {
 
 	/** date mise en circulation du vehicule */
 	@Column(name = "date_mise_en_circulation", nullable = false)
-	private Date dateMiseCircualtion;
+	private LocalDate dateMiseEnCircualtion;
 
 	/** type_moteur */
 	@Column(name = "type_moteur", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TypeMobileMoteurEnum typeMobileMoteur;
+
+	/** batterie*/
+	@Column(name = "batterie", nullable = false)
+	private String batterie;
+
+	/** duree*/
+	@Column(name = "duree_batterie", nullable = false)
+	private LocalTime dureeBaterie;
+
+	/**
+	 * @return the motoriser
+	 */
+	public Boolean getMotoriser() {
+		return motoriser;
+	}
+
+	/**
+	 * @param motoriser the motoriser to set
+	 */
+	public void setMotoriser(Boolean motoriser) {
+		this.motoriser = motoriser;
+	}
 
 	/**
 	 * @return the kilometrage
@@ -109,17 +137,17 @@ public abstract class MobileMoteur extends Mobile implements Serializable {
 	}
 
 	/**
-	 * @return the dateMiseCircualtion
+	 * @return the dateMiseEnCircualtion
 	 */
-	public Date getDateMiseCircualtion() {
-		return dateMiseCircualtion;
+	public LocalDate getDateMiseEnCircualtion() {
+		return dateMiseEnCircualtion;
 	}
 
 	/**
-	 * @param dateMiseCircualtion the dateMiseCircualtion to set
+	 * @param dateMiseEnCircualtion the dateMiseEnCircualtion to set
 	 */
-	public void setDateMiseCircualtion(Date dateMiseCircualtion) {
-		this.dateMiseCircualtion = dateMiseCircualtion;
+	public void setDateMiseEnCircualtion(LocalDate dateMiseEnCircualtion) {
+		this.dateMiseEnCircualtion = dateMiseEnCircualtion;
 	}
 
 	/**
@@ -137,9 +165,30 @@ public abstract class MobileMoteur extends Mobile implements Serializable {
 	}
 
 	/**
-	 * @param typeMobile the typeMobile to set
+	 * @return the batterie
 	 */
-	public void setTypeMobile(TypeMobileMoteurEnum typeMobile) {
-		this.typeMobileMoteur = typeMobile;
+	public String getBatterie() {
+		return batterie;
+	}
+
+	/**
+	 * @param batterie the batterie to set
+	 */
+	public void setBatterie(String batterie) {
+		this.batterie = batterie;
+	}
+
+	/**
+	 * @return the dureeBaterie
+	 */
+	public LocalTime getDureeBaterie() {
+		return dureeBaterie;
+	}
+
+	/**
+	 * @param dureeBaterie the dureeBaterie to set
+	 */
+	public void setDureeBaterie(LocalTime dureeBaterie) {
+		this.dureeBaterie = dureeBaterie;
 	}
 }

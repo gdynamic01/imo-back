@@ -22,6 +22,10 @@ public abstract class AbstractEntity {
 	@Column(name = "create_at")
 	private LocalDate createAt = LocalDate.now();
 
+	/** date modification */
+	@Column(name = "update_at")
+	private LocalDate updateAt = LocalDate.now();
+
 	/** Id entity */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +35,6 @@ public abstract class AbstractEntity {
 	/** nombre de modification */
 	@Column(name = "modificationcounter")
 	private int modificationcounter = 0;
-
-	/** date mise a jour */
-	@Column(name = "update_at")
-	private LocalDate updateAt = LocalDate.now();
 
 	/**
 	 * @return the createAt
@@ -55,13 +55,6 @@ public abstract class AbstractEntity {
 	 */
 	public int getModificationcounter() {
 		return modificationcounter;
-	}
-
-	/**
-	 * @return the updateAt
-	 */
-	public LocalDate getUpdateAt() {
-		return updateAt;
 	}
 
 	/**
@@ -89,8 +82,14 @@ public abstract class AbstractEntity {
 	}
 
 	/**
-	 * @param updateAt
-	 *                 the updateAt to set
+	 * @return the updateAt
+	 */
+	public LocalDate getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * @param updateAt the updateAt to set
 	 */
 	public void setUpdateAt(LocalDate updateAt) {
 		this.updateAt = updateAt;

@@ -1,4 +1,4 @@
-package imo.com.model;
+package imo.com.model.enums;
 
 /**
  * 
@@ -14,7 +14,10 @@ public enum TypeMobileMoteurEnum {
 	HYBRIDE("Hybride"), //
 
 	/** Vapeur */
-	VAPEUR("Vapeur");
+	VAPEUR("Vapeur"),
+
+	/** PAS DE MOTEUR */
+	SANS_MOTEUR("Sans moteur");
 
 	/** Libelle enum */
 	private String libelle;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package imo.com.model.typeutilisateur;
+package imo.com.model.enums;
 
 /**
  * @author mbalde

@@ -22,8 +22,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import imo.com.model.AbstractEntity;
 import imo.com.model.adresse.Adresse;
+import imo.com.model.enums.TypeUtilisateurEnum;
 import imo.com.model.info.RepresentantLegal;
-import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
 
 /**
  * @author mbalde
@@ -43,7 +43,6 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 
 	/** email utilisateur */
 	@Column(name = "email", nullable = false, unique = true)
-	@JsonIgnore
 	private String email;
 
 	/** activation et desactivation */
@@ -83,7 +82,6 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	/**
 	 * @return the email
 	 */
-	@JsonIgnore
 	public String getEmail() {
 		return email;
 	}
@@ -135,7 +133,6 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	 * @param email
 	 *              the email to set
 	 */
-	@JsonIgnore
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -179,5 +176,4 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	public void setTypeUtilisateur(TypeUtilisateurEnum typeUtilisateur) {
 		this.typeUtilisateur = typeUtilisateur;
 	}
-
 }

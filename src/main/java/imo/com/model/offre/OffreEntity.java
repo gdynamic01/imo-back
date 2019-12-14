@@ -1,23 +1,30 @@
 package imo.com.model.offre;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import imo.com.model.AbstractEntity;
 import imo.com.model.adresse.Adresse;
+import imo.com.model.enums.TypeOffreEnum;
+import imo.com.model.enums.TypeServiceOffre;
+import imo.com.model.photo.PhotosEntity;
 import imo.com.model.utilisateur.AppUser;
 
 /**
@@ -27,7 +34,7 @@ import imo.com.model.utilisateur.AppUser;
 @Entity
 @Table(name = "imo_offre")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Offre extends AbstractEntity implements Serializable {
+public abstract class OffreEntity extends AbstractEntity implements Serializable {
 
 	/** Serial ID */
 	private static final long serialVersionUID = -716142150922491844L;
@@ -40,14 +47,6 @@ public abstract class Offre extends AbstractEntity implements Serializable {
 	@Column(name = "description", nullable = false)
 	private String description;
 
-	/** date publication de l'offre */
-	@Column(name = "date_publication", nullable = false)
-	private Date datePublication;
-
-	/** date mise à jour de l'offre */
-	@Column(name = "date_mise_a_jour", nullable = false)
-	private Date dateMiseAjour;
-
 	/** adresse de l'offre */
 	@Embedded
 	private Adresse adresse;
@@ -56,10 +55,23 @@ public abstract class Offre extends AbstractEntity implements Serializable {
 	@Column(name = "prix", nullable = false)
 	private Double prix;
 
+	/** user concerné */
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "users_id", nullable = false)
-	@JsonIgnore
 	private AppUser user;
+
+	/** type d'offre */
+	@Column(name = "type_offre", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TypeOffreEnum typeOffre;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type_service_offre")
+	private TypeServiceOffre typeServiceOffre;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "offre_id", referencedColumnName = "id", nullable = true)
+	private List<PhotosEntity> photosOffres = new ArrayList<PhotosEntity>();
 
 	/**
 	 * @return the titre
@@ -87,34 +99,6 @@ public abstract class Offre extends AbstractEntity implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * @return the datePublication
-	 */
-	public Date getDatePublication() {
-		return datePublication;
-	}
-
-	/**
-	 * @param datePublication the datePublication to set
-	 */
-	public void setDatePublication(Date datePublication) {
-		this.datePublication = datePublication;
-	}
-
-	/**
-	 * @return the dateMiseAjour
-	 */
-	public Date getDateMiseAjour() {
-		return dateMiseAjour;
-	}
-
-	/**
-	 * @param dateMiseAjour the dateMiseAjour to set
-	 */
-	public void setDateMiseAjour(Date dateMiseAjour) {
-		this.dateMiseAjour = dateMiseAjour;
 	}
 
 	/**
@@ -159,5 +143,61 @@ public abstract class Offre extends AbstractEntity implements Serializable {
 	@JsonIgnore
 	public void setUser(AppUser user) {
 		this.user = user;
+	}
+
+	/**
+	 * @return the typeOffre
+	 */
+	public TypeOffreEnum getTypeOffre() {
+		return typeOffre;
+	}
+
+	/**
+	 * @param typeOffre the typeOffre to set
+	 */
+	public void setTypeOffre(TypeOffreEnum typeOffre) {
+		this.typeOffre = typeOffre;
+	}
+
+	/**
+	 * @return the photosOffre
+	 */
+	public List<PhotosEntity> getPhotosOffre() {
+		return photosOffres;
+	}
+
+	/**
+	 * @param photosOffre the photosOffre to set
+	 */
+	public void setPhotosOffre(List<PhotosEntity> photosOffre) {
+		this.photosOffres = photosOffre;
+	}
+
+	/**
+	 * @return the typeServiceOffre
+	 */
+	public TypeServiceOffre getTypeServiceOffre() {
+		return typeServiceOffre;
+	}
+
+	/**
+	 * @param typeServiceOffre the typeServiceOffre to set
+	 */
+	public void setTypeServiceOffre(TypeServiceOffre typeServiceOffre) {
+		this.typeServiceOffre = typeServiceOffre;
+	}
+
+	/**
+	 * @return the photosOffres
+	 */
+	public List<PhotosEntity> getPhotosOffres() {
+		return photosOffres;
+	}
+
+	/**
+	 * @param photosOffres the photosOffres to set
+	 */
+	public void setPhotosOffres(List<PhotosEntity> photosOffres) {
+		this.photosOffres = photosOffres;
 	}
 }

@@ -1,74 +1,182 @@
 package imo.com.logic.offre.dto;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import imo.com.logic.photos.dto.PhotosDto;
 import imo.com.model.adresse.Adresse;
+import imo.com.model.enums.TypeOffreEnum;
+import imo.com.model.enums.TypeServiceOffre;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import java.util.Date;
+public abstract class OffreDto {
 
-public class OffreDto {
+	/** titre de l'offre */
+	private String titre;
 
+	/** Description de l'offre */
+	private String description;
 
-    /** Serial ID */
-    private static final long serialVersionUID = -716142150922491844L;
-    /** titre */
-    private String titre;
-    /** description */
-    private String description;
-    /** date de publication */
-    private Date datePublication;
-    /** date mise à jour */
-    private Date dateMaj;
-    /** adresse*/
-    private Adresse adresse;
-    /** prix */
-    private Double prix;
+	/** adresse de l'offre */
+	private Adresse adresse;
 
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
+	/** Prix de l'offre */
+	private Double prix;
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	/** date publication */
+	private LocalDate createAt;
 
-    public void setDatePublication(Date datePublication) {
-        this.datePublication = datePublication;
-    }
+	/** date mise a jour publication */
+	private LocalDate updateAt;
 
-    public void setDateMaj(Date dateMaj) {
-        this.dateMaj = dateMaj;
-    }
+	/** type d'offre */
+	private TypeOffreEnum typeOffre;
 
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
+	private TypeServiceOffre typeServiceOffre;
 
-    public void setPrix(Double prix) {
-        this.prix = prix;
-    }
+	/** Liste photos */
+	private List<PhotosDto> photosOffres = new ArrayList<>();
 
-    public String getTitre() {
-        return titre;
-    }
+	/** type annonce [particulier ou professionnel] */
+	private String typeAnnonce;
 
-    public String getDescription() {
-        return description;
-    }
+	/**
+	 * @return the titre
+	 */
+	public String getTitre() {
+		return titre;
+	}
 
-    public Date getDatePublication() {
-        return datePublication;
-    }
+	/**
+	 * @param titre the titre to set
+	 */
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
-    public Date getDateMaj() {
-        return dateMaj;
-    }
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
 
-    public Adresse getAdresse() {
-        return adresse;
-    }
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Double getPrix() {
-        return prix;
-    }
+	/**
+	 * @return the adresse
+	 */
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	/**
+	 * @param adresse the adresse to set
+	 */
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	/**
+	 * @return the prix
+	 */
+	public Double getPrix() {
+		return prix;
+	}
+
+	/**
+	 * @param prix the prix to set
+	 */
+	public void setPrix(Double prix) {
+		this.prix = prix;
+	}
+
+	/**
+	 * @return the typeOffre
+	 */
+	public TypeOffreEnum getTypeOffre() {
+		return typeOffre;
+	}
+
+	/**
+	 * @param typeOffre the typeOffre to set
+	 */
+	public void setTypeOffre(TypeOffreEnum typeOffre) {
+		this.typeOffre = typeOffre;
+	}
+
+	/**
+	 * @return the createAt
+	 */
+	public LocalDate getCreateAt() {
+		return createAt;
+	}
+
+	/**
+	 * @param createAt the createAt to set
+	 */
+	public void setCreateAt(LocalDate createAt) {
+		this.createAt = createAt;
+	}
+
+	/**
+	 * @return the updateAt
+	 */
+	public LocalDate getUpdateAt() {
+		return updateAt;
+	}
+
+	/**
+	 * @param updateAt the updateAt to set
+	 */
+	public void setUpdateAt(LocalDate updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	/**
+	 * @return the photosOffres
+	 */
+	public List<PhotosDto> getPhotosOffres() {
+		return photosOffres;
+	}
+
+	/**
+	 * @param photosOffres the photosOffres to set
+	 */
+	public void setPhotosOffres(List<PhotosDto> photosOffres) {
+		this.photosOffres = photosOffres;
+	}
+
+	/**
+	 * @return the typeAnnonce
+	 */
+	public String getTypeAnnonce() {
+		return typeAnnonce;
+	}
+
+	/**
+	 * @param typeAnnonce the typeAnnonce to set
+	 */
+	public void setTypeAnnonce(String typeAnnonce) {
+		this.typeAnnonce = typeAnnonce;
+	}
+
+	/**
+	 * @return the typeServiceOffre
+	 */
+	public TypeServiceOffre getTypeServiceOffre() {
+		return typeServiceOffre;
+	}
+
+	/**
+	 * @param typeServiceOffre the typeServiceOffre to set
+	 */
+	public void setTypeServiceOffre(TypeServiceOffre typeServiceOffre) {
+		this.typeServiceOffre = typeServiceOffre;
+	}
 }

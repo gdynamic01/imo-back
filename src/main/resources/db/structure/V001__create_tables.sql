@@ -9,7 +9,7 @@ create table IF NOT EXISTS public.imo_users(
     modificationcounter integer,
     email varchar(500) not null CONSTRAINT email_unique UNIQUE,
     password varchar(500) not null,
-    code_postal varchar(8),
+    code_postal int,
     ville text,
     pays text,
     complement_adresse text,
@@ -60,21 +60,21 @@ create table IF NOT EXISTS public.imo_user_physique(
 -- create table offre
 CREATE TABLE IF NOT EXISTS public.imo_offre (
     id BIGSERIAL NOT NULL,
-    create_at date,
     modificationcounter integer,
+    create_at date not null,
     update_at date,
-    code_postal character varying(255),
+    code_postal int,
     complement_adresse character varying(255),
     libelle_rue character varying(255),
     numero_rue character varying(255),
     pays character varying(255),
     ville character varying(255),
-    date_mise_a_jour timestamp without time zone NOT NULL,
-    date_publication timestamp without time zone NOT NULL,
     description character varying(255) NOT NULL,
     prix double precision NOT NULL,
     titre character varying(255) NOT NULL,
     users_id BIGSERIAL NOT NULL,
+    type_offre character varying(250) NOT NULL,
+    type_service_offre character varying(250) NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -82,7 +82,6 @@ CREATE TABLE IF NOT EXISTS public.imo_offre (
 CREATE TABLE IF NOT EXISTS public.imo_immobilier (
 	id BIGSERIAL NOT NULL,
     surface double precision NOT NULL,
-    type_immobiler character varying(255) NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -90,14 +89,9 @@ CREATE TABLE IF NOT EXISTS public.imo_immobilier (
 CREATE TABLE IF NOT EXISTS public.imo_mobile (
 	id BIGSERIAL NOT NULL,
     motoriser boolean NOT NULL,
-    type_mobile character varying(255) NOT NULL,
-    PRIMARY KEY(id)
-);
-
--- create table mobile_moteur
-CREATE TABLE IF NOT EXISTS public.imo_mobile_moteur (
-	id BIGSERIAL NOT NULL,
-    date_mise_en_circulation timestamp without time zone NOT NULL,
+    batterie character varying(255) NOT NULL,
+    duree_batterie time without time zone NOT NULL,
+    date_mise_en_circulation date NOT NULL,
     kilometrage double precision NOT NULL,
     model character varying(255) NOT NULL,
     nombre_porte double precision NOT NULL,
@@ -106,12 +100,15 @@ CREATE TABLE IF NOT EXISTS public.imo_mobile_moteur (
     PRIMARY KEY(id)
 );
 
--- create table 
-CREATE TABLE IF NOT EXISTS public.imo_mobile_moteur_electrique (
+-- create table photos
+CREATE TABLE IF NOT EXISTS public.imo_photos (
 	id BIGSERIAL NOT NULL,
-    batterie character varying(255) NOT NULL,
-    duree_batterie time without time zone NOT NULL,
-    PRIMARY KEY(id)
+	modificationcounter integer,
+	create_at date,
+    update_at date,
+	path_photos text NOT NULL,
+	offre_id BIGSERIAL NOT NULL,
+	CONSTRAINT imo_photos_pkey PRIMARY KEY(id)
 );
 
 -- Add contraintes
@@ -124,11 +121,7 @@ ALTER TABLE ONLY public.imo_immobilier
 ALTER TABLE ONLY public.imo_offre
     ADD CONSTRAINT fk41bjdvev9kcc9d887ks4wse8c FOREIGN KEY (users_id) REFERENCES public.imo_users(id);
 
-ALTER TABLE ONLY public.imo_mobile_moteur_electrique
-    ADD CONSTRAINT fkk0o74c5640bxm1h2irml3y6es FOREIGN KEY (id) REFERENCES public.imo_mobile_moteur(id);
-    
-ALTER TABLE ONLY public.imo_mobile_moteur
-    ADD CONSTRAINT fkm7b3k8kqci4o3jiprf1j7b1h5 FOREIGN KEY (id) REFERENCES public.imo_mobile(id);
+ALTER TABLE public.imo_photos ADD CONSTRAINT fkm7w044thf5518nhnw1amen6ti FOREIGN KEY (offre_id) REFERENCES imo_offre(id);
 
 ALTER TABLE ONLY imo_user_roles ADD CONSTRAINT fk_user_roles FOREIGN KEY(user_id) REFERENCES imo_users(id);
 

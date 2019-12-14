@@ -1,11 +1,13 @@
-package imo.com.model.TypeMobile;
-
 /**
  * 
+ */
+package imo.com.model.enums;
+
+/**
  * @author balde
  *
  */
-public enum TypeMobileEnum {
+public enum TypeOffreEnum {
 
 	/** Voiture */
 	VOITURE("Voiture"), //
@@ -14,12 +16,21 @@ public enum TypeMobileEnum {
 	VELO("Velo"), //
 
 	/** Moto */
-	MOTO("Moto");
+	MOTO("Moto"),
+
+	/** Maison */
+	APPARTEMENT("Appartement"), //
+
+	/** Terrain */
+	MAISON("Maison"), //
+
+	/** Appartement */
+	TERRAIN("Terrain");
 
 	/** Libelle enum */
 	private String libelle;
 
-	private TypeMobileEnum(String libelle) {
+	private TypeOffreEnum(String libelle) {
 		this.libelle = libelle;
 	}
 

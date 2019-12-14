@@ -16,7 +16,7 @@ import imo.com.logic.utilisateur.IUser;
 import imo.com.logic.utilisateur.dto.RepresentantLegalDto;
 import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
-import imo.com.model.typeutilisateur.TypeUtilisateurEnum;
+import imo.com.model.enums.TypeUtilisateurEnum;
 import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.model.utilisateur.SexeEnum;
 import imo.com.response.ImoResponse;
