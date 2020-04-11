@@ -1,9 +1,8 @@
-package imo.com.logic.mobiles.dto;
+package imo.com.logic.offre.dto;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
-import imo.com.logic.offre.dto.OffreDto;
 import imo.com.model.enums.TypeMobileMoteurEnum;
 
 public class MobileDto extends OffreDto {
@@ -24,7 +23,7 @@ public class MobileDto extends OffreDto {
 	private Double nbPorte;
 
 	/** date mise en circulation du vehicule */
-	private Date dateMiseEnCircualtion;
+	private LocalDate dateMiseEnCircualtion;
 
 	/** type_moteur */
 	private TypeMobileMoteurEnum typeMobileMoteur;
@@ -108,14 +107,14 @@ public class MobileDto extends OffreDto {
 	/**
 	 * @return the dateMiseEnCircualtion
 	 */
-	public Date getDateMiseEnCircualtion() {
+	public LocalDate getDateMiseEnCircualtion() {
 		return dateMiseEnCircualtion;
 	}
 
 	/**
 	 * @param dateMiseEnCircualtion the dateMiseEnCircualtion to set
 	 */
-	public void setDateMiseEnCircualtion(Date dateMiseEnCircualtion) {
+	public void setDateMiseEnCircualtion(LocalDate dateMiseEnCircualtion) {
 		this.dateMiseEnCircualtion = dateMiseEnCircualtion;
 	}
 

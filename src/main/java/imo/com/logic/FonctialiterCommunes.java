@@ -1,7 +1,7 @@
 /**
  * 
  */
-package imo.com.logic.utilisateur;
+package imo.com.logic;
 
 import java.util.List;
 

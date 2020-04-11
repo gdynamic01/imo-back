@@ -30,26 +30,26 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	private static final long serialVersionUID = -716142150922491844L;
 
 	/** moteur*/
-	@Column(name = "motoriser", nullable = false)
+	@Column(name = "motoriser")
 	private Boolean motoriser;
 
 	/** Kilometrage */
-	@Column(name = "kilometrage", nullable = false)
-	private Double kilometrage;
+	@Column(name = "kilometrage")
+	private int kilometrage;
 
 	/** Nombre de roue */
-	@Column(name = "nombre_roue", nullable = false)
-	private Double nbRoue;
+	@Column(name = "nombre_roue")
+	private int nbRoue = 0;
 
 	/** model */
-	@Column(name = "model", nullable = false)
+	@Column(name = "model")
 	private String model;
 
-	/** date publication de l'offre */
-	@Column(name = "nombre_porte", nullable = false)
-	private Double nbPorte;
+	/** nombre de porte */
+	@Column(name = "nombre_porte")
+	private int nbPorte = 0;
 
-	/** date mise en circulation du vehicule */
+	/** date mise en circulation du mobile */
 	@Column(name = "date_mise_en_circulation", nullable = false)
 	private LocalDate dateMiseEnCircualtion;
 
@@ -59,11 +59,11 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	private TypeMobileMoteurEnum typeMobileMoteur;
 
 	/** batterie*/
-	@Column(name = "batterie", nullable = false)
+	@Column(name = "batterie")
 	private String batterie;
 
 	/** duree*/
-	@Column(name = "duree_batterie", nullable = false)
+	@Column(name = "duree_batterie")
 	private LocalTime dureeBaterie;
 
 	/**
@@ -83,28 +83,28 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	/**
 	 * @return the kilometrage
 	 */
-	public Double getKilometrage() {
+	public int getKilometrage() {
 		return kilometrage;
 	}
 
 	/**
 	 * @param kilometrage the kilometrage to set
 	 */
-	public void setKilometrage(Double kilometrage) {
+	public void setKilometrage(int kilometrage) {
 		this.kilometrage = kilometrage;
 	}
 
 	/**
 	 * @return the nbRoue
 	 */
-	public Double getNbRoue() {
+	public int getNbRoue() {
 		return nbRoue;
 	}
 
 	/**
 	 * @param nbRoue the nbRoue to set
 	 */
-	public void setNbRoue(Double nbRoue) {
+	public void setNbRoue(int nbRoue) {
 		this.nbRoue = nbRoue;
 	}
 
@@ -125,14 +125,14 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	/**
 	 * @return the nbPorte
 	 */
-	public Double getNbPorte() {
+	public int getNbPorte() {
 		return nbPorte;
 	}
 
 	/**
 	 * @param nbPorte the nbPorte to set
 	 */
-	public void setNbPorte(Double nbPorte) {
+	public void setNbPorte(int nbPorte) {
 		this.nbPorte = nbPorte;
 	}
 

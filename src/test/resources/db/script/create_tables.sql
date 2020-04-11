@@ -88,14 +88,14 @@ CREATE TABLE IF NOT EXISTS public.imo_immobilier (
 -- create table mobile
 CREATE TABLE IF NOT EXISTS public.imo_mobile (
 	id BIGSERIAL NOT NULL,
-    motoriser boolean,
-    batterie character varying(255),
-    duree_batterie time without time zone,
+    motoriser boolean NOT NULL,
+    batterie character varying(255) NOT NULL,
+    duree_batterie time without time zone NOT NULL,
     date_mise_en_circulation date NOT NULL,
-    kilometrage integer,
+    kilometrage double precision NOT NULL,
     model character varying(255) NOT NULL,
-    nombre_porte integer,
-    nombre_roue integer,
+    nombre_porte double precision NOT NULL,
+    nombre_roue double precision NOT NULL,
     type_moteur character varying(255) NOT NULL,
     PRIMARY KEY(id)
 );

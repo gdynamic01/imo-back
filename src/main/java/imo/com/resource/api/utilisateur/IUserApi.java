@@ -14,7 +14,9 @@ import imo.com.response.ImoResponse;
  * @author balde
  *
  */
-@RequestMapping(path = "/immo")
+@RequestMapping(
+		path = "/immo", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
+)
 public interface IUserApi {
 
 	/**
@@ -22,10 +24,7 @@ public interface IUserApi {
 	 * @param userDto
 	 * @return token
 	 */
-	@PostMapping(
-			path = "/authentification", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
-	)
-
+	@PostMapping(path = "/authentification")
 	public ResponseEntity<?> connexion(@RequestBody UserDto userDto);
 
 	/**
@@ -33,10 +32,7 @@ public interface IUserApi {
 	 * @param userMoralDto
 	 * @return responseEntity
 	 */
-	@PostMapping(
-			path = "/inscription/professionnel", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
-	)
-
+	@PostMapping(path = "/inscription/professionnel")
 	public ResponseEntity<ImoResponse<UserMoralDto>> creationCompte(@RequestBody UserMoralDto professionnel);
 
 	/**
@@ -44,10 +40,7 @@ public interface IUserApi {
 	 * @param userPhysiqueDto
 	 * @param responseEntity
 	 */
-	@PostMapping(
-			path = "/inscription/particulier", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
-	)
-
+	@PostMapping(path = "/inscription/particulier")
 	public ResponseEntity<ImoResponse<UserDto>> creationCompte(@RequestBody UserDto particulier);
 
 }

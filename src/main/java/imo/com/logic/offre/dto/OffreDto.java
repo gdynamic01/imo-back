@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import imo.com.logic.photos.dto.PhotosDto;
-import imo.com.model.adresse.Adresse;
+import imo.com.logic.utilisateur.dto.AdresseDto;
+import imo.com.model.enums.SymboleMonetaireEnum;
 import imo.com.model.enums.TypeOffreEnum;
 import imo.com.model.enums.TypeServiceOffre;
 
@@ -18,20 +19,21 @@ public abstract class OffreDto {
 	private String description;
 
 	/** adresse de l'offre */
-	private Adresse adresse;
+	private AdresseDto adresse;
 
 	/** Prix de l'offre */
-	private Double prix;
+	private Double prix = 0.0;
 
 	/** date publication */
-	private LocalDate createAt;
+	private LocalDate createAt = LocalDate.now();
 
 	/** date mise a jour publication */
-	private LocalDate updateAt;
+	private LocalDate updateAt = LocalDate.now();
 
 	/** type d'offre */
 	private TypeOffreEnum typeOffre;
 
+	/** type offre */
 	private TypeServiceOffre typeServiceOffre;
 
 	/** Liste photos */
@@ -39,6 +41,9 @@ public abstract class OffreDto {
 
 	/** type annonce [particulier ou professionnel] */
 	private String typeAnnonce;
+
+	/** Symbole monetaire */
+	private SymboleMonetaireEnum SymboleMonetaire;
 
 	/**
 	 * @return the titre
@@ -71,14 +76,14 @@ public abstract class OffreDto {
 	/**
 	 * @return the adresse
 	 */
-	public Adresse getAdresse() {
+	public AdresseDto getAdresse() {
 		return adresse;
 	}
 
 	/**
 	 * @param adresse the adresse to set
 	 */
-	public void setAdresse(Adresse adresse) {
+	public void setAdresse(AdresseDto adresse) {
 		this.adresse = adresse;
 	}
 
@@ -178,5 +183,19 @@ public abstract class OffreDto {
 	 */
 	public void setTypeServiceOffre(TypeServiceOffre typeServiceOffre) {
 		this.typeServiceOffre = typeServiceOffre;
+	}
+
+	/**
+	 * @return the symboleMonetaire
+	 */
+	public SymboleMonetaireEnum getSymboleMonetaire() {
+		return SymboleMonetaire;
+	}
+
+	/**
+	 * @param symboleMonetaire the symboleMonetaire to set
+	 */
+	public void setSymboleMonetaire(SymboleMonetaireEnum symboleMonetaire) {
+		SymboleMonetaire = symboleMonetaire;
 	}
 }
