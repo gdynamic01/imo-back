@@ -1,6 +1,4 @@
-package imo.com.logic.immobiliers.dto;
-
-import imo.com.logic.offre.dto.OffreDto;
+package imo.com.logic.offre.dto;
 
 public class ImmobilierDto extends OffreDto {
 

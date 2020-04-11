@@ -24,6 +24,15 @@ public class ImoResponse<T> {
 	/** code http */
 	private int statut;
 
+	/** nombre d'offre */
+	private int nbOffre;
+
+	/** nombre offre particulier */
+	private int nbOffreParticulier;
+
+	/** nombre offre professionnel */
+	private int nbOffreProfessionnel;
+
 	/**
 	 * @return the champsObligatoires
 	 */
@@ -83,4 +92,47 @@ public class ImoResponse<T> {
 	public void setStatut(int codeResultat) {
 		this.statut = codeResultat;
 	}
+
+	/**
+	 * @return the nbOffre
+	 */
+	public int getNbOffre() {
+		return nbOffre;
+	}
+
+	/**
+	 * @param nbOffre the nbOffre to set
+	 */
+	public void setNbOffre(int nbOffre) {
+		this.nbOffre = nbOffre;
+	}
+
+	/**
+	 * @return the nbOffreParticulier
+	 */
+	public int getNbOffreParticulier() {
+		return nbOffreParticulier;
+	}
+
+	/**
+	 * @param nbOffreParticulier the nbOffreParticulier to set
+	 */
+	public void setNbOffreParticulier(int nbOffreParticulier) {
+		this.nbOffreParticulier = nbOffreParticulier;
+	}
+
+	/**
+	 * @return the nbOffreProfessionnel
+	 */
+	public int getNbOffreProfessionnel() {
+		return nbOffreProfessionnel;
+	}
+
+	/**
+	 * @param nbOffreProfessionnel the nbOffreProfessionnel to set
+	 */
+	public void setNbOffreProfessionnel(int nbOffreProfessionnel) {
+		this.nbOffreProfessionnel = nbOffreProfessionnel;
+	}
+
 }

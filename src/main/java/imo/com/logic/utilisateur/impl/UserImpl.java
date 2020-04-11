@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 import imo.com.general.ConstantesUtils;
 import imo.com.general.config.JwtTokenUtil;
 import imo.com.general.config.UsersDetailsServicesImpl;
+import imo.com.logic.FonctialiterCommunes;
 import imo.com.logic.utilisateur.CheckFieldsUser;
-import imo.com.logic.utilisateur.FonctialiterCommunes;
 import imo.com.logic.utilisateur.IUser;
 import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
@@ -48,6 +50,8 @@ import imo.com.response.JwtTokenResponse;
 @Component
 @Transactional
 public class UserImpl implements IUser {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserImpl.class);
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -128,8 +132,9 @@ public class UserImpl implements IUser {
 		else {
 			UserMoralEntity entity = this.mapperProfessionnel.asObjectEntity(dto);
 			List<Role> roles = new ArrayList<>();
-			if (dto.getRoles() != null && !dto.getRoles().isEmpty())
+			if (dto.getRoles() != null && !dto.getRoles().isEmpty()) {
 				roles = roleRepository.findByRoleEnumIn(dto.getRoles());
+			}
 			entity.setRoles(roles);
 			try {
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));

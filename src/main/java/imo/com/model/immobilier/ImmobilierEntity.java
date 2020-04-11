@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 import imo.com.model.offre.OffreEntity;
 
@@ -20,6 +21,7 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 	/** surface */
 	/** surface de l'offre */
 	@Column(name = "surface", nullable = false)
+	@Min(value = 9)
 	private Double surface;
 
 	/**

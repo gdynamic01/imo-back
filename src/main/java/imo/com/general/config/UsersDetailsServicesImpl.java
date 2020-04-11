@@ -42,7 +42,7 @@ public class UsersDetailsServicesImpl implements UserDetailsService {
 			authories.add(new SimpleGrantedAuthority(r.getRoleEnum().name()));
 		});
 
-		return new User(user.getRepresentantLegal().getNom() + " " + user.getRepresentantLegal().getPrenom(),
+		return new User(user.getRepresentantLegal().getNom() + " " + user.getRepresentantLegal().getPrenom()+ " " +user.getEmail(),
 				user.getPassword(), authories);
 	}
 

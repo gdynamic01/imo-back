@@ -44,7 +44,7 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	private String titre;
 
 	/** Description de l'offre */
-	@Column(name = "description", nullable = false)
+	@Column(name = "description")
 	private String description;
 
 	/** adresse de l'offre */
@@ -53,7 +53,7 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 
 	/** Prix de l'offre */
 	@Column(name = "prix", nullable = false)
-	private Double prix;
+	private Double prix = 0.0;
 
 	/** user concerné */
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
@@ -71,7 +71,7 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "offre_id", referencedColumnName = "id", nullable = true)
-	private List<PhotosEntity> photosOffres = new ArrayList<PhotosEntity>();
+	private List<PhotosEntity> photosOffres = new ArrayList<>();
 
 	/**
 	 * @return the titre

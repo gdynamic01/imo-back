@@ -5,8 +5,7 @@ package imo.com.logic.utilisateur;
 
 import org.apache.commons.lang3.StringUtils;
 
-import imo.com.general.IFonctionaliteCommune;
-import imo.com.logic.utilisateur.dto.AdresseDto;
+import imo.com.general.ICheckFieldsObject;
 import imo.com.logic.utilisateur.dto.RepresentantLegalDto;
 import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
@@ -16,36 +15,7 @@ import imo.com.response.ImoResponse;
  * @author mbalde
  *
  */
-public class CheckFieldsUser implements IFonctionaliteCommune {
-
-	/**
-	 * check object adresse
-	 * 
-	 * @param adresse
-	 *                Adresse
-	 * @return message
-	 */
-	private String checkAdresse(AdresseDto adresse) {
-		String message = "";
-		if (adresse == null)
-			message += "pays ville ";
-		else {
-			if (StringUtils.isBlank(adresse.getPays()))
-				message += "pays";
-			else if (!"Guinee".equals(adresse.getPays())) {
-				// verification rue, numero et code postal
-				if (StringUtils.isBlank(adresse.getNumeroRue()))
-					message += "numeroRue ";
-				if (StringUtils.isBlank(adresse.getLibelleRue()))
-					message += "libelleRue ";
-				if (StringUtils.isBlank(adresse.getCodePostal()))
-					message += "codePostal ";
-			}
-			if (adresse.getVille() == null)
-				message += "ville ";
-		}
-		return message;
-	}
+public class CheckFieldsUser implements ICheckFieldsObject {
 
 	/**
 	 * verification des champs non nullable
@@ -62,9 +32,8 @@ public class CheckFieldsUser implements IFonctionaliteCommune {
 	public <D> boolean checkObjectDto(Object dto, ImoResponse<D> imoResponse) {
 
 		String champsObligatoires = "";
-		if (dto instanceof UserMoralDto) {
-			if (((UserMoralDto) dto).getSiret() == null)
-				champsObligatoires += "numero siret ";
+		if (dto instanceof UserMoralDto && ((UserMoralDto) dto).getSiret() == null) {
+			champsObligatoires += "numero siret ";
 		}
 		// champs communs
 		champsObligatoires += checkRepresentantLegal(((UserDto) dto).getRepresentantLegal());

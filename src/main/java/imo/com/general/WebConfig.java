@@ -8,6 +8,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import imo.com.logic.utilisateur.UtilisateurConnecterContextHolder;
+
 /**
  * @author mbalde
  *
@@ -37,6 +39,11 @@ public class WebConfig implements WebMvcConfigurer {
 	public BCryptPasswordEncoder passwordEncoder() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
+	}
+
+	@Bean
+	public UtilisateurConnecterContextHolder userConnect() {
+		return new UtilisateurConnecterContextHolder();
 	}
 
 }

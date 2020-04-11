@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 				// dont authenticate this particular request
 				.authorizeRequests().antMatchers("/immo/authentification", "/immo/inscription/professionnel",
-						"/immo/inscription/particulier", "/h2-console/**")
+						"/immo/inscription/particulier", "/h2-console/**", "/immo/creation-offre")
 				.permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().

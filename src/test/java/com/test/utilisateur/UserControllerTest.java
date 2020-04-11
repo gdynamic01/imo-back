@@ -43,6 +43,7 @@ public class UserControllerTest extends ConfigTestImo {
 	}
 
 	@Test
+//	@SqlGroup({ @Sql(scripts = "db/script/create_tables.sql") })
 	public void registrationProfessionnelTest() {
 
 		ImoResponse<UserMoralDto> response1, response2, response5;
