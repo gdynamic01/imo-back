@@ -3,7 +3,12 @@
  */
 package imo.com.resource.impl.offre;
 
+import imo.com.logic.offre.IOffre;
+import imo.com.logic.offre.dto.OffreDto;
+import imo.com.logic.utilisateur.dto.UserMoralDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import imo.com.logic.offre.dto.OffreGlobalDto;
@@ -18,12 +23,17 @@ import imo.com.response.ImoResponse;
 public class OffreController implements IOffreApi{
 	
 	@Autowired
-	private IOffreApi iOffre;
+	private IOffre iOffre;
+
+
+
 
 	@Override
-	public ImoResponse<OffreGlobalDto> creationOffre(OffreGlobalDto dto) {
+	public ResponseEntity<ImoResponse<OffreGlobalDto>>  creationOffre(OffreGlobalDto dto) {
 		// TODO Auto-generated method stub
-		return null;
+		ImoResponse<OffreGlobalDto> imoResponse = this.iOffre.creationOffre(dto);
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+		//return null;
 	}
 
 	@Override

@@ -4,6 +4,7 @@
 package imo.com.resource.api.offre;
 
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,7 @@ public interface IOffreApi {
 	 * @return offreGlobalDto
 	 */
 	@PostMapping(path = "/creation-offre")
-	public ImoResponse<OffreGlobalDto> creationOffre(@RequestBody OffreGlobalDto dto);
+	public ResponseEntity<ImoResponse<OffreGlobalDto>> creationOffre(@RequestBody OffreGlobalDto dto);
 
 	/**
 	 * recupère toutes les offres
