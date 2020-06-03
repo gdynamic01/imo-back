@@ -82,6 +82,17 @@ CREATE TABLE IF NOT EXISTS public.imo_offre (
 CREATE TABLE IF NOT EXISTS public.imo_immobilier (
 	id BIGSERIAL NOT NULL,
     surface double precision NOT NULL,
+    nombre_pieces integer NOT NULL,
+    piscine character varying(255),
+    type_location character varying(255) NOT NULL,
+    sanitaire character varying(255) NOT NULL,
+    autre_service character varying(255),
+    zone_geographique character varying(255) NOT NULL,
+    parking character varying(255) NOT NULL,
+    electricite character varying(255) NOT NULL,
+    eau character varying(255) NOT NULL,
+    date_debut date NOT NULL,
+    date_fin date NOT NULL,
     PRIMARY KEY(id)
 );
 
