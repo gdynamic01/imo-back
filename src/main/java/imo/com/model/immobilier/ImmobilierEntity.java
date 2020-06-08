@@ -3,12 +3,12 @@ package imo.com.model.immobilier;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 
+import imo.com.model.enums.SanitaireEnum;
+import imo.com.model.enums.TypeBienImmobilierEnum;
+import imo.com.model.enums.TypeServiceOffre;
 import imo.com.model.offre.OffreEntity;
 
 @Entity
@@ -31,17 +31,22 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 	@Column(name = "date_fin", nullable = false)
 	public Date date_fin;
 	@Column(name = "nombre_pieces", nullable = false)
-	public int nbre_pices;
+	public int nbre_pieces;
 	@Column(name = "piscine", nullable =true)
 	public boolean piscine;
-	@Column(name = "type_location", nullable = false)
-	public String type_location;
-	@Column(name = "sanitaire", nullable = false)
-	public String sanitaire;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type_de_Bien")
+	private TypeBienImmobilierEnum type_de_Bien;
+
+	//@Column(name = "type_de_Bien", nullable = false)
+	//public String type_de_bien;
+	@Enumerated(EnumType.STRING)
+	public SanitaireEnum sanitaire;
 	@Column(name = "autre_service", nullable = true)
 	public String autre_service;
-	@Column(name = "service _menage", nullable = true)
-	public String service_menage;
+	@Column(name = "service_menage", nullable = true)
+	public Boolean service_menage;
 	@Column(name = "zone_geographique", nullable = false)
 	public String zone_geographique;
 	@Column(name = "parking", nullable = false)
@@ -51,13 +56,14 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 	@Column(name = "eau", nullable = false)
 	public Boolean eau;
 
-
-	public void setService_menage(String service_menage) {
-		this.service_menage = service_menage;
-	}
-	public String getService_menage() {
+	public Boolean getService_menage() {
 		return service_menage;
 	}
+
+	public void setService_menage(Boolean service_menage) {
+		this.service_menage = service_menage;
+	}
+
 	public void setEau(Boolean eau) {
 		this.eau = eau;
 	}
@@ -82,20 +88,12 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 		this.date_fin = date_fin;
 	}
 
-	public void setNbre_pices(int nbre_pices) {
-		this.nbre_pices = nbre_pices;
+	public void setNbre_pieces(int nbre_pices) {
+		this.nbre_pieces = nbre_pices;
 	}
 
 	public void setPiscine(boolean piscine) {
 		this.piscine = piscine;
-	}
-
-	public void setType_location(String type_location) {
-		this.type_location = type_location;
-	}
-
-	public void setSanitaire(String sanitaire) {
-		this.sanitaire = sanitaire;
 	}
 
 	public void setAutre_service(String autre_service) {
@@ -118,20 +116,28 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 		return date_fin;
 	}
 
-	public int getNbre_pices() {
-		return nbre_pices;
+	public int getNbre_pieces() {
+		return nbre_pieces;
 	}
 
 	public boolean isPiscine() {
 		return piscine;
 	}
 
-	public String getType_location() {
-		return type_location;
+	public TypeBienImmobilierEnum getType_de_Bien() {
+		return type_de_Bien;
 	}
 
-	public String getSanitaire() {
+	public void setType_de_Bien(TypeBienImmobilierEnum type_de_Bien) {
+		this.type_de_Bien = type_de_Bien;
+	}
+
+	public SanitaireEnum getSanitaire() {
 		return sanitaire;
+	}
+
+	public void setSanitaire(SanitaireEnum sanitaire) {
+		this.sanitaire = sanitaire;
 	}
 
 	public String getAutre_service() {

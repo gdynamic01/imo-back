@@ -1,5 +1,8 @@
 package imo.com.logic.offre.dto;
 
+import imo.com.model.enums.SanitaireEnum;
+import imo.com.model.enums.TypeBienImmobilierEnum;
+
 import javax.persistence.Column;
 import java.util.Date;
 
@@ -15,26 +18,29 @@ public class ImmobilierDto extends OffreDto {
 	// les champs à completer
 	public Date date_debut;
 	public Date date_fin;
-	public int nbre_pices;
+	public int nbre_pieces;
 	public boolean piscine;
 
-	public String type_location;
-
-	public String sanitaire;
-
+	//public String type_location;
+	private TypeBienImmobilierEnum type_de_Bien;
+	public SanitaireEnum sanitaire;
+	public Boolean eau;
 	public String autre_service;
-	public String service_menage;
+	public Boolean service_menage;
 
 	public String zone_geographique;
 
 	public Boolean parking;
+	public Boolean electricite;
 
-	public String getService_menage() {
+	public Boolean getService_menage() {
 		return service_menage;
 	}
-	public void setService_menage(String service_menage) {
+
+	public void setService_menage(Boolean service_menage) {
 		this.service_menage = service_menage;
 	}
+
 	public void setEau(Boolean eau) {
 		this.eau = eau;
 	}
@@ -42,20 +48,12 @@ public class ImmobilierDto extends OffreDto {
 	public void setElectricite(Boolean electricite) {
 		this.electricite = electricite;
 	}
-
-	@Column(name = "eau", nullable = false)
-	public Boolean eau;
-
 	public Boolean getEau() {
 		return eau;
 	}
-
 	public Boolean getElectricite() {
 		return electricite;
 	}
-
-	@Column(name = "electricite", nullable = false)
-	public Boolean electricite;
 
 	public void setDate_debut(Date date_debut) {
 		this.date_debut = date_debut;
@@ -64,20 +62,19 @@ public class ImmobilierDto extends OffreDto {
 	public void setDate_fin(Date date_fin) {
 		this.date_fin = date_fin;
 	}
-
 	public void setNbre_pices(int nbre_pices) {
-		this.nbre_pices = nbre_pices;
+		this.nbre_pieces = nbre_pices;
 	}
 
 	public void setPiscine(boolean piscine) {
 		this.piscine = piscine;
 	}
 
-	public void setType_location(String type_location) {
-		this.type_location = type_location;
+	public SanitaireEnum getSanitaire() {
+		return sanitaire;
 	}
 
-	public void setSanitaire(String sanitaire) {
+	public void setSanitaire(SanitaireEnum sanitaire) {
 		this.sanitaire = sanitaire;
 	}
 
@@ -101,22 +98,14 @@ public class ImmobilierDto extends OffreDto {
 		return date_fin;
 	}
 
-	public int getNbre_pices() {
-		return nbre_pices;
+	public int getNbre_pieces() {
+		return nbre_pieces;
 	}
 
 	public boolean isPiscine() {
 		return piscine;
 	}
-
-	public String getType_location() {
-		return type_location;
-	}
-
-	public String getSanitaire() {
-		return sanitaire;
-	}
-
+	
 	public String getAutre_service() {
 		return autre_service;
 	}
@@ -131,6 +120,18 @@ public class ImmobilierDto extends OffreDto {
 
 	public Double getSurface() {
 		return surface;
+	}
+
+	public TypeBienImmobilierEnum getType_de_Bien() {
+		return type_de_Bien;
+	}
+
+	public void setNbre_pieces(int nbre_pieces) {
+		this.nbre_pieces = nbre_pieces;
+	}
+
+	public void setType_de_Bien(TypeBienImmobilierEnum type_de_Bien) {
+		this.type_de_Bien = type_de_Bien;
 	}
 
 	/**
