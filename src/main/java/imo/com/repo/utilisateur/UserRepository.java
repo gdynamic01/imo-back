@@ -3,15 +3,12 @@
  */
 package imo.com.repo.utilisateur;
 
-import javax.transaction.Transactional;
-
 import imo.com.model.utilisateur.AppUser;
 
 /**
  * @author mbalde
  *
  */
-@Transactional
 public interface UserRepository extends UserBaseRepository<AppUser> {
 
 	/**

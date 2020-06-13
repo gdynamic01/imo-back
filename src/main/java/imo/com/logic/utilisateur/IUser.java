@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
+import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
 import imo.com.response.ImoResponse;
 import imo.com.response.JwtTokenResponse;
 
@@ -27,11 +28,17 @@ public interface IUser {
 	 * @param dto
 	 * @return userMoralDto
 	 */
-	public ImoResponse<UserMoralDto> registration(UserMoralDto dto);
+	public ImoResponse<UserMoralDto> registration(UserMoralDto dto); 
 
 	/**
 	 * @param dto donnee utilisateur physique
 	 * @return userPhysiqueDto
 	 */
-	public ImoResponse<UserDto> registration(UserDto dto);
+	public ImoResponse<UserPhysiqueDto> registration(UserPhysiqueDto dto);
+	
+	/**
+	 * @param email la valeur de l'email
+	 * @return l'email
+	 */
+	public String getEmail(String email);
 }

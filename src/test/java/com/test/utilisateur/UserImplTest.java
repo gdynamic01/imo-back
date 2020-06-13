@@ -1,7 +1,11 @@
 package com.test.utilisateur;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,27 +13,31 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.test.config.ConfigTestImo;
 
 import imo.com.logic.utilisateur.IUser;
 import imo.com.logic.utilisateur.dto.RepresentantLegalDto;
-import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
+import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
 import imo.com.model.enums.TypeUtilisateurEnum;
+import imo.com.model.utilisateur.AppUser;
 import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.model.utilisateur.SexeEnum;
+import imo.com.model.utilisateur.UserPhysiqueEntity;
+import imo.com.repo.utilisateur.UserRepository;
 import imo.com.response.ImoResponse;
 
 /**
  * @author balde
  *
  */
-public class UserControllerTest extends ConfigTestImo {
+public class UserImplTest extends ConfigTestImo {
 
 	private UserMoralDto userMoralDto = new UserMoralDto();
 
-	private UserDto userDto = new UserDto();
+	private UserPhysiqueDto userPhysiqueDto = new UserPhysiqueDto();
 
 	RepresentantLegalDto repr;
 
@@ -37,13 +45,15 @@ public class UserControllerTest extends ConfigTestImo {
 	private IUser iUser;
 
 	List<RoleUserEnum> roles;
+	
+	private static final String emailParticulier = "particulier@yahoo.fr";
+	
+	private static final String emailProfessionnel = "professionel@yahoo.fr";
+	
+	@MockBean
+	private UserRepository userRepo;
 
 	@Test
-	public void userControllerTest() {
-	}
-
-	@Test
-//	@SqlGroup({ @Sql(scripts = "db/script/create_tables.sql") })
 	public void registrationProfessionnelTest() {
 
 		ImoResponse<UserMoralDto> response1, response2, response5;
@@ -69,17 +79,17 @@ public class UserControllerTest extends ConfigTestImo {
 	@Test
 	public void registrationParticulierTest() {
 
-		ImoResponse<UserDto> response3, response4, response6;
+		ImoResponse<UserPhysiqueDto> response3, response4, response6;
 
 		// 1-- Cas erreur [champs obligatoires n'ont renseigné]
-		response3 = this.iUser.registration(userDto);
+		response3 = this.iUser.registration(userPhysiqueDto);
 
 		// 2-- Cas sans erreur
-		userDto.setEmail("test@yahoo.fr");
-		response4 = this.iUser.registration(userDto);
+		userPhysiqueDto.setEmail(emailParticulier);
+		response4 = this.iUser.registration(userPhysiqueDto);
 
 		// 3-- Cas erreur [email existant]
-		response6 = this.iUser.registration(userDto);
+		response6 = this.iUser.registration(userPhysiqueDto);
 
 		assertNotNull(response3);
 		assertTrue(response3.getStatut() == 400);
@@ -87,6 +97,20 @@ public class UserControllerTest extends ConfigTestImo {
 		assertTrue(response6.getStatut() == 500);
 		assertNotNull(response4);
 		assertTrue(response4.getStatut() == 200);
+	}
+	
+	@Test
+	public void getEmailNotFoundTest() {
+		String email = iUser.getEmail("m@yahoo.fr");
+		assertNull(email);
+		assertNotEquals("m@yahoo.fr", email);
+	}
+	
+	@Test 
+	public void getEmailSuccessTest() {
+		String email = iUser.getEmail(emailParticulier);
+		assertNotNull(email);
+		assertEquals(emailParticulier, email);
 	}
 
 	@Before
@@ -98,7 +122,7 @@ public class UserControllerTest extends ConfigTestImo {
 		repr.setNom("BALDE");
 		repr.setPrenom("Mamadou");
 		repr.setSexe(SexeEnum.M);
-		userMoralDto.setEmail("test20@yahoo.fr");
+		userMoralDto.setEmail(emailProfessionnel);
 		userMoralDto.setRepresentantLegal(repr);
 		userMoralDto.setPassword("testtest");
 		userMoralDto.setSiret("215468L");
@@ -111,11 +135,18 @@ public class UserControllerTest extends ConfigTestImo {
 		repr.setNom("BAH");
 		repr.setPrenom("Mata");
 		repr.setSexe(SexeEnum.F);
-		userDto.setRepresentantLegal(repr);
-		userDto.setPassword("testtest");
+		userPhysiqueDto.setRepresentantLegal(repr);
+		userPhysiqueDto.setPassword("testtest");
 		roles.add(RoleUserEnum.USER_PHYSIQUE);
-		userDto.setTypeUtilisateur(TypeUtilisateurEnum.PARTICULIER);
-		userDto.setRoles(roles);
+		userPhysiqueDto.setTypeUtilisateur(TypeUtilisateurEnum.PARTICULIER);
+		userPhysiqueDto.setRoles(roles);
+		
+		AppUser appUser = new UserPhysiqueEntity();
+		appUser.setEmail(emailParticulier);
+		appUser.setId(1L);
+		
+		when(userRepo.findByEmail(emailParticulier)).thenReturn(appUser);
+		
 	}
 
 }

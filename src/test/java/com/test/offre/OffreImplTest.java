@@ -23,9 +23,7 @@ import imo.com.logic.offre.dto.ImmobilierDto;
 import imo.com.logic.offre.dto.MobileDto;
 import imo.com.logic.offre.dto.OffreDto;
 import imo.com.logic.offre.dto.OffreGlobalDto;
-import imo.com.logic.utilisateur.UtilisateurConnecterContextHolder;
 import imo.com.logic.utilisateur.dto.AdresseDto;
-import imo.com.logic.utilisateur.mapper.UserMapper;
 import imo.com.model.enums.TypeMobileMoteurEnum;
 import imo.com.model.enums.TypeOffreEnum;
 import imo.com.model.enums.TypeServiceOffre;
@@ -57,12 +55,6 @@ public class OffreImplTest extends ConfigTestImo {
 
 	@Autowired
 	private RoleRepository roleRepository;
-
-	@Autowired
-	private UserMapper userMapper;
-
-	@Autowired
-	private UtilisateurConnecterContextHolder userConnect;
 
 	private UserPhysiqueEntity particulier;
 

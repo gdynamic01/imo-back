@@ -14,6 +14,8 @@ import imo.com.response.ImoResponse;
  *
  */
 public abstract class FonctialiterCommunes {
+	
+	public static String messageErreur = "";
 
     /**
      * @param imo
