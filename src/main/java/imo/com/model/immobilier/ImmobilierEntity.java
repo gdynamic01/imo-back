@@ -43,11 +43,11 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 	//public String type_de_bien;
 	@Enumerated(EnumType.STRING)
 	public SanitaireEnum sanitaire;
-	@Column(name = "autre_service", nullable = true)
+	@Column(name = "autre_service")
 	public String autre_service;
-	@Column(name = "service_menage", nullable = true)
+	@Column(name = "service_menage")
 	public Boolean service_menage;
-	@Column(name = "zone_geographique", nullable = false)
+	@Column(name = "zone_geographique")
 	public String zone_geographique;
 	@Column(name = "parking", nullable = false)
 	public Boolean parking;

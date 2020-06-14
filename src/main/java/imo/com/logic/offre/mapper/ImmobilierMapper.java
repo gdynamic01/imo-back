@@ -29,6 +29,7 @@ public class ImmobilierMapper implements IGeneriqueMapper<ImmobilierDto, Immobil
 	@Override
 	public ImmobilierEntity asObjectEntity(ImmobilierDto in) {
 		return this.modelMapper.map(in, ImmobilierEntity.class);
+
 	}
 
 }
