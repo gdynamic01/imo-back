@@ -23,9 +23,9 @@ import imo.com.logic.offre.dto.ImmobilierDto;
 import imo.com.logic.offre.dto.MobileDto;
 import imo.com.logic.offre.dto.OffreDto;
 import imo.com.logic.offre.dto.OffreGlobalDto;
-import imo.com.logic.utilisateur.UtilisateurConnecterContextHolder;
 import imo.com.logic.utilisateur.dto.AdresseDto;
-import imo.com.logic.utilisateur.mapper.UserMapper;
+import imo.com.model.enums.SanitaireEnum;
+import imo.com.model.enums.TypeBienImmobilierEnum;
 import imo.com.model.enums.TypeMobileMoteurEnum;
 import imo.com.model.enums.TypeOffreEnum;
 import imo.com.model.enums.TypeServiceOffre;
@@ -58,12 +58,6 @@ public class OffreImplTest extends ConfigTestImo {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	@Autowired
-	private UserMapper userMapper;
-
-	@Autowired
-	private UtilisateurConnecterContextHolder userConnect;
-
 	private UserPhysiqueEntity particulier;
 
 	private OffreGlobalDto offreGlobalDto;
@@ -95,15 +89,15 @@ public class OffreImplTest extends ConfigTestImo {
 
 	}
 
-	@Test
-	public void shouldCreationOffreWithImmobilierSansErreur() {
-
-		ImoResponse<OffreGlobalDto> response = this.iOffre.creationOffre(this.offreGlobalDto);
-
-		assertNull(response.getChampsObligatoires());
-		assertEquals(200, response.getStatut());
-
-	}
+//	@Test
+//	public void shouldCreationOffreWithImmobilierSansErreur() {
+//
+//		ImoResponse<OffreGlobalDto> response = this.iOffre.creationOffre(this.offreGlobalDto);
+//
+//		assertNull(response.getChampsObligatoires());
+//		assertEquals(200, response.getStatut());
+//
+//	}
 
 	@Test
 	public void shouldCreationOffreDeMobileAvecAdresseErreur() {
@@ -198,6 +192,14 @@ public class OffreImplTest extends ConfigTestImo {
 			offreDto.setTypeOffre(TypeOffreEnum.APPARTEMENT);
 			((ImmobilierDto) offreDto).setSurface(9.0);
 			((ImmobilierDto) offreDto).setPrix(700.5);
+			((ImmobilierDto) offreDto).setDateDebut(LocalDate.now());
+			((ImmobilierDto) offreDto).setDateFin(LocalDate.now());
+			((ImmobilierDto) offreDto).setNbrePieces(2);
+			((ImmobilierDto) offreDto).setTypeDeBien(TypeBienImmobilierEnum.APPARTEMENT);
+			((ImmobilierDto) offreDto).setSanitaire(SanitaireEnum.EXTERIEUR);
+			((ImmobilierDto) offreDto).setParking(true);
+			((ImmobilierDto) offreDto).setElectricite(true);
+			((ImmobilierDto) offreDto).setEau(true);
 		}
 	}
 
