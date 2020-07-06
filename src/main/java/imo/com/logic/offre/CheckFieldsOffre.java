@@ -90,7 +90,7 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 			champs += "surface ";
 		}
 
-		if (immobilierDto.getType_de_Bien() == null) {
+		if (immobilierDto.getTypeDeBien() == null) {
 			champs += "type_de_Bien";
 		}
 		if (immobilierDto.getParking()== null) {

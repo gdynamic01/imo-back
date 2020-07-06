@@ -49,35 +49,39 @@ public class OffreImpl implements IOffre {
 
 		ImoResponse<OffreGlobalDto> imoResponse = new ImoResponse<>();
 		CheckFieldsOffre checkFields = new CheckFieldsOffre();
-		if (dto != null && (dto.getMobile() != null || dto.getImmobilier() != null)) {
-			if (checkFields.checkObjectDto(dto, imoResponse)) {
-				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
-						ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE, null);
-			}
-			else {
-				AppUser user = this.userRepo.findByEmail(dto.getEmail());
-				// sauvegarde de l'offre mobile
-				if (dto.getMobile() != null) {
-					MobileEntity entity = mobileMapper.asObjectEntity(dto.getMobile());
-					entity.setUser(user);
-					mobileRepository.save(entity);
+		try {
+			if (dto != null && (dto.getMobile() != null || dto.getImmobilier() != null)) {
+				if (checkFields.checkObjectDto(dto, imoResponse)) {
+					FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
+							ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE, null);
 				}
-				// Sauvegarde de l'offre immobilier
-				if (dto.getImmobilier() != null) {
-					ImmobilierEntity entity = this.immobilierMapper.asObjectEntity(dto.getImmobilier());
-					entity.setUser(user);
-					immobilierRepository.save(entity);
+				else {
+					AppUser user = this.userRepo.findByEmail(dto.getEmail());
+					// sauvegarde de l'offre mobile
+					if (dto.getMobile() != null) {
+						MobileEntity entity = mobileMapper.asObjectEntity(dto.getMobile());
+						entity.setUser(user);
+						mobileRepository.save(entity);
+					}
+					// Sauvegarde de l'offre immobilier
+					if (dto.getImmobilier() != null) {
+						ImmobilierEntity entity = this.immobilierMapper.asObjectEntity(dto.getImmobilier());
+						entity.setUser(user);
+						immobilierRepository.save(entity);
+					}
+					FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
+							ConstantesUtils.MESSAGE_CREATION_OFFRE, null);
 				}
-				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
-						ConstantesUtils.MESSAGE_CREATION_OFFRE, null);
+				return imoResponse;
 			}
-			return imoResponse;
+
+			// Erreur lors de la création de l'offre
+			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
+					ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE, null);
+		} catch(Exception ex) {
+			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
+					ConstantesUtils.contrainteMessage(ex.getCause().getCause().getMessage()), null);
 		}
-
-		// Erreur lors de la création de l'offre
-		FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
-				ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE, null);
-
 		return imoResponse;
 	}
 }

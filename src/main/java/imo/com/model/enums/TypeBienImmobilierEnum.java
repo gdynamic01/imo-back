@@ -25,11 +25,16 @@ public enum TypeBienImmobilierEnum {
 
     /** Salle evenement */
     TERRAIN("Terrain");
+	
     /** Libelle enum */
     private String libelle;
 
     private TypeBienImmobilierEnum(String libelle) {
         this.libelle = libelle;
     }
+
+	public String getLibelle() {
+		return libelle;
+	}
 
 }
