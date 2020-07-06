@@ -30,9 +30,12 @@ public class UserController implements IUserApi {
 	IUser user;
 
 	@Override
-	public ResponseEntity<JwtTokenResponse> connexion(UserDto userDto) {
+	public ResponseEntity<JwtTokenResponse> connexion(String email, String password) {
 		try {
-			return this.user.authentification(userDto);
+			UserDto dto = new UserDto();
+			dto.setEmail(email);
+			dto.setPassword(password);
+			return user.authentification(dto);
 		}
 		catch (Exception e) {
 			return new ResponseEntity<>(new JwtTokenResponse(null, "L'email ou le mot de passe est incorrect",
@@ -44,7 +47,7 @@ public class UserController implements IUserApi {
 	public ResponseEntity<ImoResponse<UserMoralDto>> creationCompte(UserMoralDto professionnel) {
 		ImoResponse<UserMoralDto> imoResponse = new ImoResponse<>();
 		try {
-			imoResponse = this.user.registration(professionnel);
+			imoResponse = user.registration(professionnel);
 		} catch (UnexpectedRollbackException ex) {
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					FonctialiterCommunes.messageErreur, null);
@@ -56,7 +59,7 @@ public class UserController implements IUserApi {
 	public ResponseEntity<ImoResponse<UserPhysiqueDto>> creationCompte(UserPhysiqueDto particulier) {
 		ImoResponse<UserPhysiqueDto> imoResponse = new ImoResponse<>();
 		try {
-			imoResponse = this.user.registration(particulier);
+			imoResponse = user.registration(particulier);
 		} catch (UnexpectedRollbackException ex) {
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					FonctialiterCommunes.messageErreur, null);
@@ -65,8 +68,9 @@ public class UserController implements IUserApi {
 	}
 
 	@Override
-	public String isEmailExist(String email) {
-		return user.getEmail(email);
+	public ResponseEntity<ImoResponse<String>> getEmailExist(String email) {
+		ImoResponse<String> imoResponse = user.getEmail(email);
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}
 
 }

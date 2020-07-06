@@ -40,5 +40,5 @@ public interface IUser {
 	 * @param email la valeur de l'email
 	 * @return l'email
 	 */
-	public String getEmail(String email);
+	public ImoResponse<String> getEmail(String email);
 }

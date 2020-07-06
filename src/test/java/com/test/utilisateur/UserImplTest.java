@@ -1,9 +1,7 @@
 package com.test.utilisateur;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -101,16 +99,18 @@ public class UserImplTest extends ConfigTestImo {
 	
 	@Test
 	public void getEmailNotFoundTest() {
-		String email = iUser.getEmail("m@yahoo.fr");
-		assertNull(email);
-		assertNotEquals("m@yahoo.fr", email);
+		ImoResponse<String> response;
+		response = iUser.getEmail("m@yahoo.fr");
+		assertTrue(response.getResult().isEmpty());
+		assertEquals(204, response.getStatut());
 	}
 	
 	@Test 
 	public void getEmailSuccessTest() {
-		String email = iUser.getEmail(emailParticulier);
-		assertNotNull(email);
-		assertEquals(emailParticulier, email);
+		ImoResponse<String> response;
+		response = iUser.getEmail(emailParticulier);
+		assertNotNull(response.getResult());
+		assertEquals(emailParticulier, response.getResult().get(0));
 	}
 
 	@Before

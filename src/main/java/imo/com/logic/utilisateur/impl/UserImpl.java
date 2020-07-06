@@ -188,9 +188,17 @@ public class UserImpl implements IUser {
 	}
 
 	@Override
-	public String getEmail(String email) {
+	public ImoResponse<String> getEmail(String email) {
+		ImoResponse<String> imoResponse = new ImoResponse<>();
 		AppUser user = userRepo.findByEmail(email);
-		return user == null ? null : user.getEmail();
+		List<String> result = new ArrayList<>();
+		int codeStatus = HttpStatus.NO_CONTENT.value();
+		if(user != null) {
+			result.add(user.getEmail());
+			codeStatus = HttpStatus.OK.value();
+		}
+		FonctialiterCommunes.setImoResponse(imoResponse, codeStatus, null, result);
+		return imoResponse;
 	}
 
 }
