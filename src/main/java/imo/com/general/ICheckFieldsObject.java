@@ -38,7 +38,7 @@ public interface ICheckFieldsObject {
 		else {
 			if (StringUtils.isBlank(adresse.getPays()))
 				message += "pays";
-			else if (!"Guinée".equals(adresse.getPays())) {
+			else if (!"Guinee".equalsIgnoreCase(adresse.getPays())) {
 				// verification rue, numero et code postal
 				if (StringUtils.isBlank(adresse.getNumeroRue()))
 					message += "numeroRue ";

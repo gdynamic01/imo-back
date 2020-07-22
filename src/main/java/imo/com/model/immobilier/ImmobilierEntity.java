@@ -1,8 +1,6 @@
 package imo.com.model.immobilier;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 
@@ -18,20 +16,17 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 	/** Serial ID */
 	private static final long serialVersionUID = -716142150922491844L;
 
-	/** surface */
 	/** surface de l'offre */
 	@Column(name = "surface", nullable = false)
 	@Min(value = 9)
 	private Double surface;
 
-	// les champs à completer
-	@Column(name = "date_debut", nullable = false)
-	public LocalDate dateDebut;
-	@Column(name = "date_fin", nullable = false)
-	public LocalDate dateFin;
+	/** nombre de pièces */
 	@Column(name = "nombre_pieces", nullable = false)
 	public int nbrePieces;
-	@Column(name = "piscine", nullable =true)
+	
+	/** piscine */
+	@Column(name = "piscine")
 	public Boolean piscine;
 
 	@Enumerated(EnumType.STRING)
@@ -41,14 +36,19 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
 	public SanitaireEnum sanitaire;
+	
 	@Column(name = "autre_service")
 	public String autreService;
+	
 	@Column(name = "service_menage")
 	public Boolean serviceMenage;
+	
 	@Column(name = "zone_geographique")
 	public String zoneGeographique;
-	@Column(name = "parking", nullable = false)
+	
+	@Column(name = "parking")
 	public Boolean parking;
+	
 	public Boolean electricite;
 	@Column(name = "eau", nullable = false)
 	public Boolean eau;
@@ -105,22 +105,6 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 	 */
 	public void setSurface(Double surface) {
 		this.surface = surface;
-	}
-
-	public LocalDate getDateDebut() {
-		return dateDebut;
-	}
-
-	public void setDateDebut(LocalDate dateDebut) {
-		this.dateDebut = dateDebut;
-	}
-
-	public LocalDate getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(LocalDate dateFin) {
-		this.dateFin = dateFin;
 	}
 
 	public int getNbrePieces() {
