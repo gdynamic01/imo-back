@@ -4,6 +4,7 @@
 package imo.com.resource.impl.offre;
 
 import imo.com.logic.offre.IOffre;
+import imo.com.logic.offre.dto.OffreDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,9 +28,8 @@ public class OffreController implements IOffreApi{
 	}
 
 	@Override
-	public ImoResponse<OffreGlobalDto> getListesOffres() {
-		// TODO Auto-generated method stub
-		return null;
+	public ImoResponse<OffreDto> getListesOffres() {
+		return iOffre.getListesOffres();
 	}
 
 }

@@ -181,7 +181,7 @@ public class OffreImplTest extends ConfigTestImo {
 
 		// Offre Mobile
 		if (offreDto instanceof MobileDto) {
-			offreDto.setTypeOffre(TypeOffreEnum.MOTO);
+			offreDto.setTypeOffre(TypeOffreEnum.MOBILE);
 			((MobileDto) offreDto).setDateMiseEnCircualtion(LocalDate.now());
 			((MobileDto) offreDto).setTypeMobileMoteur(TypeMobileMoteurEnum.SANS_MOTEUR);
 			((MobileDto) offreDto).setModel("model 1");
@@ -189,7 +189,7 @@ public class OffreImplTest extends ConfigTestImo {
 
 		// Offre Immobilier
 		if (offreDto instanceof ImmobilierDto) {
-			offreDto.setTypeOffre(TypeOffreEnum.APPARTEMENT);
+			offreDto.setTypeOffre(TypeOffreEnum.IMMOBILIER);
 			((ImmobilierDto) offreDto).setSurface(9.0);
 			((ImmobilierDto) offreDto).setPrix(700.5);
 			((ImmobilierDto) offreDto).setDateDebut(LocalDate.now());

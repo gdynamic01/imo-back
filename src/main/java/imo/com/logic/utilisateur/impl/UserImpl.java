@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
 
 import imo.com.general.ConstantesUtils;
@@ -30,6 +31,7 @@ import imo.com.logic.utilisateur.CheckFieldsUser;
 import imo.com.logic.utilisateur.IUser;
 import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
+import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
 import imo.com.logic.utilisateur.mapper.UserMapper;
 import imo.com.logic.utilisateur.mapper.UserMoralMapper;
 import imo.com.model.utilisateur.AppUser;
@@ -48,7 +50,6 @@ import imo.com.response.JwtTokenResponse;
  *
  */
 @Component
-@Transactional
 public class UserImpl implements IUser {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserImpl.class);
@@ -122,7 +123,8 @@ public class UserImpl implements IUser {
 	}
 
 	@Override
-	public ImoResponse<UserMoralDto> registration(UserMoralDto dto) {
+	@Transactional
+	public ImoResponse<UserMoralDto> registration(UserMoralDto dto) throws UnexpectedRollbackException {
 
 		CheckFieldsUser checkUser = new CheckFieldsUser();
 		ImoResponse<UserMoralDto> imoResponse = new ImoResponse<>();
@@ -143,6 +145,8 @@ public class UserImpl implements IUser {
 						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
 			}
 			catch (Exception e) {
+				LOGGER.warn("---------- [ Erreur lors de la creation du professionel ] :"+e.getCause().getCause());
+				FonctialiterCommunes.messageErreur = ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage());
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), null);
 			}
@@ -152,10 +156,11 @@ public class UserImpl implements IUser {
 	}
 
 	@Override
-	public ImoResponse<UserDto> registration(UserDto dto) {
+	@Transactional
+	public ImoResponse<UserPhysiqueDto> registration(UserPhysiqueDto dto) throws UnexpectedRollbackException {
 
 		CheckFieldsUser checkUser = new CheckFieldsUser();
-		ImoResponse<UserDto> imoResponse = new ImoResponse<>();
+		ImoResponse<UserPhysiqueDto> imoResponse = new ImoResponse<>();
 		if (checkUser.checkObjectDto(dto, imoResponse))
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
 					ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, null);
@@ -170,12 +175,29 @@ public class UserImpl implements IUser {
 				this.userPhysiqueRepo.save(entity);
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
 						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
+				LOGGER.info("---------- [ creation de l'utilisateur ] :"+dto.getEmail()+" avec succès");
 			}
 			catch (Exception e) {
+				LOGGER.warn("---------- [ Erreur lors de la creation du particulier ] :"+e.getCause().getCause());
+				FonctialiterCommunes.messageErreur = ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage());
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), null);
 			}
 		}
+		return imoResponse;
+	}
+
+	@Override
+	public ImoResponse<String> getEmail(String email) {
+		ImoResponse<String> imoResponse = new ImoResponse<>();
+		AppUser user = userRepo.findByEmail(email);
+		List<String> result = new ArrayList<>();
+		int codeStatus = HttpStatus.NO_CONTENT.value();
+		if(user != null) {
+			result.add(user.getEmail());
+			codeStatus = HttpStatus.OK.value();
+		}
+		FonctialiterCommunes.setImoResponse(imoResponse, codeStatus, null, result);
 		return imoResponse;
 	}
 

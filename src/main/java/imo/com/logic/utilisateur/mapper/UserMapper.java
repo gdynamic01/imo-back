@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import imo.com.logic.IGeneriqueMapper;
-import imo.com.logic.utilisateur.dto.UserDto;
+import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
 import imo.com.model.utilisateur.UserPhysiqueEntity;
 
 /**
@@ -15,18 +15,18 @@ import imo.com.model.utilisateur.UserPhysiqueEntity;
  *
  */
 @Component
-public class UserMapper implements IGeneriqueMapper<UserDto, UserPhysiqueEntity> {
+public class UserMapper implements IGeneriqueMapper<UserPhysiqueDto, UserPhysiqueEntity> {
 
 	@Autowired
 	ModelMapper modelMapper;
 
 	@Override
-	public UserDto asObjectDto(UserPhysiqueEntity in) {
-		return modelMapper.map(in, UserDto.class);
+	public UserPhysiqueDto asObjectDto(UserPhysiqueEntity in) {
+		return modelMapper.map(in, UserPhysiqueDto.class);
 	}
 
 	@Override
-	public UserPhysiqueEntity asObjectEntity(UserDto in) {
+	public UserPhysiqueEntity asObjectEntity(UserPhysiqueDto in) {
 		return modelMapper.map(in, UserPhysiqueEntity.class);
 	}
 

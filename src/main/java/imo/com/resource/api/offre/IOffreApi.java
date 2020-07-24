@@ -3,6 +3,7 @@
  */
 package imo.com.resource.api.offre;
 
+import imo.com.logic.offre.dto.OffreDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,5 @@ public interface IOffreApi {
 	 * @return listeOffre
 	 */
 	@GetMapping(path = "/liste/offres")
-	public ImoResponse<OffreGlobalDto> getListesOffres();
+	public ImoResponse<OffreDto> getListesOffres();
 }

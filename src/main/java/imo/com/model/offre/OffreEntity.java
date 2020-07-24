@@ -1,6 +1,7 @@
 package imo.com.model.offre;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,14 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	/** Prix de l'offre */
 	@Column(name = "prix", nullable = false)
 	private Double prix = 0.0;
+	
+	/** Date debut location */
+	@Column(name = "date_debut", nullable = false)
+	public LocalDate dateDebut = LocalDate.now();
+	
+	/** Date fin location */
+	@Column(name = "date_fin", nullable = false)
+	public LocalDate dateFin = LocalDate.now();
 
 	/** user concerné */
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
@@ -200,4 +209,33 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	public void setPhotosOffres(List<PhotosEntity> photosOffres) {
 		this.photosOffres = photosOffres;
 	}
+
+	/**
+	 * @return the dateDebut
+	 */
+	public LocalDate getDateDebut() {
+		return dateDebut;
+	}
+
+	/**
+	 * @param dateDebut the dateDebut to set
+	 */
+	public void setDateDebut(LocalDate dateDebut) {
+		this.dateDebut = dateDebut;
+	}
+
+	/**
+	 * @return the dateFin
+	 */
+	public LocalDate getDateFin() {
+		return dateFin;
+	}
+
+	/**
+	 * @param dateFin the dateFin to set
+	 */
+	public void setDateFin(LocalDate dateFin) {
+		this.dateFin = dateFin;
+	}
+
 }

@@ -23,6 +23,10 @@ public abstract class ConstantesUtils {
 	/** message creation annoce */
 	public static final String MESSAGE_CREATION_OFFRE = "<h3>Confirmation</h3><h5>Votre offre a bien été enregistré</h5>";
 
+	/** message creation annoce */
+	public static final String MESSAGE_EMPTY = "<h3>Confirmation</h3><h5>Pas de resultat</h5>";
+
+
 	/** message d'erreur lors de la création de l'annonce */
 	public static final String MESSAGE_ERREUR_CREATION_OFFRE = "Votre annonce n'a pas pu être créer";
 

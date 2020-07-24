@@ -23,13 +23,20 @@ public enum TypeBienImmobilierEnum {
     /** Salle evenement */
     SALLE("Salle"),
 
-    /** Salle evenement */
+    /** Terrain */
     TERRAIN("Terrain");
+
     /** Libelle enum */
     private String libelle;
 
     private TypeBienImmobilierEnum(String libelle) {
         this.libelle = libelle;
     }
+
+
+	public String getLibelle() {
+		return libelle;
+	}
+
 
 }

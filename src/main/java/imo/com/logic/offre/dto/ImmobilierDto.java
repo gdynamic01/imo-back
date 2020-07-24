@@ -9,18 +9,10 @@ public class ImmobilierDto extends OffreDto {
 
 	/** surface de l'offre */
 	private Double surface;
-
-	/**
-	 * @return the surface
-	 */
-
-	// les champs à completer
 	public LocalDate dateDebut;
 	public LocalDate dateFin;
 	public int nbrePieces;
 	public Boolean piscine;
-
-	//public String type_location;
 	private TypeBienImmobilierEnum typeDeBien;
 	public SanitaireEnum sanitaire;
 	public Boolean eau;

@@ -10,22 +10,10 @@ package imo.com.model.enums;
 public enum TypeOffreEnum {
 
 	/** Voiture */
-	VOITURE("Voiture"), //
+	MOBILE("Mobile"), //
 
 	/** Velo */
-	VELO("Velo"), //
-
-	/** Moto */
-	MOTO("Moto"),
-
-	/** Maison */
-	APPARTEMENT("Appartement"), //
-
-	/** Terrain */
-	MAISON("Maison"), //
-
-	/** Appartement */
-	TERRAIN("Terrain");
+	IMMOBILIER("Immobilier");
 
 	/** Libelle enum */
 	private String libelle;

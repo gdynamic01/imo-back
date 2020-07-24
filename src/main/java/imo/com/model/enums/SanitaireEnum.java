@@ -4,6 +4,7 @@ public enum SanitaireEnum {
 
     /** Exterieur*/
     EXTERIEUR("Exterieur"), //
+
     /** Interieur */
     INTERIEUR("Interieur");
 

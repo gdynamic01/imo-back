@@ -2,12 +2,14 @@ package imo.com.resource.api.utilisateur;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
+import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
 import imo.com.response.ImoResponse;
 
 /**
@@ -24,8 +26,8 @@ public interface IUserApi {
 	 * @param userDto
 	 * @return token
 	 */
-	@PostMapping(path = "/authentification")
-	public ResponseEntity<?> connexion(@RequestBody UserDto userDto);
+	@GetMapping(path = "/authentification/{email}/{password}")
+	public ResponseEntity<?> connexion(@PathVariable(value="email") String email, @PathVariable(value="password") String password);
 
 	/**
 	 * creation compte professionnel
@@ -41,6 +43,14 @@ public interface IUserApi {
 	 * @param responseEntity
 	 */
 	@PostMapping(path = "/inscription/particulier")
-	public ResponseEntity<ImoResponse<UserDto>> creationCompte(@RequestBody UserDto particulier);
+	public ResponseEntity<ImoResponse<UserPhysiqueDto>> creationCompte(@RequestBody UserPhysiqueDto particulier);
+	
+	/**
+	 * get email
+	 * @param email
+	 * @return responseEntity
+	 */
+	@GetMapping(path= "/email/{email:.+}")
+	public ResponseEntity<ImoResponse<String>> getEmailExist(@PathVariable(value="email") String email);
 
 }
