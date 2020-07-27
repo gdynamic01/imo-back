@@ -25,10 +25,10 @@ public abstract class OffreDto {
 	private Double prix = 0.0;
 
 	/** date publication */
-	private LocalDate createAt = LocalDate.now();
+	private LocalDate createAt;
 
 	/** date mise a jour publication */
-	private LocalDate updateAt = LocalDate.now();
+	private LocalDate updateAt;
 
 	/** type d'offre */
 	private TypeOffreEnum typeOffre;

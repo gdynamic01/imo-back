@@ -30,8 +30,7 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 				this.champsObligatoires += this.checkFieldsImmobilier(((OffreGlobalDto) dto).getImmobilier()); // (OffreDto)
 			}
 			if (((OffreGlobalDto) dto).getMobile() != null) {
-				this.champsObligatoires = checkFieldsOffre(((OffreGlobalDto) dto).getMobile()); // cas global
-																									// (OffreDto)
+				this.champsObligatoires = checkFieldsOffre(((OffreGlobalDto) dto).getMobile()); // cas global															// (OffreDto)
 				this.champsObligatoires += checkFieldsMobile(((OffreGlobalDto) dto).getMobile());
 			}
 			if (!StringUtils.isBlank(champsObligatoires)) {
