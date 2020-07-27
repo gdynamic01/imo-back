@@ -1,0 +1,26 @@
+{
+  "mobile":{
+  	"titre":"",
+  	"description":"Mobile description 1",
+  	"adresse":null,
+  	"prix":0.0,
+  	"createAt":null,
+  	"updateAt":null,
+  	"typeOffre":null,
+  	"typeServiceOffre":null,
+  	"photosOffres":[],
+  	"typeAnnonce":null,
+  	"motoriser":null,
+  	"kilometrage":null,
+  	"nbRoue":null,
+  	"model":"model 1",
+  	"nbPorte":null,
+  	"dateMiseEnCircualtion":null,
+  	"typeMobileMoteur":null,
+  	"batterie":null,
+  	"dureeBaterie":null,
+  	"symboleMonetaire":null
+  },
+  "immobilier":null,
+  "email":null
+}

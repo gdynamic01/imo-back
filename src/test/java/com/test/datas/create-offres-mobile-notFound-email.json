@@ -1,0 +1,31 @@
+{
+  "mobile":{
+  	"titre":"Titre1",
+  	"description":"Mobile description 1",
+  	"adresse":{
+  		"codePostal":null,
+  		"complementAdresse":null,
+  		"libelleRue":null,
+  		"numeroRue":null,
+  		"pays":"Guinee",
+  		"ville":"Conakry"
+  	},
+  	"prix":0.0,
+  	"typeOffre":"MOBILE",
+  	"typeServiceOffre":"VENTE",
+  	"photosOffres":[],
+  	"typeAnnonce":null,
+  	"motoriser":null,
+  	"kilometrage":null,
+  	"nbRoue":null,
+  	"model":"model 1",
+  	"nbPorte":null,
+  	"dateMiseEnCircualtion": "2021-06-08",
+  	"typeMobileMoteur":"SANS_MOTEUR",
+  	"batterie":null,
+  	"dureeBaterie":null,
+  	"symboleMonetaire":null
+  },
+  "immobilier":null,
+  "email": "mo@yahoo.fr"
+}

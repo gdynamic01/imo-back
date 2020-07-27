@@ -3,16 +3,13 @@ package com.test.utilisateur;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-
+import com.test.allObjects.IUtilisateursTest;
 import com.test.config.ConfigTestImo;
 
 import imo.com.logic.utilisateur.IUser;
@@ -23,15 +20,16 @@ import imo.com.model.enums.TypeUtilisateurEnum;
 import imo.com.model.utilisateur.AppUser;
 import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.model.utilisateur.SexeEnum;
+import imo.com.model.utilisateur.UserMoralEntity;
 import imo.com.model.utilisateur.UserPhysiqueEntity;
+import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
 import imo.com.response.ImoResponse;
 
 /**
  * @author balde
- *
  */
-public class UserImplTest extends ConfigTestImo {
+public class UserImplTest extends ConfigTestImo implements IUtilisateursTest {
 
 	private UserMoralDto userMoralDto = new UserMoralDto();
 
@@ -43,13 +41,18 @@ public class UserImplTest extends ConfigTestImo {
 	private IUser iUser;
 
 	List<RoleUserEnum> roles;
-	
+
 	private static final String emailParticulier = "particulier@yahoo.fr";
-	
-	private static final String emailProfessionnel = "professionel@yahoo.fr";
-	
-	@MockBean
+
+	private static final String emailProfessionnel = "p@yahoo.fr";
+
+	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private RoleRepository roleRepository;
+
+	UserMoralEntity professionnel;
 
 	@Test
 	public void registrationProfessionnelTest() {
@@ -96,21 +99,19 @@ public class UserImplTest extends ConfigTestImo {
 		assertNotNull(response4);
 		assertTrue(response4.getStatut() == 200);
 	}
-	
+
 	@Test
 	public void getEmailNotFoundTest() {
-		ImoResponse<String> response;
-		response = iUser.getEmail("m@yahoo.fr");
+		ImoResponse<String> response = iUser.getEmail("m@yahoo.fr");
 		assertTrue(response.getResult().isEmpty());
 		assertEquals(204, response.getStatut());
 	}
-	
-	@Test 
+
+	@Test
 	public void getEmailSuccessTest() {
-		ImoResponse<String> response;
-		response = iUser.getEmail(emailParticulier);
+		ImoResponse<String> response = iUser.getEmail(professionnel.getEmail());
 		assertNotNull(response.getResult());
-		assertEquals(emailParticulier, response.getResult().get(0));
+		assertEquals(professionnel.getEmail(), response.getResult().get(0));
 	}
 
 	@Before
@@ -140,13 +141,13 @@ public class UserImplTest extends ConfigTestImo {
 		roles.add(RoleUserEnum.USER_PHYSIQUE);
 		userPhysiqueDto.setTypeUtilisateur(TypeUtilisateurEnum.PARTICULIER);
 		userPhysiqueDto.setRoles(roles);
-		
+
 		AppUser appUser = new UserPhysiqueEntity();
 		appUser.setEmail(emailParticulier);
 		appUser.setId(1L);
-		
-		when(userRepo.findByEmail(emailParticulier)).thenReturn(appUser);
-		
+
+		professionnel = creationProfessionnel(userRepo, roleRepository);
+
 	}
 
 }

@@ -1,0 +1,34 @@
+{
+	"immobilier":
+	{
+		"titre":"Titre1",
+		"dateDebut": null,
+		"dateFin": null,
+		"description":"Description 1",
+		"adresse":
+		{
+			"codePostal":null,
+			"complementAdresse":null,
+			"libelleRue":null,
+			"numeroRue":null,
+			"pays":"France",
+			"ville":null
+		},
+		"prix":700.5,
+		"createAt":"",
+		"updateAt":"",
+		"nbrePieces":2,
+		"piscine":null,
+		"typeDeBien":null,
+		"sanitaire":null,
+		"eau":null,
+		"autreService":null,
+		"serviceMenage":null,
+		"zoneGeographique":null,
+		"parking":null,
+		"electricite":null,
+		"symboleMonetaire":null
+	},
+	"email":null,
+	"mobile":null
+}

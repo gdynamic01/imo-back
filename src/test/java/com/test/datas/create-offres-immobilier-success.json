@@ -1,0 +1,37 @@
+{
+	"immobilier":
+	{
+		"titre":"Titre1",
+		"description":"Description 1",
+		"dateDebut": "2019-03-03",
+		"dateFin": "2019-04-03",
+		"adresse":
+		{
+			"codePostal":"94140",
+			"complementAdresse":null,
+			"libelleRue":"rue des camelias",
+			"numeroRue":27,
+			"pays":"France",
+			"ville":"AlfortVille"
+		},
+		"prix":700.5,
+		"typeOffre":"IMMOBILIER",
+  		"typeServiceOffre":"LOCATION",
+		"createAt":"2019-07-15",
+		"updateAt":"2019-07-15",
+		"nbrePieces":2,
+		"piscine":null,
+		"typeDeBien":"APPARTEMENT",
+		"sanitaire":"EXTERIEUR",
+		"eau":true,
+		"surface": 20.5,
+		"autreService":null,
+		"serviceMenage":null,
+		"zoneGeographique":null,
+		"parking":true,
+		"electricite":true,
+		"symboleMonetaire":null
+	},
+	"email":"professionel@yahoo.fr",
+	"mobile":null
+}

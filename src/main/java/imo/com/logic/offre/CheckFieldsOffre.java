@@ -30,9 +30,11 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 				this.champsObligatoires += this.checkFieldsImmobilier(((OffreGlobalDto) dto).getImmobilier()); // (OffreDto)
 			}
 			if (((OffreGlobalDto) dto).getMobile() != null) {
-				this.champsObligatoires = checkFieldsOffre(((OffreGlobalDto) dto).getMobile()); // cas global
-																									// (OffreDto)
+				this.champsObligatoires = checkFieldsOffre(((OffreGlobalDto) dto).getMobile()); // cas global															// (OffreDto)
 				this.champsObligatoires += checkFieldsMobile(((OffreGlobalDto) dto).getMobile());
+			}
+			if (StringUtils.isBlank(((OffreGlobalDto) dto).getEmail())) {
+				this.champsObligatoires += "email";
 			}
 			if (!StringUtils.isBlank(champsObligatoires)) {
 				imoResponse.setChampsObligatoires(champsObligatoires.split(" "));
@@ -91,19 +93,25 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 		}
 
 		if (immobilierDto.getTypeDeBien() == null) {
-			champs += "type_de_Bien";
+			champs += "type_de_Bien ";
 		}
 		if (immobilierDto.getParking()== null) {
-			champs += "parking";
+			champs += "parking ";
 		}
 		if (immobilierDto.getElectricite()== null) {
-			champs += "electricite";
+			champs += "electricite ";
 		}
 		if (immobilierDto.getEau()== null) {
-			champs += "eau";
+			champs += "eau ";
 		}
 		if (immobilierDto.getSanitaire()== null) {
-			champs += "sanitaire";
+			champs += "sanitaire ";
+		}
+		if(immobilierDto.getDateDebut() == null) {
+			champs += "date_debut ";
+		}
+		if(immobilierDto.getDateFin() == null) {
+			champs += "date_fin ";
 		}
 		return champs;
 	}
