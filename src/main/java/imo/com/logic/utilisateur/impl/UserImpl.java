@@ -47,7 +47,6 @@ import imo.com.response.JwtTokenResponse;
 
 /**
  * @author balde
- *
  */
 @Component
 public class UserImpl implements IUser {
@@ -110,18 +109,6 @@ public class UserImpl implements IUser {
 
 	}
 
-	private void authenticate(String email, String password) {
-		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-		}
-		catch (DisabledException e) {
-			throw new DisabledException("USER_DISABLED", e);
-		}
-		catch (BadCredentialsException e) {
-			throw new BadCredentialsException("INVALID_CREDENTIALS", e);
-		}
-	}
-
 	@Override
 	@Transactional
 	public ImoResponse<UserMoralDto> registration(UserMoralDto dto) throws UnexpectedRollbackException {
@@ -143,10 +130,10 @@ public class UserImpl implements IUser {
 				this.userMoralrepo.save(entity);
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
 						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
-			}
-			catch (Exception e) {
-				LOGGER.warn("---------- [ Erreur lors de la creation du professionel ] :"+e.getCause().getCause());
-				FonctialiterCommunes.messageErreur = ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage());
+			} catch (Exception e) {
+				LOGGER.warn("---------- [ Erreur lors de la creation du professionel ] :" + e.getCause().getCause());
+				FonctialiterCommunes.messageErreur = ConstantesUtils
+						.contrainteMessage(e.getCause().getCause().getMessage());
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), null);
 			}
@@ -175,11 +162,11 @@ public class UserImpl implements IUser {
 				this.userPhysiqueRepo.save(entity);
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
 						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
-				LOGGER.info("---------- [ creation de l'utilisateur ] :"+dto.getEmail()+" avec succès");
-			}
-			catch (Exception e) {
-				LOGGER.warn("---------- [ Erreur lors de la creation du particulier ] :"+e.getCause().getCause());
-				FonctialiterCommunes.messageErreur = ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage());
+				LOGGER.info("---------- [ creation de l'utilisateur ] :" + dto.getEmail() + " avec succès");
+			} catch (Exception e) {
+				LOGGER.warn("---------- [ Erreur lors de la creation du particulier ] :" + e.getCause().getCause());
+				FonctialiterCommunes.messageErreur = ConstantesUtils
+						.contrainteMessage(e.getCause().getCause().getMessage());
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 						ConstantesUtils.contrainteMessage(e.getCause().getCause().getMessage()), null);
 			}
@@ -193,12 +180,22 @@ public class UserImpl implements IUser {
 		AppUser user = userRepo.findByEmail(email);
 		List<String> result = new ArrayList<>();
 		int codeStatus = HttpStatus.NO_CONTENT.value();
-		if(user != null) {
+		if (user != null) {
 			result.add(user.getEmail());
 			codeStatus = HttpStatus.OK.value();
 		}
 		FonctialiterCommunes.setImoResponse(imoResponse, codeStatus, null, result);
 		return imoResponse;
+	}
+
+	private void authenticate(String email, String password) {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+		} catch (DisabledException e) {
+			throw new DisabledException("USER_DISABLED", e);
+		} catch (BadCredentialsException e) {
+			throw new BadCredentialsException("INVALID_CREDENTIALS", e);
+		}
 	}
 
 }
