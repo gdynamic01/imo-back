@@ -71,6 +71,7 @@ public class ImmobilierDto extends OffreDto {
 		return dateDebut;
 	}
 
+
 	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
