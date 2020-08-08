@@ -19,14 +19,16 @@
 		"updateAt":"",
 		"nbrePieces":2,
 		"piscine":null,
-		"typeDeBien":"APPARTEMENT",
-		"sanitaire":"EXTERIEUR",
-		"eau":true,
+
+
+		"typeDeBien":null,
+		"sanitaire":null,
+		"eau":null,
 		"autreService":null,
 		"serviceMenage":null,
 		"zoneGeographique":null,
-		"parking":true,
-		"electricite":true,
+		"parking":null,
+		"electricite":null,
 		"symboleMonetaire":null
 	},
 	"email":null,

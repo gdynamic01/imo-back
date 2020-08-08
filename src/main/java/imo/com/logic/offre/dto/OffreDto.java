@@ -25,10 +25,12 @@ public abstract class OffreDto {
 	private Double prix = 0.0;
 
 	/** date publication */
-	private LocalDate createAt;
+
+	private LocalDate createAt = LocalDate.now();;
 
 	/** date mise a jour publication */
-	private LocalDate updateAt;
+	private LocalDate updateAt = LocalDate.now();;
+
 
 	/** type d'offre */
 	private TypeOffreEnum typeOffre;
@@ -44,6 +46,12 @@ public abstract class OffreDto {
 
 	/** Symbole monetaire */
 	private SymboleMonetaireEnum SymboleMonetaire;
+	
+	/** date debut */
+	public LocalDate dateDebut = LocalDate.now();
+	
+	/** date de fin */
+	public LocalDate dateFin = LocalDate.now();
 
 	/**
 	 * @return the titre
@@ -197,5 +205,33 @@ public abstract class OffreDto {
 	 */
 	public void setSymboleMonetaire(SymboleMonetaireEnum symboleMonetaire) {
 		SymboleMonetaire = symboleMonetaire;
+	}
+
+	/**
+	 * @return the dateDebut
+	 */
+	public LocalDate getDateDebut() {
+		return dateDebut;
+	}
+
+	/**
+	 * @param dateDebut the dateDebut to set
+	 */
+	public void setDateDebut(LocalDate dateDebut) {
+		this.dateDebut = dateDebut;
+	}
+
+	/**
+	 * @return the dateFin
+	 */
+	public LocalDate getDateFin() {
+		return dateFin;
+	}
+
+	/**
+	 * @param dateFin the dateFin to set
+	 */
+	public void setDateFin(LocalDate dateFin) {
+		this.dateFin = dateFin;
 	}
 }
