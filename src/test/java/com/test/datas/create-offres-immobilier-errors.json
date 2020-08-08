@@ -1,0 +1,34 @@
+{
+	"immobilier":
+	{
+		"titre":"Titre1",
+		"dateDebut": null,
+		"dateFin": null,
+		"description":"Description 1",
+		"adresse":
+		{
+			"codePostal":null,
+			"complementAdresse":null,
+			"libelleRue":null,
+			"numeroRue":null,
+			"pays":"France",
+			"ville":null
+		},
+		"prix":700.5,
+		"createAt":"",
+		"updateAt":"",
+		"nbrePieces":2,
+		"piscine":null,
+		"typeDeBien":"APPARTEMENT",
+		"sanitaire":"EXTERIEUR",
+		"eau":true,
+		"autreService":null,
+		"serviceMenage":null,
+		"zoneGeographique":null,
+		"parking":true,
+		"electricite":true,
+		"symboleMonetaire":null
+	},
+	"email":null,
+	"mobile":null
+}

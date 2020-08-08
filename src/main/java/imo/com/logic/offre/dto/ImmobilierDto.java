@@ -9,8 +9,6 @@ public class ImmobilierDto extends OffreDto {
 
 	/** surface de l'offre */
 	private Double surface;
-	public LocalDate dateDebut;
-	public LocalDate dateFin;
 	public int nbrePieces;
 	public Boolean piscine;
 	private TypeBienImmobilierEnum typeDeBien;
