@@ -34,7 +34,7 @@ public class OffreControllerTest extends ConfigTestImo implements IUtilisateursT
 	 */
 	@Test
 	public void should_creation_offre_mobile_with_fields_required_missing_error() throws Exception {
-		mockMvc.perform(post("/immo/creation-offre")
+		mockMvc.perform(post("/loumos")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path+"create-offres-mobile-errors.json"))
@@ -47,7 +47,7 @@ public class OffreControllerTest extends ConfigTestImo implements IUtilisateursT
 	
 	@Test
 	public void should_creation_offre_mobile_with_success() throws Exception {
-		mockMvc.perform(post("/immo/creation-offre")
+		mockMvc.perform(post("/loumos")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path+"create-offres-mobile-success.json"))
@@ -58,7 +58,7 @@ public class OffreControllerTest extends ConfigTestImo implements IUtilisateursT
 	
 	@Test
 	public void should_creation_offre_immobilier_with_fields_required_missing_error() throws Exception {
-		mockMvc.perform(post("/immo/creation-offre")
+		mockMvc.perform(post("/loumos")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path+"create-offres-immobilier-errors.json"))
@@ -70,7 +70,7 @@ public class OffreControllerTest extends ConfigTestImo implements IUtilisateursT
 	
 	@Test
 	public void should_creation_offre_immobilier_with_success() throws Exception {
-		mockMvc.perform(post("/immo/creation-offre")
+		mockMvc.perform(post("/loumos")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path+"create-offres-immobilier-success.json"))
@@ -85,7 +85,7 @@ public class OffreControllerTest extends ConfigTestImo implements IUtilisateursT
 	 */
 	@Test
 	public void should_creationOffre_mobile_without_notMobile_and_notImmo_error() throws Exception {
-		mockMvc.perform(post("/immo/creation-offre")
+		mockMvc.perform(post("/loumos")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content("{}")
@@ -96,7 +96,7 @@ public class OffreControllerTest extends ConfigTestImo implements IUtilisateursT
 	
 	@Test
 	public void should_creation_tout_offre_with_email_notFound_error() throws Exception {
-		mockMvc.perform(post("/immo/creation-offre")
+		mockMvc.perform(post("/loumos")
 				.accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path+"create-offres-mobile-notFound-email.json"))

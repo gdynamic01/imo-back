@@ -17,7 +17,7 @@ import imo.com.response.ImoResponse;
  *
  */
 @RequestMapping(
-		path = "/immo", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
+		path = "/loumos", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
 )
 public interface IOffreApi {
 
@@ -26,13 +26,13 @@ public interface IOffreApi {
 	 * @param dto
 	 * @return offreGlobalDto
 	 */
-	@PostMapping(path = "/creation-offre")
+	@PostMapping
 	public ImoResponse<OffreGlobalDto> creationOffre(@RequestBody OffreGlobalDto dto);
 
 	/**
 	 * recupère toutes les offres
 	 * @return listeOffre
 	 */
-	@GetMapping(path = "/liste/offres")
+	@GetMapping
 	public ImoResponse<OffreGlobalDto> getListesOffres();
 }
