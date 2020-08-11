@@ -169,20 +169,6 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	}
 
 	/**
-	 * @return the photosOffre
-	 */
-	public List<PhotosEntity> getPhotosOffre() {
-		return photosOffres;
-	}
-
-	/**
-	 * @param photosOffre the photosOffre to set
-	 */
-	public void setPhotosOffre(List<PhotosEntity> photosOffre) {
-		this.photosOffres = photosOffre;
-	}
-
-	/**
 	 * @return the typeServiceOffre
 	 */
 	public TypeServiceOffre getTypeServiceOffre() {

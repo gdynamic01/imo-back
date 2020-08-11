@@ -25,6 +25,8 @@ public abstract class ConstantesUtils {
 
 	/** message d'erreur lors de la création de l'annonce */
 	public static final String MESSAGE_ERREUR_CREATION_OFFRE = "Votre annonce n'a pas pu être créer";
+	
+	public static final String MESSAGE_EMPTY = "<h4>Aucune annonce n'est disponible</h4>";
 
 	/**
 	 * cette methode doit etre enrichie au fur et a mesure pour le traitement des

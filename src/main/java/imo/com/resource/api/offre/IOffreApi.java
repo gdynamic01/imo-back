@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import imo.com.logic.offre.dto.OffreDto;
 import imo.com.logic.offre.dto.OffreGlobalDto;
 import imo.com.response.ImoResponse;
 
@@ -34,5 +35,5 @@ public interface IOffreApi {
 	 * @return listeOffre
 	 */
 	@GetMapping
-	public ImoResponse<OffreGlobalDto> getListesOffres();
+	public ImoResponse<OffreDto> getListOffres();
 }

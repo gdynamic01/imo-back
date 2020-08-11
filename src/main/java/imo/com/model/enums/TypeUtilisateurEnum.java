@@ -10,7 +10,7 @@ package imo.com.model.enums;
 public enum TypeUtilisateurEnum {
 
 	/** Entreprise */
-	ENTREPRISE("Entreprise"), //
+	ENTREPRISE("Professionnel"), //
 
 	/** Particulier */
 	PARTICULIER("Particulier");

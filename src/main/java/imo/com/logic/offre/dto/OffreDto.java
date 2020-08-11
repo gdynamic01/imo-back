@@ -6,7 +6,6 @@ import java.util.List;
 
 import imo.com.logic.photos.dto.PhotosDto;
 import imo.com.logic.utilisateur.dto.AdresseDto;
-import imo.com.model.enums.SymboleMonetaireEnum;
 import imo.com.model.enums.TypeOffreEnum;
 import imo.com.model.enums.TypeServiceOffre;
 
@@ -43,7 +42,7 @@ public abstract class OffreDto {
 	private String typeAnnonce;
 
 	/** Symbole monetaire */
-	private SymboleMonetaireEnum SymboleMonetaire;
+	private String SymboleMonetaire;
 	
 	/** date debut */
 	public LocalDate dateDebut = LocalDate.now();
@@ -194,14 +193,14 @@ public abstract class OffreDto {
 	/**
 	 * @return the symboleMonetaire
 	 */
-	public SymboleMonetaireEnum getSymboleMonetaire() {
+	public String getSymboleMonetaire() {
 		return SymboleMonetaire;
 	}
 
 	/**
 	 * @param symboleMonetaire the symboleMonetaire to set
 	 */
-	public void setSymboleMonetaire(SymboleMonetaireEnum symboleMonetaire) {
+	public void setSymboleMonetaire(String symboleMonetaire) {
 		SymboleMonetaire = symboleMonetaire;
 	}
 
