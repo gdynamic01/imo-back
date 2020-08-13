@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.test.allObjects.IUtilisateursTest;
+import com.test.allObjects.IGeneralTest;
 import com.test.config.ConfigTestImo;
 
 import imo.com.model.offre.OffreEntity;
@@ -26,7 +26,7 @@ import imo.com.repo.offre.OffreRepository;
 import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
 
-public class OffreControllerTest extends ConfigTestImo implements IUtilisateursTest {
+public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	private final String uri = "/loumos";
 
@@ -108,6 +108,9 @@ public class OffreControllerTest extends ConfigTestImo implements IUtilisateursT
 				.andExpect(status().isOk()).andExpect(jsonPath("$.result", hasSize(2)))
 				.andExpect(jsonPath("$.result.[0].titre").value("immo 1"))
 				.andExpect(jsonPath("$.result.[1].titre").value("mobile 1"))
+				.andExpect(jsonPath("$.nbOffreParticulier").value(1))
+				.andExpect(jsonPath("$.nbOffreProfessionnel").value(1))
+				.andExpect(jsonPath("$.nbOffre").value(2))
 				.andDo(print());
 	}
 

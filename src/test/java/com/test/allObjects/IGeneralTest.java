@@ -23,7 +23,7 @@ import imo.com.model.utilisateur.UserPhysiqueEntity;
 import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
 
-public interface IUtilisateursTest {
+public interface IGeneralTest {
 
 	static final String emailParticulier = "test2@yahoo.fr";
 

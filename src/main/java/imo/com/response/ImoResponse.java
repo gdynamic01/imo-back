@@ -25,13 +25,13 @@ public class ImoResponse<T> {
 	private int statut;
 
 	/** nombre d'offre */
-	private int nbOffre;
+	private long nbOffre;
 
 	/** nombre offre particulier */
-	private int nbOffreParticulier;
+	private long nbOffreParticulier;
 
 	/** nombre offre professionnel */
-	private int nbOffreProfessionnel;
+	private long nbOffreProfessionnel;
 
 	/**
 	 * @return the champsObligatoires
@@ -96,7 +96,7 @@ public class ImoResponse<T> {
 	/**
 	 * @return the nbOffre
 	 */
-	public int getNbOffre() {
+	public long getNbOffre() {
 		return nbOffre;
 	}
 
@@ -110,28 +110,28 @@ public class ImoResponse<T> {
 	/**
 	 * @return the nbOffreParticulier
 	 */
-	public int getNbOffreParticulier() {
+	public long getNbOffreParticulier() {
 		return nbOffreParticulier;
 	}
 
 	/**
 	 * @param nbOffreParticulier the nbOffreParticulier to set
 	 */
-	public void setNbOffreParticulier(int nbOffreParticulier) {
+	public void setNbOffreParticulier(long nbOffreParticulier) {
 		this.nbOffreParticulier = nbOffreParticulier;
 	}
 
 	/**
 	 * @return the nbOffreProfessionnel
 	 */
-	public int getNbOffreProfessionnel() {
+	public long getNbOffreProfessionnel() {
 		return nbOffreProfessionnel;
 	}
 
 	/**
 	 * @param nbOffreProfessionnel the nbOffreProfessionnel to set
 	 */
-	public void setNbOffreProfessionnel(int nbOffreProfessionnel) {
+	public void setNbOffreProfessionnel(long nbOffreProfessionnel) {
 		this.nbOffreProfessionnel = nbOffreProfessionnel;
 	}
 

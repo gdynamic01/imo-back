@@ -1,7 +1,9 @@
 package imo.com.logic.offre.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.temporal.ChronoUnit;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,12 @@ public class OffreMapper implements IGeneriqueMapper<OffreDto, OffreEntity> {
 		}).collect(Collectors.toList());
 		
 		dto.setPhotosOffres(photosDtos);
+		
+		long nbJour = ChronoUnit.DAYS.between(entity.getCreateAt(), LocalDate.now());
+		dto.setNombreDeJour(nbJour);
+		
+		dto.setImmobilier(entity instanceof ImmobilierEntity);
+		dto.setMobile(entity instanceof MobileEntity);
 	}
 
 }

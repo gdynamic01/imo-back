@@ -59,7 +59,7 @@ public abstract class AppUser extends AbstractEntity implements Serializable {
 	private RepresentantLegal representantLegal;
 
 	/** liste des roles */
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "imo_user_roles", joinColumns = @JoinColumn(
 					name = "user_id", referencedColumnName = "id", nullable = false

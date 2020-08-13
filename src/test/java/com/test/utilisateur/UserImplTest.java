@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.test.allObjects.IUtilisateursTest;
+import com.test.allObjects.IGeneralTest;
 import com.test.config.ConfigTestImo;
 
 import imo.com.logic.utilisateur.IUser;
@@ -29,7 +29,7 @@ import imo.com.response.ImoResponse;
 /**
  * @author balde
  */
-public class UserImplTest extends ConfigTestImo implements IUtilisateursTest {
+public class UserImplTest extends ConfigTestImo implements IGeneralTest {
 
 	private UserMoralDto userMoralDto = new UserMoralDto();
 

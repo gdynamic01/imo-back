@@ -31,17 +31,16 @@ public class UsersDetailsServicesImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email) {
-
+		String tokens[] = email.split(" ");
+		email = tokens.length == 1 ? email : tokens[2];
 		AppUser user = this.repository.findByEnabledTrueAndEmail(email);
 		if (user == null) {
 			throw new UsernameNotFoundException("L'adresse " + email + " N'existe pas");
 		}
-
 		Collection<GrantedAuthority> authories = new ArrayList<>();
 		user.getRoles().forEach(r -> {
 			authories.add(new SimpleGrantedAuthority(r.getRoleEnum().name()));
 		});
-
 		return new User(user.getRepresentantLegal().getNom() + " " + user.getRepresentantLegal().getPrenom()+ " " +user.getEmail(),
 				user.getPassword(), authories);
 	}

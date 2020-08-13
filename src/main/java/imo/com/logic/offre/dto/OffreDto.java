@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import imo.com.logic.photos.dto.PhotosDto;
 import imo.com.logic.utilisateur.dto.AdresseDto;
 import imo.com.model.enums.TypeOffreEnum;
@@ -24,9 +25,11 @@ public abstract class OffreDto {
 	private Double prix = 0.0;
 
 	/** date publication */
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate createAt = LocalDate.now();;
 
 	/** date mise a jour publication */
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate updateAt = LocalDate.now();;
 
 	/** type d'offre */
@@ -45,11 +48,22 @@ public abstract class OffreDto {
 	private String SymboleMonetaire;
 	
 	/** date debut */
-	public LocalDate dateDebut = LocalDate.now();
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	protected LocalDate dateDebut = LocalDate.now();
 	
 	/** date de fin */
-	public LocalDate dateFin = LocalDate.now();
-
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	protected LocalDate dateFin = LocalDate.now();
+	
+	/** nombre de jour ecoulé apres la publication de l'annonce */
+	private long nombreDeJour;
+	
+	/** offre immobilier */
+	private boolean isImmobilier = false;
+	
+	/** offre mobile */
+	private boolean isMobile = false;
+	
 	/**
 	 * @return the titre
 	 */
@@ -230,5 +244,47 @@ public abstract class OffreDto {
 	 */
 	public void setDateFin(LocalDate dateFin) {
 		this.dateFin = dateFin;
+	}
+
+	/**
+	 * @return the nombreDeJour
+	 */
+	public long getNombreDeJour() {
+		return nombreDeJour;
+	}
+
+	/**
+	 * @param nombreDeJour the nombreDeJour to set
+	 */
+	public void setNombreDeJour(long nombreDeJour) {
+		this.nombreDeJour = nombreDeJour;
+	}
+
+	/**
+	 * @return the isImmobilier
+	 */
+	public boolean isImmobilier() {
+		return isImmobilier;
+	}
+
+	/**
+	 * @param isImmobilier the isImmobilier to set
+	 */
+	public void setImmobilier(boolean isImmobilier) {
+		this.isImmobilier = isImmobilier;
+	}
+
+	/**
+	 * @return the isMobile
+	 */
+	public boolean isMobile() {
+		return isMobile;
+	}
+
+	/**
+	 * @param isMobile the isMobile to set
+	 */
+	public void setMobile(boolean isMobile) {
+		this.isMobile = isMobile;
 	}
 }

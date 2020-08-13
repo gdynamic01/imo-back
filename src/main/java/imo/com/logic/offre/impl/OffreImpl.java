@@ -99,12 +99,12 @@ public class OffreImpl implements IOffre {
 
 	@Override
 	public ImoResponse<OffreDto> getListOffres() {
-		List<OffreDto> listoffredto = new ArrayList<>();
+		List<OffreDto> listoffreDto = new ArrayList<>();
 		List<OffreEntity> offreEntities = (List<OffreEntity>) offreRepository.findAll();
-		listoffredto = offreEntities.stream().map(offremapper::asObjectDto).collect(Collectors.toList());
+		listoffreDto = offreEntities.stream().map(offremapper::asObjectDto).collect(Collectors.toList());
 		ImoResponse<OffreDto> imoResponse = new ImoResponse<>();
-		FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
-				listoffredto.isEmpty() ? ConstantesUtils.MESSAGE_EMPTY : null, listoffredto);
+		FonctialiterCommunes.setImoResponse(imoResponse, listoffreDto.isEmpty() ? HttpStatus.NOT_FOUND.value() : HttpStatus.OK.value(),
+				listoffreDto.isEmpty() ? ConstantesUtils.MESSAGE_EMPTY : null, listoffreDto);
 		return imoResponse;
 	}
 }
