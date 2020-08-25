@@ -29,13 +29,14 @@ public interface IOffreApi {
 	 * @param dto
 	 * @return offreGlobalDto
 	 */
-	@PostMapping("/offre")
+	@PreAuthorize(AuthorisationUser.PROF_OR_PAR)
+	@PostMapping(path="/offre")
 	public ImoResponse<OffreGlobalDto> creationOffre(@RequestBody OffreGlobalDto dto);
 
 	/**
 	 * recupère toutes les offres
 	 * @return listeOffre
 	 */
-	@GetMapping("/offres")
+	@GetMapping(path="/offres")
 	public ImoResponse<OffreDto> getListOffres();
 }

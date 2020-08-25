@@ -143,5 +143,5 @@ ALTER TABLE ONLY imo_user_moral ADD CONSTRAINT fk_user_morale_user FOREIGN KEY (
 
 ALTER TABLE ONLY imo_user_physique ADD CONSTRAINT fk_user_physique_user FOREIGN KEY (id) REFERENCES imo_users(id);
 
-insert into imo_role (id,modificationcounter, role) values (1, 0, 'ADMIN'),(2, 0, 'USER_MORAL'),(3, 0, 'USER_PHYSIQUE');
+insert into imo_role (id,modificationcounter, role) values (1, 0, 'ROLE_ADMIN'),(2, 0, 'ROLE_USER_MORAL'),(3, 0, 'ROLE_USER_PHYSIQUE');
 

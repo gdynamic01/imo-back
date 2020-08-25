@@ -19,6 +19,5 @@ public abstract class AuthorisationUser {
 	/** role professionnel ou admin */
 	public static final String PROF_OR_ADMIN = "hasRole('ROLE_USER_MORAL') or hasRole('ROLE_ADMIN')";
 	
-	public static final String PROF_OR_PAR_OR_ADMIN = "hasRole('USER_MORAL') or hasRole('USER_PHYSIQUE') or hasRole('ADMIN')";
-
+	public static final String PROF_OR_PAR_OR_ADMIN = "hasRole('ROLE_USER_MORAL') or hasRole('ROLE_USER_PHYSIQUE') or hasRole('ROLE_ADMIN')";
 }
