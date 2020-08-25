@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -35,6 +37,8 @@ import imo.com.response.ImoResponse;
  */
 @Component
 public class OffreImpl implements IOffre {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(OffreImpl.class);
 
 	@Autowired
 	private MobileMapper mobileMapper;
@@ -67,6 +71,8 @@ public class OffreImpl implements IOffre {
 				if (checkFields.checkObjectDto(dto, imoResponse)) {
 					FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
 							ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE, null);
+					
+					LOGGER.error("---------------- [creation offre] : "+ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE);
 				} else {
 					AppUser user = this.userRepo.findByEmail(dto.getEmail());
 					// sauvegarde de l'offre mobile
@@ -83,6 +89,8 @@ public class OffreImpl implements IOffre {
 					}
 					FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
 							ConstantesUtils.MESSAGE_CREATION_OFFRE, null);
+					
+					LOGGER.info("---------------- [creation offre] : "+ConstantesUtils.MESSAGE_CREATION_OFFRE);
 				}
 				return imoResponse;
 			}
@@ -90,6 +98,8 @@ public class OffreImpl implements IOffre {
 			// Erreur lors de la création de l'offre
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
 					ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE, null);
+			
+			LOGGER.info("---------------- [creation offre] : "+ConstantesUtils.MESSAGE_ERREUR_CREATION_OFFRE);
 		} catch (Exception ex) {
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					ConstantesUtils.contrainteMessage(ex.getCause().getCause().getMessage()), null);

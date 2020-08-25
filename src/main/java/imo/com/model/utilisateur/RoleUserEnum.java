@@ -10,11 +10,11 @@ package imo.com.model.utilisateur;
 public enum RoleUserEnum {
 
 	/** Administateur */
-	ADMIN ("Administrateur"), //
+	ROLE_ADMIN ("Administrateur"), //
 	/** client user moral */
-	USER_MORAL ("entreprise"), //
+	ROLE_USER_MORAL ("entreprise"), //
 	/** Role promotteur immobilier */
-	USER_PHYSIQUE ("particulier");
+	ROLE_USER_PHYSIQUE ("particulier");
 
 	private String libelle;
 
