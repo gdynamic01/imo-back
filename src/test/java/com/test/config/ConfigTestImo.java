@@ -23,7 +23,6 @@ import imo.com.ImoBackApplication;
  * @author balde
  *
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = { ImoBackApplication.class })
 // @TestPropertySource("classpath:application-test.properties")

@@ -37,9 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// configure AuthenticationManager so that it knows from where to load
-		// user for matching credentials
-		// Use BCryptPasswordEncoder
 		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 
@@ -58,11 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// We don't need CSRF for this example
 		httpSecurity.csrf().disable()
 				// authenticate this particular request
-				.authorizeRequests().antMatchers("/loumos", "/loumos/authentification/**", "/loumos/professionnel",
+				.authorizeRequests().antMatchers("/loumos/offres", "/loumos/authentification/**", "/loumos/professionnel",
 						"/loumos/particulier", "/loumos/email/**", "/h2-console/**")
 				.permitAll().
 				// all other requests need to be authenticated
-				anyRequest().authenticated().and().
+				anyRequest().authenticated().and().logout().and().
 				// make sure we use stateless session; session won't be used to
 				// store user's state.
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

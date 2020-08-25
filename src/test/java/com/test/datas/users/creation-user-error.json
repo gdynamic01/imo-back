@@ -1,0 +1,17 @@
+{
+	"adresse":null,
+	"email":null,
+	"password":null,
+	"representantLegal":{
+		"nom":null,
+		"posteOcupee":null,
+		"prenom":null,
+		"telephone":null,
+		"sexe":null
+	},
+	"roles":["USER_MORAL"],
+	"typeUtilisateur":null,
+	"kbis":null,
+	"raisonSocial":null,
+	"siret":null
+}

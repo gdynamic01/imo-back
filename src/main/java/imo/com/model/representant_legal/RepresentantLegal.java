@@ -1,7 +1,7 @@
 /**
  * 
  */
-package imo.com.model.info;
+package imo.com.model.representant_legal;
 
 import java.io.Serializable;
 

@@ -17,9 +17,12 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.test.allObjects.IGeneralTest;
 import com.test.config.ConfigTestImo;
+import com.test.config.WithMockAdminUser;
 
 import imo.com.model.offre.OffreEntity;
 import imo.com.repo.offre.OffreRepository;
@@ -38,6 +41,9 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@MockBean
 	private OffreRepository offreRepo;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPassword;
 
 	private List<OffreEntity> offreEntities = new ArrayList<>();
 
@@ -46,35 +52,39 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	 * @throws Exception
 	 */
 	@Test
+	@WithMockAdminUser
 	public void should_creation_offre_mobile_with_fields_required_missing_error() throws Exception {
 		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "create-offres-mobile-errors.json"))).andExpect(status().isOk())
+				.content(getJsonFromFile(path + "offres\\create-offres-mobile-errors.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(8)))
 				.andExpect(jsonPath("$.champsObligatoires[5]").value("dateMiseEnCircualtion"))
 				.andExpect(jsonPath("$.messageResponse").value("Votre annonce n'a pas pu être créer")).andDo(print());
 	}
 
 	@Test
+	@WithMockAdminUser
 	public void should_creation_offre_mobile_with_success() throws Exception {
 		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "create-offres-mobile-success.json"))).andExpect(status().isOk())
+				.content(getJsonFromFile(path + "offres\\create-offres-mobile-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
 						.value("<h3>Confirmation</h3><h5>Votre offre a bien été enregistré</h5>"))
 				.andDo(print());
 	}
 
 	@Test
+	@WithMockAdminUser
 	public void should_creation_offre_immobilier_with_fields_required_missing_error() throws Exception {
 		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "create-offres-immobilier-errors.json"))).andExpect(status().isOk())
+				.content(getJsonFromFile(path + "offres\\create-offres-immobilier-errors.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(15)))
 				.andExpect(jsonPath("$.messageResponse").value("Votre annonce n'a pas pu être créer")).andDo(print());
 	}
 
 	@Test
+	@WithMockAdminUser
 	public void should_creation_offre_immobilier_with_success() throws Exception {
 		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "create-offres-immobilier-success.json"))).andExpect(status().isOk())
+				.content(getJsonFromFile(path + "offres\\create-offres-immobilier-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
 						.value("<h3>Confirmation</h3><h5>Votre offre a bien été enregistré</h5>"))
 				.andDo(print());
@@ -85,6 +95,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	 * @throws Exception
 	 */
 	@Test
+	@WithMockAdminUser
 	public void should_creationOffre_mobile_without_notMobile_and_notImmo_error() throws Exception {
 		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content("{}")).andExpect(status().isOk())
@@ -92,9 +103,10 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	}
 
 	@Test
+	@WithMockAdminUser
 	public void should_creation_tout_offre_with_email_notFound_error() throws Exception {
 		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "create-offres-mobile-notFound-email.json"))).andExpect(status().isOk())
+				.content(getJsonFromFile(path + "offres\\create-offres-mobile-notFound-email.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
 						.value("Le formulaire contient des erreurs, veuillez contacter le service loumo@contact.fr"))
 				.andDo(print());
@@ -116,8 +128,8 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Before
 	public void initDataOffreMobileAndImmobilier() throws JsonProcessingException {
-		creationParticulier(userRepo, roleRepository);
-		creationProfessionnel(userRepo, roleRepository);
+		creationParticulier(userRepo, roleRepository, bcryptPassword);
+		creationProfessionnel(userRepo, roleRepository, bcryptPassword);
 		offreEntities.add(creationImmobilier(userRepo));
 		offreEntities.add(creationMobile(userRepo));
 	}

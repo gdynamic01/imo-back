@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import imo.com.general.ConstantesUtils;
 import imo.com.logic.FonctialiterCommunes;
@@ -33,7 +33,7 @@ import imo.com.response.ImoResponse;
 /**
  * @author balde
  */
-@Component
+@Service
 public class OffreImpl implements IOffre {
 
 	@Autowired

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import imo.com.model.adresse.Adresse;
 import imo.com.model.enums.SanitaireEnum;
 import imo.com.model.enums.TypeBienImmobilierEnum;
@@ -11,9 +13,9 @@ import imo.com.model.enums.TypeOffreEnum;
 import imo.com.model.enums.TypeServiceOffre;
 import imo.com.model.enums.TypeUtilisateurEnum;
 import imo.com.model.immobilier.ImmobilierEntity;
-import imo.com.model.info.RepresentantLegal;
 import imo.com.model.mobile.MobileEntity;
 import imo.com.model.photo.PhotosEntity;
+import imo.com.model.representant_legal.RepresentantLegal;
 import imo.com.model.utilisateur.AppUser;
 import imo.com.model.utilisateur.Role;
 import imo.com.model.utilisateur.RoleUserEnum;
@@ -28,31 +30,29 @@ public interface IGeneralTest {
 	static final String emailParticulier = "test2@yahoo.fr";
 
 	static final String emailProfessionnel = "professionel@yahoo.fr";
+	
+	static final String emailParticulierNonActif = "fakeEmailNotActif@yahoo.fr";
 
+	static final String emailBadCredential = "emailBadCredential@yahoo.fr";
+	
 	/**
 	 * creation particulier
 	 * 
 	 * @return entity
 	 */
-	default UserPhysiqueEntity creationParticulier(UserRepository userRepo, RoleRepository roleRepository) {
-
-		UserPhysiqueEntity user = new UserPhysiqueEntity();
-		RepresentantLegal repr = new RepresentantLegal();
-		List<RoleUserEnum> roles = new ArrayList<>();
-		List<Role> role = new ArrayList<>();
-		repr.setNom("BAH");
-		repr.setPrenom("Mata");
-		repr.setSexe(SexeEnum.F);
-		user.setRepresentantLegal(repr);
-		user.setEmail(emailParticulier);
-		user.setEnabled(true);
-		user.setPassword("testtest");
-		roles.add(RoleUserEnum.USER_PHYSIQUE);
-		role = roleRepository.findByRoleEnumIn(roles);
-		user.setTypeUtilisateur(TypeUtilisateurEnum.PARTICULIER);
-		user.setRoles(role);
-
-		return userRepo.save(user);
+	default UserPhysiqueEntity creationParticulier(UserRepository userRepo, RoleRepository roleRepository, BCryptPasswordEncoder bcryptPassword) {
+		UserPhysiqueEntity entity = initUserPhysiqueEntity(roleRepository, true, emailParticulier, bcryptPassword);
+		return userRepo.saveAndFlush(entity);
+	}
+	
+	/**
+	 * creation particulier inactif
+	 * 
+	 * @return entity
+	 */
+	default UserPhysiqueEntity creationParticulierNonActif(UserRepository userRepo, RoleRepository roleRepository, BCryptPasswordEncoder bcryptPassword) {
+		UserPhysiqueEntity entity = initUserPhysiqueEntity(roleRepository, false, emailParticulierNonActif, bcryptPassword);
+		return userRepo.saveAndFlush(entity);
 	}
 
 	/**
@@ -60,8 +60,18 @@ public interface IGeneralTest {
 	 * 
 	 * @return entity
 	 */
-	default UserMoralEntity creationProfessionnel(UserRepository userRepo, RoleRepository roleRepository) {
-
+	default UserMoralEntity creationProfessionnel(UserRepository userRepo, RoleRepository roleRepository, BCryptPasswordEncoder bcryptPassword) {
+		UserMoralEntity entity = initUserMoralEntity(roleRepository, true, emailProfessionnel, bcryptPassword);
+		return userRepo.saveAndFlush(entity);
+	}
+	
+	default UserPhysiqueEntity creationParticulierAvecMotDePasseNonCrypter(UserRepository userRepo, RoleRepository roleRepository, BCryptPasswordEncoder bcryptPassword) {
+		UserPhysiqueEntity entity = initUserPhysiqueEntity(roleRepository, true, emailBadCredential, bcryptPassword);
+		entity.setPassword("badCredential");
+		return userRepo.saveAndFlush(entity);
+	}
+	
+	default UserMoralEntity initUserMoralEntity(RoleRepository roleRepository, boolean isActif, String email, BCryptPasswordEncoder bcryptPassword) {
 		UserMoralEntity professionnel = new UserMoralEntity();
 		RepresentantLegal repr = new RepresentantLegal();
 		List<RoleUserEnum> roles = new ArrayList<>();
@@ -70,18 +80,38 @@ public interface IGeneralTest {
 		repr.setNom("BALDE");
 		repr.setPrenom("Mamadou");
 		repr.setSexe(SexeEnum.M);
-		professionnel.setEmail(emailProfessionnel);
+		professionnel.setEmail(email);
 		professionnel.setRepresentantLegal(repr);
-		professionnel.setPassword("testtest");
-		professionnel.setEnabled(true);
+		professionnel.setPassword(bcryptPassword.encode("testtest"));
+		professionnel.setEnabled(isActif);
 		professionnel.setSiret("215468L");
 		roles.add(RoleUserEnum.USER_MORAL);
 
 		role = roleRepository.findByRoleEnumIn(roles);
-		professionnel.setTypeUtilisateur(TypeUtilisateurEnum.PARTICULIER);
+		professionnel.setTypeUtilisateur(TypeUtilisateurEnum.ENTREPRISE);
 		professionnel.setRoles(role);
-
-		return userRepo.save(professionnel);
+		
+		return professionnel;
+	}
+	
+	default UserPhysiqueEntity initUserPhysiqueEntity(RoleRepository roleRepository, boolean isActif, String email, BCryptPasswordEncoder bcryptPassword) {
+		UserPhysiqueEntity userPhysique = new UserPhysiqueEntity();
+		RepresentantLegal repr = new RepresentantLegal();
+		List<RoleUserEnum> roles = new ArrayList<>();
+		List<Role> role = new ArrayList<>();
+		repr.setNom("BAH");
+		repr.setPrenom("Mata");
+		repr.setSexe(SexeEnum.F);
+		userPhysique.setRepresentantLegal(repr);
+		userPhysique.setEmail(email);
+		userPhysique.setEnabled(isActif);
+		userPhysique.setPassword(bcryptPassword.encode("testtest"));
+		roles.add(RoleUserEnum.USER_PHYSIQUE);
+		role = roleRepository.findByRoleEnumIn(roles);
+		userPhysique.setTypeUtilisateur(TypeUtilisateurEnum.PARTICULIER);
+		userPhysique.setRoles(role);
+		
+		return userPhysique;
 	}
 
 	default ImmobilierEntity creationImmobilier(UserRepository userRepo) {

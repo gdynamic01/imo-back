@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import imo.com.model.AbstractEntity;
 import imo.com.model.adresse.Adresse;
 import imo.com.model.enums.TypeUtilisateurEnum;
-import imo.com.model.info.RepresentantLegal;
+import imo.com.model.representant_legal.RepresentantLegal;
 
 /**
  * @author mbalde

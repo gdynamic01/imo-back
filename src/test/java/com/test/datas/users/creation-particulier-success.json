@@ -1,0 +1,17 @@
+{
+	"adresse":null,
+	"email":"part@yahoo.fr",
+	"password":"test",
+	"representantLegal":{
+		"nom":"PAR",
+		"posteOcupee":null,
+		"prenom":"PrenonPart",
+		"telephone":null,
+		"sexe":"F"
+	},
+	"roles":["USER_PHYSIQUE"],
+	"typeUtilisateur":"PARTICULIER",
+	"kbis":null,
+	"raisonSocial":null,
+	"siret":"12345"
+}
