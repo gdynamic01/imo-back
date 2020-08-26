@@ -54,7 +54,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creation_offre_mobile_with_fields_required_missing_error() throws Exception {
-		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path + "offres\\create-offres-mobile-errors.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(8)))
 				.andExpect(jsonPath("$.champsObligatoires[5]").value("dateMiseEnCircualtion"))
@@ -64,7 +64,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creation_offre_mobile_with_success() throws Exception {
-		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path + "offres\\create-offres-mobile-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
 						.value("<h3>Confirmation</h3><h5>Votre offre a bien été enregistré</h5>"))
@@ -74,7 +74,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creation_offre_immobilier_with_fields_required_missing_error() throws Exception {
-		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path + "offres\\create-offres-immobilier-errors.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(15)))
 				.andExpect(jsonPath("$.messageResponse").value("Votre annonce n'a pas pu être créer")).andDo(print());
@@ -83,7 +83,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creation_offre_immobilier_with_success() throws Exception {
-		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path + "offres\\create-offres-immobilier-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
 						.value("<h3>Confirmation</h3><h5>Votre offre a bien été enregistré</h5>"))
@@ -97,7 +97,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creationOffre_mobile_without_notMobile_and_notImmo_error() throws Exception {
-		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content("{}")).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse").value("Votre annonce n'a pas pu être créer")).andDo(print());
 	}
@@ -105,7 +105,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creation_tout_offre_with_email_notFound_error() throws Exception {
-		mockMvc.perform(post(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
+		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(path + "offres\\create-offres-mobile-notFound-email.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
 						.value("Le formulaire contient des erreurs, veuillez contacter le service loumo@contact.fr"))
@@ -116,7 +116,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	public void sould_get_all_offres() throws Exception {
 
 		when(offreRepo.findAll()).thenReturn(offreEntities);
-		mockMvc.perform(get(uri).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+		mockMvc.perform(get(uri+"/offres").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk()).andExpect(jsonPath("$.result", hasSize(2)))
 				.andExpect(jsonPath("$.result.[0].titre").value("immo 1"))
 				.andExpect(jsonPath("$.result.[1].titre").value("mobile 1"))

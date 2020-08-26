@@ -9,7 +9,7 @@
 		"telephone":null,
 		"sexe":"M"
 	},
-	"roles":["USER_MORAL"],
+	"roles":["ROLE_USER_MORAL"],
 	"typeUtilisateur":"ENTREPRISE",
 	"kbis":null,
 	"raisonSocial":null,

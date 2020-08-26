@@ -85,7 +85,7 @@ public interface IGeneralTest {
 		professionnel.setPassword(bcryptPassword.encode("testtest"));
 		professionnel.setEnabled(isActif);
 		professionnel.setSiret("215468L");
-		roles.add(RoleUserEnum.USER_MORAL);
+		roles.add(RoleUserEnum.ROLE_USER_MORAL);
 
 		role = roleRepository.findByRoleEnumIn(roles);
 		professionnel.setTypeUtilisateur(TypeUtilisateurEnum.ENTREPRISE);
@@ -106,7 +106,7 @@ public interface IGeneralTest {
 		userPhysique.setEmail(email);
 		userPhysique.setEnabled(isActif);
 		userPhysique.setPassword(bcryptPassword.encode("testtest"));
-		roles.add(RoleUserEnum.USER_PHYSIQUE);
+		roles.add(RoleUserEnum.ROLE_USER_PHYSIQUE);
 		role = roleRepository.findByRoleEnumIn(roles);
 		userPhysique.setTypeUtilisateur(TypeUtilisateurEnum.PARTICULIER);
 		userPhysique.setRoles(role);
