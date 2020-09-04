@@ -147,6 +147,16 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 				).andExpect(status().isUnauthorized())
 		.andDo(print());
 	}
+	
+	@Test
+	public void should_get_roles_by_success() throws Exception {
+		mockMvc.perform(get(uri + "/roles/professionel@yahoo.fr")
+				.accept(MediaType.APPLICATION_JSON_VALUE)
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				).andExpect(status().isOk())
+		.andExpect(jsonPath("$.result").value("ROLE_USER_MORAL"))
+		.andDo(print());
+	}
 
 	@Before
 	public void initData() {

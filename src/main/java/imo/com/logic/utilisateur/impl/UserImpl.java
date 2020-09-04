@@ -5,6 +5,7 @@ package imo.com.logic.utilisateur.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -35,6 +36,7 @@ import imo.com.logic.utilisateur.mapper.UserMapper;
 import imo.com.logic.utilisateur.mapper.UserMoralMapper;
 import imo.com.model.utilisateur.AppUser;
 import imo.com.model.utilisateur.Role;
+import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.model.utilisateur.UserMoralEntity;
 import imo.com.model.utilisateur.UserPhysiqueEntity;
 import imo.com.repo.utilisateur.RoleRepository;
@@ -167,16 +169,17 @@ public class UserImpl implements IUser {
 
 	@Override
 	public ImoResponse<String> getEmail(String email) {
-		ImoResponse<String> imoResponse = new ImoResponse<>();
-		AppUser user = userRepo.findByEmail(email);
-		List<String> result = new ArrayList<>();
-		int codeStatus = HttpStatus.NO_CONTENT.value();
-		if (user != null) {
-			result.add(user.getEmail());
-			codeStatus = HttpStatus.OK.value();
-		}
-		FonctialiterCommunes.setImoResponse(imoResponse, codeStatus, null, result);
-		return imoResponse;
+		ImoResponse<String> imoEmails = new ImoResponse<>();
+//		AppUser user = userRepo.findByEmail(email);
+//		List<String> result = new ArrayList<>();
+//		int codeStatus = HttpStatus.NO_CONTENT.value();
+//		if (user != null) {
+//			result.add(user.getEmail());
+//			codeStatus = HttpStatus.OK.value();
+//		}
+//		FonctialiterCommunes.setImoResponse(imoResponse, codeStatus, null, result);
+		this.setResponseByEmail(email, imoEmails, null, "");
+		return imoEmails;
 	}
 
 	private void authenticate(String email, String password) {
@@ -185,6 +188,39 @@ public class UserImpl implements IUser {
 		} catch (BadCredentialsException e) {
 			throw new BadCredentialsException("INVALID_CREDENTIALS", e);
 		}
+	}
+
+	@Override
+	public ImoResponse<RoleUserEnum> getRolesByEmail(String email) {
+		ImoResponse<RoleUserEnum> imoRoles = new ImoResponse<>();
+		this.setResponseByEmail(email, null, imoRoles, "roles");
+		return imoRoles;
+	}
+	
+	private void setResponseByEmail(String email, ImoResponse<String> imoEmails, ImoResponse<RoleUserEnum> imoRoles, String typeResult) {
+		AppUser user = userRepo.findByEmail(email);
+		int codeStatus = user != null ? HttpStatus.OK.value() : HttpStatus.NO_CONTENT.value();
+		if (user != null) {
+			switch(typeResult) {
+			case "roles":
+				List<RoleUserEnum> roles = user.getRoles().stream().map(roleEnum -> {
+					return roleEnum.getRoleEnum();
+				}).collect(Collectors.toList());
+				FonctialiterCommunes.setImoResponse(imoRoles, codeStatus, null, roles);
+				break;
+				default:
+					List<String> emails = new ArrayList<>();
+					emails.add(user.getEmail());
+					FonctialiterCommunes.setImoResponse(imoEmails, codeStatus, null, emails);
+			}
+		} else {
+			if(imoRoles != null) {
+				FonctialiterCommunes.setImoResponse(imoRoles, codeStatus, null, null);
+			} else {
+				FonctialiterCommunes.setImoResponse(imoEmails, codeStatus, null, null);
+			}
+		}
+		
 	}
 
 }

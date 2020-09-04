@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import imo.com.logic.utilisateur.dto.UserMoralDto;
 import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
+import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.response.ImoResponse;
 
 /**
@@ -52,5 +53,13 @@ public interface IUserApi {
 	 */
 	@GetMapping(path= "/email/{email:.+}")
 	public ResponseEntity<ImoResponse<String>> getEmailExist(@PathVariable(value="email") String email);
+	
+	/**
+	 * get roles
+	 * @param email
+	 * @return
+	 */
+	@GetMapping(path= "/roles/{email:.+}")
+	public ResponseEntity<ImoResponse<RoleUserEnum>> getRolesByEmail(@PathVariable(value="email") String email);
 
 }

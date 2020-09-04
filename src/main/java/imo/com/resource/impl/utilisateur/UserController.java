@@ -15,6 +15,7 @@ import imo.com.logic.utilisateur.IUser;
 import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
 import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
+import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.resource.api.utilisateur.IUserApi;
 import imo.com.response.ImoResponse;
 import imo.com.response.JwtTokenResponse;
@@ -70,6 +71,12 @@ public class UserController implements IUserApi {
 	@Override
 	public ResponseEntity<ImoResponse<String>> getEmailExist(String email) {
 		ImoResponse<String> imoResponse = user.getEmail(email);
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+	}
+
+	@Override
+	public ResponseEntity<ImoResponse<RoleUserEnum>> getRolesByEmail(String email) {
+		ImoResponse<RoleUserEnum> imoResponse = user.getRolesByEmail(email);
 		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}
 

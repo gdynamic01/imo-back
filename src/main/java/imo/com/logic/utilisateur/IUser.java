@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import imo.com.logic.utilisateur.dto.UserDto;
 import imo.com.logic.utilisateur.dto.UserMoralDto;
 import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
+import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.response.ImoResponse;
 import imo.com.response.JwtTokenResponse;
 
@@ -41,4 +42,10 @@ public interface IUser {
 	 * @return l'email
 	 */
 	public ImoResponse<String> getEmail(String email);
+	
+	/**
+	 * @param email
+	 * @return
+	 */
+	public ImoResponse<RoleUserEnum> getRolesByEmail(String email);
 }

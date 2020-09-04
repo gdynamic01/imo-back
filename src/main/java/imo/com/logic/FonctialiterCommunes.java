@@ -27,13 +27,15 @@ public abstract class FonctialiterCommunes {
 		imo.setStatut(status);
 		imo.setMessageResponse(message);
 		imo.setResult(list);
-		long nbOffreProfessionnel = list != null ? list.stream().filter(offre -> offre != null
-				&& !"String".equals(offre.getClass().getSimpleName()) && ((OffreDto) offre).isImmobilier()).count() : 0;
-		long nbOffreParticulier = list != null ? list.stream().filter(offre -> offre != null
-				&& !"String".equals(offre.getClass().getSimpleName()) && ((OffreDto) offre).isMobile()).count() : 0;
-		imo.setNbOffre(list != null ? list.size() : 0);
-		imo.setNbOffreParticulier(nbOffreParticulier);
-		imo.setNbOffreProfessionnel(nbOffreProfessionnel);
+		if (list != null && list.get(0) instanceof OffreDto) {
+			long nbOffreProfessionnel = list.stream().filter(offre -> offre != null
+					&& !"String".equals(offre.getClass().getSimpleName()) && ((OffreDto) offre).isImmobilier()).count();
+			long nbOffreParticulier = list.stream().filter(offre -> offre != null
+					&& !"String".equals(offre.getClass().getSimpleName()) && ((OffreDto) offre).isMobile()).count();
+			imo.setNbOffre(list != null ? list.size() : 0);
+			imo.setNbOffreParticulier(nbOffreParticulier);
+			imo.setNbOffreProfessionnel(nbOffreProfessionnel);
+		}
 	}
 
 }
