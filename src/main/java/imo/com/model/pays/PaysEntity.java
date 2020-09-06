@@ -1,6 +1,5 @@
 package imo.com.model.pays;
 
-
 import imo.com.model.AbstractEntity;
 import imo.com.model.ville.VilleEntity;
 
@@ -13,24 +12,22 @@ import java.util.List;
 @Table(name = "imo_pays")
 public class PaysEntity extends AbstractEntity implements Serializable {
 
+	/** Serial ID */
+	private static final long serialVersionUID = -716142150922491844L;
 
-    /** Serial ID */
-    private static final long serialVersionUID = -716142150922491844L;
+	/** model */
+	@Column(name = "nom_pays")
+	private String nomPays;
 
-    /** model */
-    @Column(name = "nom_pays")
-    private String nomPays;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "pays_id", referencedColumnName = "id", nullable = true)
+	private List<VilleEntity> billes = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pays_id", referencedColumnName = "id", nullable = true)
-    private List<VilleEntity> billes = new ArrayList<>();
+	public String getNomPays() {
+		return nomPays;
+	}
 
-
-    public String getNomPays() {
-        return nomPays;
-    }
-
-    public void setNomPays(String nomPays) {
-        this.nomPays = nomPays;
-    }
+	public void setNomPays(String nomPays) {
+		this.nomPays = nomPays;
+	}
 }
