@@ -123,6 +123,25 @@ CREATE TABLE IF NOT EXISTS public.imo_photos (
 	CONSTRAINT imo_photos_pkey PRIMARY KEY(id)
 );
 
+CREATE TABLE IF NOT EXISTS public.imo_ville (
+    id bigserial not null,
+    create_at date,
+    modificationcounter integer,
+    update_at date,
+    code_postal integer,
+    nom_ville character varying(255) not null,
+    pays_id serial not null,
+    CONSTRAINT imo_ville_pkey PRIMARY KEY(id)
+ );
+    create TABLE IF NOT EXISTS public.imo_pays (
+     id  bigserial not null,
+     create_at date,
+     modificationcounter integer,
+     update_at date,
+     nom_pays character varying(255),
+     CONSTRAINT imo_pays_pkey PRIMARY KEY(id)
+ );
+
 -- Add contraintes
 ALTER TABLE ONLY public.imo_mobile
     ADD CONSTRAINT fk215868tr3u27jcxsj6i1sctax FOREIGN KEY (id) REFERENCES public.imo_offre(id);
@@ -143,5 +162,8 @@ ALTER TABLE ONLY imo_user_moral ADD CONSTRAINT fk_user_morale_user FOREIGN KEY (
 
 ALTER TABLE ONLY imo_user_physique ADD CONSTRAINT fk_user_physique_user FOREIGN KEY (id) REFERENCES imo_users(id);
 
+alter table ONLY imo_ville add constraint FK9tjir9hrn5ds297c0c7239fe foreign key (pays_id) references imo_pays(id);
+
 insert into imo_role (id,modificationcounter, role) values (1, 0, 'ROLE_ADMIN'),(2, 0, 'ROLE_USER_MORAL'),(3, 0, 'ROLE_USER_PHYSIQUE');
+
 

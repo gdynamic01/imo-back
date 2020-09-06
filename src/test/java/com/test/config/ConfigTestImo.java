@@ -36,9 +36,12 @@ public abstract class ConfigTestImo {
 	@Autowired
 	protected MockMvc mockMvc;
 	
-	@Value("${path.datas.tests}")
-	protected String path;
-	
+	@Value("${path.users}")
+	protected String pathUsers;
+
+	@Value("${path.offres}")
+	protected String pathOffres;
+
 	public String getJsonFromFile(String path) throws IOException  {
 		byte[] datas = Files.readAllBytes(Paths.get(path));
 		return new String(datas, "UTF-8");

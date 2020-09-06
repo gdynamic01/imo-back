@@ -43,7 +43,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 		// --- user professionnel
 		mockMvc.perform(post(uri + "/professionnel").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "users\\creation-user-error.json"))).andExpect(status().isBadRequest())
+				.content(getJsonFromFile(pathUsers + "creation-user-error.json"))).andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(8)))
 				.andExpect(jsonPath("$.champsObligatoires[0]").value("numero"))
 				.andExpect(jsonPath("$.messageResponse")
@@ -53,7 +53,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 		// --- user particulier
 		mockMvc.perform(post(uri + "/particulier").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "users\\creation-user-error.json"))).andExpect(status().isBadRequest())
+				.content(getJsonFromFile(pathUsers + "creation-user-error.json"))).andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(6)))
 				.andExpect(jsonPath("$.champsObligatoires[0]").value("nom"))
 				.andExpect(jsonPath("$.messageResponse")
@@ -65,7 +65,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 	public void should_creation_professionnel_with_email_exist_error() throws Exception {
 		mockMvc.perform(post(uri + "/professionnel").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "users\\creation-professionnel-email-exists.json")))
+				.content(getJsonFromFile(pathUsers + "creation-professionnel-email-exists.json")))
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.messageResponse").value("Cet email existe dejà veuillez vous connecter"))
 				.andDo(print());
@@ -75,7 +75,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 	public void should_creation_particulier_with_email_exists_error() throws Exception {
 		mockMvc.perform(post(uri + "/particulier").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "users\\creation-particulier-email-exists.json")))
+				.content(getJsonFromFile(pathUsers+ "creation-particulier-email-exists.json")))
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.messageResponse").value("Cet email existe dejà veuillez vous connecter"))
 				.andDo(print());
@@ -85,7 +85,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 	public void should_creation_professionnel_with_success() throws Exception {
 		mockMvc.perform(post(uri + "/professionnel").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "users\\creation-professionnel-success.json")))
+				.content(getJsonFromFile(pathUsers + "creation-professionnel-success.json")))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse").value(
 						"<h6>ACTIVATION COMPTE</h6> <p><span>Votre compte a été créé avec succès!</span></p><p><strong>veuillez cliquer sur le lien figurant dans l’email de confirmation que nous venons de vous envoyer.</strong></p>"))
@@ -96,7 +96,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 	public void should_creation_particulier_with_success() throws Exception {
 		mockMvc.perform(post(uri + "/particulier").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(getJsonFromFile(path + "users\\creation-particulier-success.json")))
+				.content(getJsonFromFile(pathUsers + "creation-particulier-success.json")))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse").value(
 						"<h6>ACTIVATION COMPTE</h6> <p><span>Votre compte a été créé avec succès!</span></p><p><strong>veuillez cliquer sur le lien figurant dans l’email de confirmation que nous venons de vous envoyer.</strong></p>"))
