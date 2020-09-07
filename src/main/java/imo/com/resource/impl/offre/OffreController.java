@@ -3,6 +3,7 @@
  */
 package imo.com.resource.impl.offre;
 
+import imo.com.general.AuthorisationUser;
 import imo.com.logic.offre.IOffre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +24,7 @@ public class OffreController implements IOffreApi {
 	private IOffre iOffre;
 
 	@Override
-	@PreAuthorize("hasRole('USER_PHYSIQUE')")
+	@PreAuthorize(AuthorisationUser.PROF_OR_PAR)
 	public ImoResponse<OffreGlobalDto> creationOffre(OffreGlobalDto dto) {
 		return iOffre.creationOffre(dto);
 	}

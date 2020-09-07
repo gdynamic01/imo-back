@@ -7,9 +7,11 @@ import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.web.bind.annotation.RestController;
 
+import imo.com.general.AuthorisationUser;
 import imo.com.logic.FonctialiterCommunes;
 import imo.com.logic.utilisateur.IUser;
 import imo.com.logic.utilisateur.dto.UserDto;
@@ -75,6 +77,7 @@ public class UserController implements IUserApi {
 	}
 
 	@Override
+	@PreAuthorize(AuthorisationUser.PROF_OR_PAR)
 	public ResponseEntity<ImoResponse<RoleUserEnum>> getRolesByEmail(String email) {
 		ImoResponse<RoleUserEnum> imoResponse = user.getRolesByEmail(email);
 		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));

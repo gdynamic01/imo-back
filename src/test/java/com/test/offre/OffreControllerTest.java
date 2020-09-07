@@ -67,7 +67,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(pathOffres + "create-offres-mobile-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
-						.value("<h3>Confirmation</h3><h5>Votre offre a bien été enregistré</h5>"))
+						.value("<h3>Confirmation</h3><h5>Votre offre a bien été créé</h5>"))
 				.andDo(print());
 	}
 
@@ -86,7 +86,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 		mockMvc.perform(post(uri+"/offre").accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(pathOffres + "create-offres-immobilier-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
-						.value("<h3>Confirmation</h3><h5>Votre offre a bien été enregistré</h5>"))
+						.value("<h3>Confirmation</h3><h5>Votre offre a bien été créé</h5>"))
 				.andDo(print());
 	}
 

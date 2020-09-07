@@ -18,6 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.test.allObjects.IGeneralTest;
 import com.test.config.ConfigTestImo;
+import com.test.config.WithMockAdminUser;
+
 import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
 
@@ -44,7 +46,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 		mockMvc.perform(post(uri + "/professionnel").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(pathUsers + "creation-user-error.json"))).andExpect(status().isBadRequest())
-				.andExpect(jsonPath("$.champsObligatoires", hasSize(8)))
+				.andExpect(jsonPath("$.champsObligatoires", hasSize(10)))
 				.andExpect(jsonPath("$.champsObligatoires[0]").value("numero"))
 				.andExpect(jsonPath("$.messageResponse")
 						.value("Le formulaire contient des erreurs, veuillez contacter le service loumo@contact.fr"))
@@ -54,7 +56,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 		mockMvc.perform(post(uri + "/particulier").accept(MediaType.APPLICATION_JSON_VALUE)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(getJsonFromFile(pathUsers + "creation-user-error.json"))).andExpect(status().isBadRequest())
-				.andExpect(jsonPath("$.champsObligatoires", hasSize(6)))
+				.andExpect(jsonPath("$.champsObligatoires", hasSize(8)))
 				.andExpect(jsonPath("$.champsObligatoires[0]").value("nom"))
 				.andExpect(jsonPath("$.messageResponse")
 						.value("Le formulaire contient des erreurs, veuillez contacter le service loumo@contact.fr"))
@@ -149,6 +151,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 	}
 	
 	@Test
+	@WithMockAdminUser
 	public void should_get_roles_by_success() throws Exception {
 		mockMvc.perform(get(uri + "/roles/professionel@yahoo.fr")
 				.accept(MediaType.APPLICATION_JSON_VALUE)

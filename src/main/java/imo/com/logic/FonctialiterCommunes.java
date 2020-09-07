@@ -27,7 +27,7 @@ public abstract class FonctialiterCommunes {
 		imo.setStatut(status);
 		imo.setMessageResponse(message);
 		imo.setResult(list);
-		if (list != null && list.get(0) instanceof OffreDto) {
+		if (list != null && !list.isEmpty() && list.get(0) instanceof OffreDto) {
 			long nbOffreProfessionnel = list.stream().filter(offre -> offre != null
 					&& !"String".equals(offre.getClass().getSimpleName()) && ((OffreDto) offre).isImmobilier()).count();
 			long nbOffreParticulier = list.stream().filter(offre -> offre != null

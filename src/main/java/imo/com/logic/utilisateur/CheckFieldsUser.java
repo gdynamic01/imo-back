@@ -37,6 +37,7 @@ public class CheckFieldsUser implements ICheckFieldsObject {
 		}
 		// champs communs
 		champsObligatoires += checkRepresentantLegal(((UserDto) dto).getRepresentantLegal());
+		champsObligatoires += checkAdresse(((UserDto) dto).getAdresse());
 		if (StringUtils.isBlank(((UserDto) dto).getEmail()))
 			champsObligatoires += "email ";
 		if (StringUtils.isBlank(((UserDto) dto).getPassword()))

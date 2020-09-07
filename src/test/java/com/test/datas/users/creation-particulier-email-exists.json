@@ -1,5 +1,12 @@
 {
-	"adresse":null,
+	"adresse":{
+  		"codePostal":null,
+  		"complementAdresse":null,
+  		"libelleRue":null,
+  		"numeroRue":null,
+  		"pays":"Guinee",
+  		"ville":"Conakry"
+  	},
 	"email":"test2@yahoo.fr",
 	"password":"test",
 	"representantLegal":{
