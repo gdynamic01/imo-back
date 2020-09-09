@@ -10,6 +10,9 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public abstract class ConstantesUtils {
+	
+	/** list pays */
+	public static final String[] pays = new String[] {"Guinee"};
 
 	/** message email existe */
 	public static final String MESSAGE_EMAIL_EXISTE = "Cet email existe dejà veuillez vous connecter";
