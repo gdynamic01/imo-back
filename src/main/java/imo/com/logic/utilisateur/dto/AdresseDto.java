@@ -10,7 +10,7 @@ package imo.com.logic.utilisateur.dto;
 public class AdresseDto {
 
 	/** le code postal */
-	private String codePostal;
+	private int codePostal;
 
 	/** complement adresse */
 	private String complementAdresse;
@@ -30,7 +30,7 @@ public class AdresseDto {
 	/**
 	 * @return the codePostal
 	 */
-	public String getCodePostal() {
+	public int getCodePostal() {
 		return codePostal;
 	}
 
@@ -72,7 +72,7 @@ public class AdresseDto {
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(String codePostal) {
+	public void setCodePostal(int codePostal) {
 		this.codePostal = codePostal;
 	}
 

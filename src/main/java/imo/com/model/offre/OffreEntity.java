@@ -61,7 +61,7 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	public LocalDate dateDebut = LocalDate.now();
 	
 	/** Date fin location */
-	@Column(name = "date_fin", nullable = false)
+	@Column(name = "date_fin")
 	public LocalDate dateFin = LocalDate.now();
 
 	/** user concerné */

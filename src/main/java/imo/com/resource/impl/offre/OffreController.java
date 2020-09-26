@@ -3,14 +3,16 @@
  */
 package imo.com.resource.impl.offre;
 
-import imo.com.general.AuthorisationUser;
 import imo.com.logic.offre.IOffre;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import imo.com.logic.offre.dto.OffreDto;
 import imo.com.logic.offre.dto.OffreGlobalDto;
+import imo.com.logic.offre.dto.OffreSearchViewDto;
+import imo.com.model.enums.TypeServiceOffre;
 import imo.com.resource.api.offre.IOffreApi;
 import imo.com.response.ImoResponse;
 
@@ -24,14 +26,16 @@ public class OffreController implements IOffreApi {
 	private IOffre iOffre;
 
 	@Override
-	@PreAuthorize(AuthorisationUser.PROF_OR_PAR)
-	public ImoResponse<OffreGlobalDto> creationOffre(OffreGlobalDto dto) {
-		return iOffre.creationOffre(dto);
+	public ResponseEntity<ImoResponse<OffreGlobalDto>> creationOffre(OffreGlobalDto dto) {
+		ImoResponse<OffreGlobalDto> imoResponse = iOffre.creationOffre(dto);
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}
 
 	@Override
-	public ImoResponse<OffreDto> getListOffres() {
-		return iOffre.getListOffres();
+	public ResponseEntity<ImoResponse<OffreSearchViewDto>> getListOffres(TypeServiceOffre typesServices, String ville,
+			String pays, String dateDebut, String dateFin, String categories) {
+		ImoResponse<OffreSearchViewDto> imoResponse = iOffre.getListOffres(typesServices, ville, pays, dateDebut, dateFin, categories);
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}
 
 }

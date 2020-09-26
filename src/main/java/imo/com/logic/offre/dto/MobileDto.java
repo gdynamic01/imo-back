@@ -3,6 +3,7 @@ package imo.com.logic.offre.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import imo.com.model.enums.TypeBienMobileEnum;
 import imo.com.model.enums.TypeMobileMoteurEnum;
 
 public class MobileDto extends OffreDto {
@@ -33,6 +34,9 @@ public class MobileDto extends OffreDto {
 
 	/** duree*/
 	private LocalTime dureeBaterie;
+	
+	/** type de bien mobile */
+	private TypeBienMobileEnum typeBienMobile;
 
 	/**
 	 * @return the motoriser
@@ -158,5 +162,19 @@ public class MobileDto extends OffreDto {
 	 */
 	public void setDureeBaterie(LocalTime dureeBaterie) {
 		this.dureeBaterie = dureeBaterie;
+	}
+
+	/**
+	 * @return the typeBienMobile
+	 */
+	public TypeBienMobileEnum getTypeBienMobile() {
+		return typeBienMobile;
+	}
+
+	/**
+	 * @param typeBienMobile the typeBienMobile to set
+	 */
+	public void setTypeBienMobile(TypeBienMobileEnum typeBienMobile) {
+		this.typeBienMobile = typeBienMobile;
 	}
 }

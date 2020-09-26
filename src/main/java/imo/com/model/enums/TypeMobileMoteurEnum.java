@@ -20,17 +20,10 @@ public enum TypeMobileMoteurEnum {
 	SANS_MOTEUR("Sans moteur");
 
 	/** Libelle enum */
+	@SuppressWarnings("unused")
 	private String libelle;
 
 	private TypeMobileMoteurEnum(String libelle) {
 		this.libelle = libelle;
-	}
-
-	/**
-	 * retourne le libelle
-	 * @return libelle
-	 */
-	public String getLibelle() {
-		return this.libelle;
 	}
 }

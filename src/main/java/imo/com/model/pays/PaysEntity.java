@@ -21,13 +21,34 @@ public class PaysEntity extends AbstractEntity implements Serializable {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pays_id", referencedColumnName = "id", nullable = true)
-	private List<VilleEntity> billes = new ArrayList<>();
+	private List<VilleEntity> villes = new ArrayList<>();
 
+	/**
+	 * @return the nomPays
+	 */
 	public String getNomPays() {
 		return nomPays;
 	}
 
+	/**
+	 * @param nomPays the nomPays to set
+	 */
 	public void setNomPays(String nomPays) {
 		this.nomPays = nomPays;
 	}
+
+	/**
+	 * @return the villes
+	 */
+	public List<VilleEntity> getVilles() {
+		return villes;
+	}
+
+	/**
+	 * @param villes the villes to set
+	 */
+	public void setVilles(List<VilleEntity> villes) {
+		this.villes = villes;
+	}
+	
 }

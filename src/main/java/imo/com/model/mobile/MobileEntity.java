@@ -13,6 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import imo.com.model.enums.TypeBienMobileEnum;
 import imo.com.model.enums.TypeMobileMoteurEnum;
 import imo.com.model.offre.OffreEntity;
 
@@ -35,11 +36,11 @@ public class MobileEntity extends OffreEntity implements Serializable {
 
 	/** Kilometrage */
 	@Column(name = "kilometrage")
-	private int kilometrage;
+	private Integer kilometrage;
 
 	/** Nombre de roue */
 	@Column(name = "nombre_roue")
-	private int nbRoue = 0;
+	private Integer nbRoue;
 
 	/** model */
 	@Column(name = "model")
@@ -47,7 +48,7 @@ public class MobileEntity extends OffreEntity implements Serializable {
 
 	/** nombre de porte */
 	@Column(name = "nombre_porte")
-	private int nbPorte = 0;
+	private Integer nbPorte;
 
 	/** date mise en circulation du mobile */
 	@Column(name = "date_mise_en_circulation", nullable = false)
@@ -65,6 +66,10 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	/** duree*/
 	@Column(name = "duree_batterie")
 	private LocalTime dureeBaterie;
+	
+	@Column(name = "type_bien_mobile", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private TypeBienMobileEnum typeBienMobile;
 
 	/**
 	 * @return the motoriser
@@ -83,28 +88,28 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	/**
 	 * @return the kilometrage
 	 */
-	public int getKilometrage() {
+	public Integer getKilometrage() {
 		return kilometrage;
 	}
 
 	/**
 	 * @param kilometrage the kilometrage to set
 	 */
-	public void setKilometrage(int kilometrage) {
+	public void setKilometrage(Integer kilometrage) {
 		this.kilometrage = kilometrage;
 	}
 
 	/**
 	 * @return the nbRoue
 	 */
-	public int getNbRoue() {
+	public Integer getNbRoue() {
 		return nbRoue;
 	}
 
 	/**
 	 * @param nbRoue the nbRoue to set
 	 */
-	public void setNbRoue(int nbRoue) {
+	public void setNbRoue(Integer nbRoue) {
 		this.nbRoue = nbRoue;
 	}
 
@@ -125,14 +130,14 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	/**
 	 * @return the nbPorte
 	 */
-	public int getNbPorte() {
+	public Integer getNbPorte() {
 		return nbPorte;
 	}
 
 	/**
 	 * @param nbPorte the nbPorte to set
 	 */
-	public void setNbPorte(int nbPorte) {
+	public void setNbPorte(Integer nbPorte) {
 		this.nbPorte = nbPorte;
 	}
 
@@ -190,5 +195,19 @@ public class MobileEntity extends OffreEntity implements Serializable {
 	 */
 	public void setDureeBaterie(LocalTime dureeBaterie) {
 		this.dureeBaterie = dureeBaterie;
+	}
+
+	/**
+	 * @return the typeBienMobile
+	 */
+	public TypeBienMobileEnum getTypeBienMobile() {
+		return typeBienMobile;
+	}
+
+	/**
+	 * @param typeBienMobile the typeBienMobile to set
+	 */
+	public void setTypeBienMobile(TypeBienMobileEnum typeBienMobile) {
+		this.typeBienMobile = typeBienMobile;
 	}
 }

@@ -26,7 +26,8 @@
   	"typeMobileMoteur":"SANS_MOTEUR",
   	"batterie":null,
   	"dureeBaterie":null,
-  	"symboleMonetaire":null
+  	"symboleMonetaire":null,
+  	"typeBienMobile": "VOITURE"
   },
   "immobilier":null,
   "email": "test2@yahoo.fr"

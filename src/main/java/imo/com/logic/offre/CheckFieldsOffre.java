@@ -10,11 +10,11 @@ import imo.com.logic.offre.dto.ImmobilierDto;
 import imo.com.logic.offre.dto.MobileDto;
 import imo.com.logic.offre.dto.OffreDto;
 import imo.com.logic.offre.dto.OffreGlobalDto;
+import imo.com.model.enums.TypeServiceOffre;
 import imo.com.response.ImoResponse;
 
 /**
  * @author balde
- *
  */
 public class CheckFieldsOffre implements ICheckFieldsObject {
 
@@ -46,6 +46,7 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 
 	/**
 	 * Check les champs obligatoires des offres
+	 * 
 	 * @param dto offre
 	 * @return champs
 	 */
@@ -67,6 +68,7 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 
 	/**
 	 * Check les champs obligatoires des offres mobile
+	 * 
 	 * @param mobileDto OffreMobile
 	 * @return champs
 	 */
@@ -78,9 +80,6 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 		}
 		if (mobileDto.getTypeMobileMoteur() == null) {
 			champs += "typeMobileMoteur ";
-		}
-		if (StringUtils.isBlank(mobileDto.getModel())) {
-			champs += "model";
 		}
 		return champs;
 	}
@@ -95,22 +94,24 @@ public class CheckFieldsOffre implements ICheckFieldsObject {
 		if (immobilierDto.getTypeDeBien() == null) {
 			champs += "type_de_Bien ";
 		}
-		if (immobilierDto.getParking()== null) {
+		if (immobilierDto.getParking() == null) {
 			champs += "parking ";
 		}
-		if (immobilierDto.getElectricite()== null) {
+		if (immobilierDto.getElectricite() == null) {
 			champs += "electricite ";
 		}
-		if (immobilierDto.getEau()== null) {
+		if (immobilierDto.getEau() == null) {
 			champs += "eau ";
 		}
-		if (immobilierDto.getSanitaire()== null) {
+		if (immobilierDto.getSanitaire() == null) {
 			champs += "sanitaire ";
 		}
-		if(immobilierDto.getDateDebut() == null) {
+		if (immobilierDto.getDateDebut() == null) {
 			champs += "date_debut ";
 		}
-		if(immobilierDto.getDateFin() == null) {
+		if (immobilierDto.getTypeServiceOffre() != null
+				&& TypeServiceOffre.LOCATION.equals(immobilierDto.getTypeServiceOffre())
+				&& immobilierDto.getDateFin() == null) {
 			champs += "date_fin ";
 		}
 		return champs;

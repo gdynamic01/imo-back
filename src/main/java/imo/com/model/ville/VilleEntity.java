@@ -1,7 +1,6 @@
 package imo.com.model.ville;
 
 import imo.com.model.AbstractEntity;
-import imo.com.model.pays.PaysEntity;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -18,10 +17,6 @@ public class VilleEntity extends AbstractEntity implements Serializable {
 	@Column(name = "code_postal")
 	private int codePostal;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-	@JoinColumn(name = "pays_id", nullable = false)
-	private PaysEntity paysEntity;
-
 	public int getCodePostal() {
 		return codePostal;
 	}
@@ -36,13 +31,5 @@ public class VilleEntity extends AbstractEntity implements Serializable {
 
 	public void setNomVille(String nomVille) {
 		this.nomVille = nomVille;
-	}
-
-	public PaysEntity getPaysEntity() {
-		return paysEntity;
-	}
-
-	public void setPaysEntity(PaysEntity paysEntity) {
-		this.paysEntity = paysEntity;
 	}
 }

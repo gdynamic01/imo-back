@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS public.imo_offre (
     type_offre character varying(250) NOT NULL,
     type_service_offre character varying(250) NOT NULL,
     date_debut date NOT NULL,
-    date_fin date NOT NULL,
+    date_fin date,
     PRIMARY KEY(id)
 );
 
@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS public.imo_mobile (
     nombre_porte integer,
     nombre_roue integer,
     type_moteur character varying(255) NOT NULL,
+    type_bien_mobile character varying(255) NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -133,13 +134,13 @@ CREATE TABLE IF NOT EXISTS public.imo_ville (
     pays_id serial not null,
     CONSTRAINT imo_ville_pkey PRIMARY KEY(id)
  );
-    create TABLE IF NOT EXISTS public.imo_pays (
-     id  bigserial not null,
-     create_at date,
-     modificationcounter integer,
-     update_at date,
-     nom_pays character varying(255),
-     CONSTRAINT imo_pays_pkey PRIMARY KEY(id)
+ create TABLE IF NOT EXISTS public.imo_pays (
+    id  bigserial not null,
+    create_at date,
+    modificationcounter integer,
+    update_at date,
+    nom_pays character varying(255),
+    CONSTRAINT imo_pays_pkey PRIMARY KEY(id)
  );
 
 -- Add contraintes

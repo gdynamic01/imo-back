@@ -23,7 +23,7 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 
 	/** nombre de pièces */
 	@Column(name = "nombre_pieces", nullable = false)
-	public int nbrePieces;
+	public Integer nbrePieces;
 	
 	/** piscine */
 	@Column(name = "piscine")
@@ -107,11 +107,11 @@ public class ImmobilierEntity extends OffreEntity implements Serializable {
 		this.surface = surface;
 	}
 
-	public int getNbrePieces() {
+	public Integer getNbrePieces() {
 		return nbrePieces;
 	}
 
-	public void setNbrePieces(int nbrePieces) {
+	public void setNbrePieces(Integer nbrePieces) {
 		this.nbrePieces = nbrePieces;
 	}
 

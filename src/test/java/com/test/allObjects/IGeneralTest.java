@@ -14,6 +14,7 @@ import imo.com.model.enums.TypeServiceOffre;
 import imo.com.model.enums.TypeUtilisateurEnum;
 import imo.com.model.immobilier.ImmobilierEntity;
 import imo.com.model.mobile.MobileEntity;
+import imo.com.model.pays.PaysEntity;
 import imo.com.model.photo.PhotosEntity;
 import imo.com.model.representant_legal.RepresentantLegal;
 import imo.com.model.utilisateur.AppUser;
@@ -22,6 +23,8 @@ import imo.com.model.utilisateur.RoleUserEnum;
 import imo.com.model.utilisateur.SexeEnum;
 import imo.com.model.utilisateur.UserMoralEntity;
 import imo.com.model.utilisateur.UserPhysiqueEntity;
+import imo.com.model.ville.VilleEntity;
+import imo.com.repo.adresse.PaysRepository;
 import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
 
@@ -65,12 +68,27 @@ public interface IGeneralTest {
 		return userRepo.saveAndFlush(entity);
 	}
 	
+	/**
+	 * 
+	 * @param userRepo
+	 * @param roleRepository
+	 * @param bcryptPassword
+	 * @return UserPhysiqueEntity
+	 */
 	default UserPhysiqueEntity creationParticulierAvecMotDePasseNonCrypter(UserRepository userRepo, RoleRepository roleRepository, BCryptPasswordEncoder bcryptPassword) {
 		UserPhysiqueEntity entity = initUserPhysiqueEntity(roleRepository, true, emailBadCredential, bcryptPassword);
 		entity.setPassword("badCredential");
 		return userRepo.saveAndFlush(entity);
 	}
 	
+	/**
+	 * 
+	 * @param roleRepository
+	 * @param isActif
+	 * @param email
+	 * @param bcryptPassword
+	 * @return UserMoralEntity
+	 */
 	default UserMoralEntity initUserMoralEntity(RoleRepository roleRepository, boolean isActif, String email, BCryptPasswordEncoder bcryptPassword) {
 		UserMoralEntity professionnel = new UserMoralEntity();
 		RepresentantLegal repr = new RepresentantLegal();
@@ -94,6 +112,14 @@ public interface IGeneralTest {
 		return professionnel;
 	}
 	
+	/**
+	 * 
+	 * @param roleRepository
+	 * @param isActif
+	 * @param email
+	 * @param bcryptPassword
+	 * @return UserPhysiqueEntity
+	 */
 	default UserPhysiqueEntity initUserPhysiqueEntity(RoleRepository roleRepository, boolean isActif, String email, BCryptPasswordEncoder bcryptPassword) {
 		UserPhysiqueEntity userPhysique = new UserPhysiqueEntity();
 		RepresentantLegal repr = new RepresentantLegal();
@@ -114,6 +140,11 @@ public interface IGeneralTest {
 		return userPhysique;
 	}
 
+	/**
+	 * 
+	 * @param userRepo
+	 * @return ImmobilierEntity
+	 */
 	default ImmobilierEntity creationImmobilier(UserRepository userRepo) {
 
 		AppUser user = userRepo.findByEmail(emailProfessionnel);
@@ -143,6 +174,11 @@ public interface IGeneralTest {
 		return entity;
 	}
 	
+	/**
+	 * 
+	 * @param userRepo
+	 * @return MobileEntity
+	 */
 	default MobileEntity creationMobile(UserRepository userRepo) {
 
 		AppUser user = userRepo.findByEmail(emailProfessionnel);
@@ -180,5 +216,22 @@ public interface IGeneralTest {
 		adresse.setPays("Guinee");
 		adresse.setVille("Conakry");
 		return adresse;
+	}
+	
+	// create ville and pays
+	default void createPays(PaysRepository paysRepository) {
+		VilleEntity ville = new VilleEntity();
+		ville.setCodePostal(94140);
+		ville.setNomVille("AlfortVille");
+		
+		List<VilleEntity> villes = new ArrayList<>();
+		villes.add(ville);
+		
+		PaysEntity pays = new PaysEntity();
+		pays.setNomPays("France");
+		pays.setVilles(villes);
+		
+		paysRepository.saveAndFlush(pays);
+		
 	}
 }

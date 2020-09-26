@@ -27,14 +27,11 @@ public enum TypeBienImmobilierEnum {
     TERRAIN("Terrain");
 	
     /** Libelle enum */
-    private String libelle;
+    @SuppressWarnings("unused")
+	private String libelle;
 
     private TypeBienImmobilierEnum(String libelle) {
         this.libelle = libelle;
     }
-
-	public String getLibelle() {
-		return libelle;
-	}
 
 }

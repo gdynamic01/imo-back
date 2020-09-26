@@ -16,17 +16,10 @@ public enum TypeOffreEnum {
 	IMMOBILIER("Immobilier");
 
 	/** Libelle enum */
+	@SuppressWarnings("unused")
 	private String libelle;
 
 	private TypeOffreEnum(String libelle) {
 		this.libelle = libelle;
-	}
-
-	/**
-	 * retourne le libelle
-	 * @return libelle
-	 */
-	public String getLibelle() {
-		return this.libelle;
 	}
 }

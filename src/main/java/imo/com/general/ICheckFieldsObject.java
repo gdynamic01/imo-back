@@ -49,7 +49,7 @@ public interface ICheckFieldsObject {
 					message += "numeroRue ";
 				if (StringUtils.isBlank(adresse.getLibelleRue()))
 					message += "libelleRue ";
-				if (StringUtils.isBlank(adresse.getCodePostal()))
+				if (adresse.getCodePostal() <= 0)
 					message += "codePostal ";
 			}
 			if (adresse.getVille() == null)

@@ -15,16 +15,10 @@ public enum TypeServiceOffre {
 	// Vente
 	VENTE("Vente");
 
+	@SuppressWarnings("unused")
 	private String libelle;
 
 	private TypeServiceOffre(String libelle) {
 		this.libelle = libelle;
-	}
-
-	/**
-	 * @return the libelle
-	 */
-	public String getLibelle() {
-		return libelle;
 	}
 }

@@ -57,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 				// authenticate this particular request
 				.authorizeRequests().antMatchers("/loumos/offres", "/loumos/authentification/**", "/loumos/professionnel",
-						"/loumos/particulier", "/loumos/email/**", "/h2-console/**")
+						"/loumos/particulier", "/loumos/email/**", "/loumos/pays", "/h2-console/**")
 				.permitAll().
 				// all other requests need to be authenticated
 				anyRequest().authenticated().and().logout().and().

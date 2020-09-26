@@ -9,7 +9,7 @@ public class ImmobilierDto extends OffreDto {
 
 	/** surface de l'offre */
 	private Double surface;
-	public int nbrePieces;
+	public Integer nbrePieces;
 	public Boolean piscine;
 	private TypeBienImmobilierEnum typeDeBien;
 	public SanitaireEnum sanitaire;
@@ -83,11 +83,11 @@ public class ImmobilierDto extends OffreDto {
 		this.dateFin = dateFin;
 	}
 
-	public int getNbrePieces() {
+	public Integer getNbrePieces() {
 		return nbrePieces;
 	}
 
-	public void setNbrePieces(int nbrePieces) {
+	public void setNbrePieces(Integer nbrePieces) {
 		this.nbrePieces = nbrePieces;
 	}
 

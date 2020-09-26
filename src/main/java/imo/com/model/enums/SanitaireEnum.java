@@ -8,16 +8,10 @@ public enum SanitaireEnum {
     /** Interieur */
     INTERIEUR("Interieur");
 
-    private String libelle;
+    @SuppressWarnings("unused")
+	private String libelle;
 
     private SanitaireEnum(String libelle) {
         this.libelle = libelle;
-    }
-
-    /**
-     * @return the libelle
-     */
-    public String getLibelle() {
-        return libelle;
     }
 }

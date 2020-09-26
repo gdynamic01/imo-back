@@ -23,10 +23,9 @@ public enum TypeUtilisateurEnum {
 	}
 
 	/**
-	 * retourne le libelle
-	 * @return libelle
+	 * @return the libelle
 	 */
 	public String getLibelle() {
-		return this.libelle;
+		return libelle;
 	}
 }
