@@ -30,9 +30,9 @@ import imo.com.ImoBackApplication;
 @Transactional
 public abstract class ConfigTestImo {
 
-	protected String mediaAccept = MediaType.APPLICATION_JSON_VALUE;
-	protected String ContentType = MediaType.APPLICATION_JSON_VALUE;
-	protected String uri = "/loumos";
+	protected final String mediaAccept = MediaType.APPLICATION_JSON_VALUE;
+	protected final String ContentType = MediaType.APPLICATION_JSON_VALUE;
+	protected final String uri = "/loumos";
 	
 	@Autowired
 	protected MockMvc mockMvc;

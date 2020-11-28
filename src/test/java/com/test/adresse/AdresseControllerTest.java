@@ -69,7 +69,6 @@ public class AdresseControllerTest extends ConfigTestImo implements IGeneralTest
 		
 		listPays.add(paysEntity);
 		
-		
 		return listPays;
 	}
 
