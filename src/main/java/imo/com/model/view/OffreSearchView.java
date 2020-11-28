@@ -138,6 +138,9 @@ public class OffreSearchView implements Serializable {
 	@Column(name = "type_bien_mobile")
 	private String typeBienMobile;
 
+	@Column(name = "siret")
+	private String siret;
+
 	/**
 	 * @return the id
 	 */
@@ -584,5 +587,13 @@ public class OffreSearchView implements Serializable {
 	 */
 	public void setTypeBienMobile(String typeBienMobile) {
 		this.typeBienMobile = typeBienMobile;
+	}
+
+	public String getSiret() {
+		return siret;
+	}
+
+	public void setSiret(String siret) {
+		this.siret = siret;
 	}
 }

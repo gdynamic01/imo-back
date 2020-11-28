@@ -38,4 +38,9 @@ public class OffreController implements IOffreApi {
 		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}
 
+	@Override
+	public ResponseEntity<?> isOffreByCodeOffre(String codeOffre) {
+		return iOffre.isOffreByCodeOffre(codeOffre);
+	}
+
 }

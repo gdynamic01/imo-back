@@ -81,6 +81,7 @@ public class OffreSearchViewDto {
 	private LocalTime dureeBaterie;
 	
 	private TypeBienMobileEnum typeBienMobile;
+	private String siret;
 
 	/**
 	 * @return the id
@@ -514,5 +515,13 @@ public class OffreSearchViewDto {
 	 */
 	public void setTypeBienMobile(TypeBienMobileEnum typeBienMobile) {
 		this.typeBienMobile = typeBienMobile;
+	}
+
+	public String getSiret() {
+		return siret;
+	}
+
+	public void setSiret(String siret) {
+		this.siret = siret;
 	}
 }

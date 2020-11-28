@@ -7,12 +7,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import imo.com.model.offre.OffreEntity;
+import imo.com.repo.offre.OffreRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import imo.com.general.ConstantesUtils;
@@ -77,6 +81,9 @@ public class OffreImpl implements IOffre {
 
 	@Autowired
 	private AdresseMapper adresseMapper;
+
+	@Autowired
+	private OffreRepository offreRepository;
 
 	@Override
 	public ImoResponse<OffreGlobalDto> creationOffre(OffreGlobalDto dto) {
@@ -156,6 +163,12 @@ public class OffreImpl implements IOffre {
 				listOffreDto.isEmpty() ? HttpStatus.NO_CONTENT.value() : HttpStatus.OK.value(),
 				listOffreDto.isEmpty() ? ConstantesUtils.MESSAGE_EMPTY : null, listOffreDto);
 		return imoResponse;
+	}
+
+	@Override
+	public ResponseEntity<?> isOffreByCodeOffre(String codeOffre) {
+		Optional<OffreEntity> offreEntity = offreRepository.findByCodeOffre(codeOffre);
+		return new ResponseEntity(offreEntity.isPresent() ? HttpStatus.OK : HttpStatus.NO_CONTENT);
 	}
 
 	private void createPaysAndVille(AdresseDto adresseDto) {

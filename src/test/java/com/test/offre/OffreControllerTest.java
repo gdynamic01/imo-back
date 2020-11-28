@@ -118,11 +118,29 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 		.andExpect(status().isNoContent()).andDo(print());
 	}
 
+
+	 @Test
+	 public void should_isOffreByCodeOffre_success() throws Exception{
+		mockMvc.perform(get( uri + "/23456/offre" ).accept(mediaAccept).contentType(ContentType)
+		).andExpect(status().isOk()).andDo(print());
+
+
+	 }
+	@Test
+	public void should_isOffreByCodeOffre_NoContent() throws Exception{
+		mockMvc.perform(get( uri + "/23456/offre" ).accept(mediaAccept).contentType(ContentType)
+		).andExpect(status().isNoContent()).andDo(print());
+
+
+	}
+
+
 	public void initDataOffreMobileAndImmobilier() throws JsonProcessingException {
 		creationParticulier(userRepo, roleRepository, bcryptPassword);
 		creationProfessionnel(userRepo, roleRepository, bcryptPassword);
 		creationImmobilier(userRepo);
 		creationMobile(userRepo);
 	}
+
 
 }
