@@ -7,11 +7,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import static org.hamcrest.Matchers.hasSize;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.test.allObjects.IGeneralTest;
 import com.test.config.ConfigTestImo;
 import com.test.config.WithMockAdminUser;
@@ -29,12 +29,11 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	@MockBean
-	private OffreRepository offreRepo;
-
 	@Autowired
 	private BCryptPasswordEncoder bcryptPassword;
-
+	
+	@Autowired
+	private OffreRepository offreRepository;
 
 	/**
 	 * @throws Exception
@@ -52,7 +51,6 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creation_offre_mobile_with_success() throws Exception {
-		initDataOffreMobileAndImmobilier();
 		mockMvc.perform(post(uri + "/offre").accept(mediaAccept).contentType(ContentType)
 				.content(getJsonFromFile(pathOffres + "create-offres-mobile-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse")
@@ -72,7 +70,6 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	@WithMockAdminUser
 	public void should_creation_offre_immobilier_with_success() throws Exception {
-		initDataOffreMobileAndImmobilier();
 		mockMvc.perform(post(uri + "/offre").accept(mediaAccept).contentType(ContentType)
 				.content(getJsonFromFile(pathOffres + "create-offres-immobilier-success.json")))
 				.andExpect(status().isOk()).andExpect(jsonPath("$.messageResponse")
@@ -104,43 +101,35 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Test
 	public void should_get_all_offres_noContent() throws Exception {
-		
+
 		String categories = "APPARTEMENT_VOITURE";
-		
-		mockMvc.perform(get(uri+"/offres")
-				.queryParam("typesServices", TypeServiceOffre.VENTE.toString())
-				.queryParam("ville", "FakeVille")
-				.queryParam("pays", "FakePays")
-				.queryParam("dateDebut", "2019-05-01")
-				.queryParam("dateFin", "2019-09-01")
-				.queryParam("categories", categories)
-				.accept(mediaAccept).contentType(ContentType))
-		.andExpect(status().isNoContent()).andDo(print());
+
+		mockMvc.perform(get(uri + "/offres").queryParam("typesServices", TypeServiceOffre.VENTE.toString())
+				.queryParam("ville", "FakeVille").queryParam("pays", "FakePays").queryParam("dateDebut", "2019-05-01")
+				.queryParam("dateFin", "2019-09-01").queryParam("categories", categories).accept(mediaAccept)
+				.contentType(ContentType)).andExpect(status().isNoContent()).andDo(print());
 	}
 
-
-	 @Test
-	 public void should_isOffreByCodeOffre_success() throws Exception{
-		mockMvc.perform(get( uri + "/23456/offre" ).accept(mediaAccept).contentType(ContentType)
-		).andExpect(status().isOk()).andDo(print());
-
-
-	 }
 	@Test
-	public void should_isOffreByCodeOffre_NoContent() throws Exception{
-		mockMvc.perform(get( uri + "/23456/offre" ).accept(mediaAccept).contentType(ContentType)
-		).andExpect(status().isNoContent()).andDo(print());
-
+	public void should_isOffreByCodeOffre_success() throws Exception {
+		mockMvc.perform(get(uri + "/200IMMOBILIER/offre").accept(mediaAccept).contentType(ContentType))
+				.andExpect(status().isOk()).andDo(print());
 
 	}
 
+	@Test
+	public void should_isOffreByCodeOffre_NoContent() throws Exception {
+		mockMvc.perform(get(uri + "/23456/offre").accept(mediaAccept).contentType(ContentType))
+				.andExpect(status().isNoContent()).andDo(print());
 
-	public void initDataOffreMobileAndImmobilier() throws JsonProcessingException {
+	}
+
+	@Before
+	public void initDatas() {
+		userRepo.deleteAll();
 		creationParticulier(userRepo, roleRepository, bcryptPassword);
 		creationProfessionnel(userRepo, roleRepository, bcryptPassword);
-		creationImmobilier(userRepo);
-		creationMobile(userRepo);
+		creationImmobilier(userRepo, offreRepository);
 	}
-
-
+	
 }

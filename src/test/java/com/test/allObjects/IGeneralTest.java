@@ -25,6 +25,7 @@ import imo.com.model.utilisateur.UserMoralEntity;
 import imo.com.model.utilisateur.UserPhysiqueEntity;
 import imo.com.model.ville.VilleEntity;
 import imo.com.repo.adresse.PaysRepository;
+import imo.com.repo.offre.OffreRepository;
 import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
 
@@ -145,15 +146,16 @@ public interface IGeneralTest {
 	 * @param userRepo
 	 * @return ImmobilierEntity
 	 */
-	default ImmobilierEntity creationImmobilier(UserRepository userRepo) {
+	default void creationImmobilier(UserRepository userRepo, OffreRepository offreRepository) {
 
-		AppUser user = userRepo.findByEmail(emailProfessionnel);
+		AppUser user = userRepo.findByEmail(emailParticulier);
 
 		ImmobilierEntity entity = new ImmobilierEntity();
+		entity.setId(200L);
 		entity.setDescription("Immo-description");
-		entity.setCreateAt(LocalDate.now());
-		entity.setDateDebut(LocalDate.now());
-		entity.setDateFin(LocalDate.now());
+		entity.setCreateAt(LocalDate.parse("2019-10-01"));
+		entity.setDateDebut(LocalDate.parse("2019-10-01"));
+		entity.setDateFin(LocalDate.parse("2019-10-01"));
 		entity.setAdresse(createAdresse(new Adresse()));
 		entity.setEau(true);
 		entity.setElectricite(true);
@@ -170,8 +172,9 @@ public interface IGeneralTest {
 		entity.setTypeServiceOffre(TypeServiceOffre.LOCATION);
 		entity.setUpdateAt(LocalDate.now());
 		entity.setUser(user);
+		entity.setCodeOffre("200IMMOBILIER");
 
-		return entity;
+		offreRepository.saveAndFlush(entity);
 	}
 	
 	/**

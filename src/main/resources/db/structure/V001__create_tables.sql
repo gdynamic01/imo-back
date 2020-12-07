@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS public.imo_offre (
     type_service_offre character varying(250) NOT NULL,
     date_debut date NOT NULL,
     date_fin date,
+    code_offre character varying(255),
     PRIMARY KEY(id)
 );
 

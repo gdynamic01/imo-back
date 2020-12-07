@@ -16,52 +16,51 @@ import imo.com.model.enums.TypeServiceOffre;
 
 /**
  * @author mbalde
- *
  */
 public class OffreSearchViewDto {
-	
+
 	private Long id;
-	
+
 	private LocalDate createAt = LocalDate.now();
 
 	private LocalDate updateAt = LocalDate.now();
-	
+
 	private TypeBienImmobilierEnum typeDebienImmobilier;
-	
+
 	private AdresseDto adresse;
-	
+
 	private Double prix = 0.0;
-	
+
 	public LocalDate dateDebut = LocalDate.now();
-	
+
 	public LocalDate dateFin = LocalDate.now();
-	
+
 	private TypeOffreEnum typeOffre;
-	
+
 	private TypeServiceOffre typeServiceOffre;
-	
+
 	private String titre;
-	
+
 	private String description;
-	
+
 	private Double surface;
 
 	public Integer nbrePieces;
-	
+
 	public Boolean piscine;
-	
+
 	public SanitaireEnum sanitaire;
-	
+
 	public String autreService;
-	
+
 	public Boolean serviceMenage;
-	
+
 	public Boolean parking;
-	
+
 	public Boolean electricite;
-	
+
 	public Boolean eau;
-	
+
 	private Boolean motoriser;
 
 	private Integer kilometrage;
@@ -71,7 +70,7 @@ public class OffreSearchViewDto {
 	private String model;
 
 	private Integer nbPorte;
-	
+
 	private LocalDate dateMiseEnCircualtion;
 
 	private TypeMobileMoteurEnum typeMobileMoteur;
@@ -79,9 +78,12 @@ public class OffreSearchViewDto {
 	private String batterie;
 
 	private LocalTime dureeBaterie;
-	
+
 	private TypeBienMobileEnum typeBienMobile;
+
 	private String siret;
+
+	private String codeOffre;
 
 	/**
 	 * @return the id
@@ -517,11 +519,31 @@ public class OffreSearchViewDto {
 		this.typeBienMobile = typeBienMobile;
 	}
 
+	/**
+	 * @return the siret
+	 */
 	public String getSiret() {
 		return siret;
 	}
 
+	/**
+	 * @param siret the siret to set
+	 */
 	public void setSiret(String siret) {
 		this.siret = siret;
+	}
+
+	/**
+	 * @return the codeOffre
+	 */
+	public String getCodeOffre() {
+		return codeOffre;
+	}
+
+	/**
+	 * @param codeOffre the codeOffre to set
+	 */
+	public void setCodeOffre(String codeOffre) {
+		this.codeOffre = codeOffre;
 	}
 }

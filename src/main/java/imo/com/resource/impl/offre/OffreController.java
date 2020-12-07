@@ -34,7 +34,8 @@ public class OffreController implements IOffreApi {
 	@Override
 	public ResponseEntity<ImoResponse<OffreSearchViewDto>> getListOffres(TypeServiceOffre typesServices, String ville,
 			String pays, String dateDebut, String dateFin, String categories) {
-		ImoResponse<OffreSearchViewDto> imoResponse = iOffre.getListOffres(typesServices, ville, pays, dateDebut, dateFin, categories);
+		ImoResponse<OffreSearchViewDto> imoResponse = iOffre.getListOffres(typesServices, ville, pays, dateDebut,
+				dateFin, categories);
 		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}
 

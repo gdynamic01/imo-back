@@ -28,85 +28,84 @@ import imo.com.model.enums.TypeServiceOffre;
 
 /**
  * @author mbalde
- *
  */
 @Entity
-@Table(name="imo_offre_view")
+@Table(name = "imo_offre_view")
 @Immutable
 public class OffreSearchView implements Serializable {
 
 	/** Serial ID */
 	private static final long serialVersionUID = 5786650661976427953L;
-	
+
 	@Id
 	private Long id;
-	
+
 	@JsonIgnore
-	@Column(name="users_id")
+	@Column(name = "users_id")
 	private Long usersId;
-	
+
 	@Column(name = "create_at")
 	private LocalDate createAt = LocalDate.now();
 
 	@Column(name = "update_at")
 	private LocalDate updateAt = LocalDate.now();
-	
+
 	@Column(name = "type_de_Bien")
 	private String typeDebienImmobilier;
-	
+
 	@Embedded
 	private Adresse adresse;
-	
+
 	@Column(name = "prix")
 	private Double prix = 0.0;
-	
+
 	@Column(name = "date_debut")
 	public LocalDate dateDebut = LocalDate.now();
-	
+
 	@Column(name = "date_fin")
 	public LocalDate dateFin = LocalDate.now();
-	
+
 	@Column(name = "type_offre")
 	@Enumerated(EnumType.STRING)
 	private TypeOffreEnum typeOffre;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type_service_offre")
 	private TypeServiceOffre typeServiceOffre;
-	
+
 	@Column(name = "titre")
 	private String titre;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "surface")
 	@Min(value = 9)
 	private Double surface;
 
 	@Column(name = "nombre_pieces")
 	public Integer nbrePieces;
-	
+
 	@Column(name = "piscine")
 	public Boolean piscine;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(nullable=false)
+	@Column(nullable = false)
 	public SanitaireEnum sanitaire;
-	
+
 	@Column(name = "autre_service")
 	public String autreService;
-	
+
 	@Column(name = "service_menage")
 	public Boolean serviceMenage;
-	
+
 	@Column(name = "parking")
 	public Boolean parking;
-	
+
 	public Boolean electricite;
 	@Column(name = "eau")
 	public Boolean eau;
-	
+
 	@Column(name = "motoriser")
 	private Boolean motoriser;
 
@@ -121,7 +120,7 @@ public class OffreSearchView implements Serializable {
 
 	@Column(name = "nombre_porte")
 	private Integer nbPorte;
-	
+
 	@Column(name = "date_mise_en_circulation")
 	private LocalDate dateMiseEnCircualtion;
 
@@ -134,12 +133,15 @@ public class OffreSearchView implements Serializable {
 
 	@Column(name = "duree_batterie")
 	private LocalTime dureeBaterie;
-	
+
 	@Column(name = "type_bien_mobile")
 	private String typeBienMobile;
 
 	@Column(name = "siret")
 	private String siret;
+
+	@Column(name = "code_offre")
+	private String codeOffre;
 
 	/**
 	 * @return the id
@@ -589,11 +591,31 @@ public class OffreSearchView implements Serializable {
 		this.typeBienMobile = typeBienMobile;
 	}
 
+	/**
+	 * @return the siret
+	 */
 	public String getSiret() {
 		return siret;
 	}
 
+	/**
+	 * @param siret the siret to set
+	 */
 	public void setSiret(String siret) {
 		this.siret = siret;
+	}
+
+	/**
+	 * @return the codeOffre
+	 */
+	public String getCodeOffre() {
+		return codeOffre;
+	}
+
+	/**
+	 * @param codeOffre the codeOffre to set
+	 */
+	public void setCodeOffre(String codeOffre) {
+		this.codeOffre = codeOffre;
 	}
 }

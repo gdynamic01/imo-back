@@ -16,36 +16,32 @@ import imo.com.response.ImoResponse;
 
 /**
  * @author balde
- *
  */
-@RequestMapping(
-		path = "/loumos", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
-)
+@RequestMapping(path = "/loumos", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public interface IOffreApi {
 
 	/**
 	 * creation une offre
+	 * 
 	 * @param dto
 	 * @return offreGlobalDto
 	 */
 	@PreAuthorize(AuthorisationUser.PROF_OR_PAR)
-	@PostMapping(path="/offre")
+	@PostMapping(path = "/offre")
 	public ResponseEntity<ImoResponse<OffreGlobalDto>> creationOffre(@RequestBody OffreGlobalDto dto);
 
 	/**
 	 * recupère toutes les offres
+	 * 
 	 * @return listeOffre
 	 */
-	@GetMapping(path="/offres")
+	@GetMapping(path = "/offres")
 	public ResponseEntity<ImoResponse<OffreSearchViewDto>> getListOffres(
 			@RequestParam(required = false) TypeServiceOffre typesServices,
-			@RequestParam(required = false) String ville, 
-			@RequestParam(required = false) String pays,
-			@RequestParam(required = false) String dateDebut,
-			@RequestParam(required = false) String dateFin,
-			@RequestParam(required = false) String categories
-			);
+			@RequestParam(required = false) String ville, @RequestParam(required = false) String pays,
+			@RequestParam(required = false) String dateDebut, @RequestParam(required = false) String dateFin,
+			@RequestParam(required = false) String categories);
 
-	@GetMapping(path="/{codeOffre}/offre")
-	public ResponseEntity<?> isOffreByCodeOffre(@PathVariable(value="codeOffre") String codeOffre);
+	@GetMapping(path = "/{codeOffre}/offre")
+	public ResponseEntity<?> isOffreByCodeOffre(@PathVariable(value = "codeOffre") String codeOffre);
 }

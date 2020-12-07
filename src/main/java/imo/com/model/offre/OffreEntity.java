@@ -30,7 +30,6 @@ import imo.com.model.utilisateur.AppUser;
 
 /**
  * @author rahime
- *
  */
 @Entity
 @Table(name = "imo_offre")
@@ -55,11 +54,11 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	/** Prix de l'offre */
 	@Column(name = "prix", nullable = false)
 	private Double prix = 0.0;
-	
+
 	/** Date debut location */
 	@Column(name = "date_debut", nullable = false)
 	public LocalDate dateDebut = LocalDate.now();
-	
+
 	/** Date fin location */
 	@Column(name = "date_fin")
 	public LocalDate dateFin = LocalDate.now();
@@ -81,6 +80,9 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "offre_id", referencedColumnName = "id", nullable = true)
 	private List<PhotosEntity> photosOffres = new ArrayList<>();
+
+	@Column(name = "code_offre")
+	private String codeOffre;
 
 	/**
 	 * @return the titre
@@ -222,6 +224,20 @@ public abstract class OffreEntity extends AbstractEntity implements Serializable
 	 */
 	public void setDateFin(LocalDate dateFin) {
 		this.dateFin = dateFin;
+	}
+
+	/**
+	 * @return the codeOffre
+	 */
+	public String getCodeOffre() {
+		return codeOffre;
+	}
+
+	/**
+	 * @param codeOffre the codeOffre to set
+	 */
+	public void setCodeOffre(String codeOffre) {
+		this.codeOffre = codeOffre;
 	}
 
 }

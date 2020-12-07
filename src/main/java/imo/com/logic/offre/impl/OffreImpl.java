@@ -1,6 +1,3 @@
-/**
- * 
- */
 package imo.com.logic.offre.impl;
 
 import java.time.LocalDate;
@@ -45,9 +42,7 @@ import imo.com.repo.utilisateur.UserRepository;
 import imo.com.repo.view.offre.IOffreSearchViewRepositoryCustom;
 import imo.com.response.ImoResponse;
 
-/**
- * @author balde
- */
+
 @Service
 public class OffreImpl implements IOffre {
 
@@ -106,14 +101,18 @@ public class OffreImpl implements IOffre {
 						adresseDto = dto.getMobile().getAdresse();
 						MobileEntity entity = mobileMapper.asObjectEntity(dto.getMobile());
 						entity.setUser(user);
-						mobileRepository.saveAndFlush(entity);
+						mobileRepository.save(entity);
+						// calcul codeOffre
+						calculCodeOffre((OffreEntity) entity);
 					}
 					// Sauvegarde de l'offre immobilier
 					if (dto.getImmobilier() != null) {
 						adresseDto = dto.getImmobilier().getAdresse();
 						ImmobilierEntity entity = this.immobilierMapper.asObjectEntity(dto.getImmobilier());
 						entity.setUser(user);
-						immobilierRepository.saveAndFlush(entity);
+						immobilierRepository.save(entity);
+						// calcul codeOffre
+						calculCodeOffre((OffreEntity) entity);
 					}
 
 					PaysEntity paysEntity = paysRepository.findByNomPays(adresseDto.getPays());
@@ -142,7 +141,6 @@ public class OffreImpl implements IOffre {
 		return imoResponse;
 	}
 
-	@Override
 	public ImoResponse<OffreSearchViewDto> getListOffres(TypeServiceOffre typesServices, String ville, String pays,
 			String dateDebut, String dateFin, String categories) {
 
@@ -165,10 +163,9 @@ public class OffreImpl implements IOffre {
 		return imoResponse;
 	}
 
-	@Override
 	public ResponseEntity<?> isOffreByCodeOffre(String codeOffre) {
 		Optional<OffreEntity> offreEntity = offreRepository.findByCodeOffre(codeOffre);
-		return new ResponseEntity(offreEntity.isPresent() ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(offreEntity.isPresent() ? HttpStatus.OK : HttpStatus.NO_CONTENT);
 	}
 
 	private void createPaysAndVille(AdresseDto adresseDto) {
@@ -183,5 +180,11 @@ public class OffreImpl implements IOffre {
 		paysDto.setVilles(listVilleDto);
 		PaysEntity entity = adresseMapper.asObjectEntity(paysDto);
 		paysRepository.saveAndFlush(entity);
+	}
+	
+	private void calculCodeOffre(OffreEntity entity) {
+		entity.setCodeOffre(entity.getId()+entity.getTypeOffre().toString());
+		entity.setCodeOffre(entity.getId()+entity.getTypeOffre().toString());
+		offreRepository.saveAndFlush(entity);
 	}
 }

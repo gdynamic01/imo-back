@@ -15,23 +15,23 @@ import imo.com.response.ImoResponse;
 
 /**
  * @author balde
- *
  */
-@RequestMapping(
-		path = "/loumos", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE
-)
+@RequestMapping(path = "/loumos", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public interface IUserApi {
 
 	/**
 	 * Connexion au site
+	 * 
 	 * @param userDto
 	 * @return token
 	 */
 	@GetMapping(path = "/authentification/{email}/{password}")
-	public ResponseEntity<?> connexion(@PathVariable(value="email") String email, @PathVariable(value="password") String password);
+	public ResponseEntity<?> connexion(@PathVariable(value = "email") String email,
+			@PathVariable(value = "password") String password);
 
 	/**
 	 * creation compte professionnel
+	 * 
 	 * @param userMoralDto
 	 * @return responseEntity
 	 */
@@ -40,26 +40,29 @@ public interface IUserApi {
 
 	/**
 	 * creation compte particulier
+	 * 
 	 * @param userPhysiqueDto
 	 * @param responseEntity
 	 */
 	@PostMapping(path = "/particulier")
 	public ResponseEntity<ImoResponse<UserPhysiqueDto>> creationCompte(@RequestBody UserPhysiqueDto particulier);
-	
+
 	/**
 	 * get email
+	 * 
 	 * @param email
 	 * @return responseEntity
 	 */
-	@GetMapping(path= "/email/{email:.+}")
-	public ResponseEntity<ImoResponse<String>> getEmailExist(@PathVariable(value="email") String email);
-	
+	@GetMapping(path = "/email/{email:.+}")
+	public ResponseEntity<ImoResponse<String>> getEmailExist(@PathVariable(value = "email") String email);
+
 	/**
 	 * get roles
+	 * 
 	 * @param email
 	 * @return
 	 */
-	@GetMapping(path= "/roles/{email:.+}")
-	public ResponseEntity<ImoResponse<RoleUserEnum>> getRolesByEmail(@PathVariable(value="email") String email);
+	@GetMapping(path = "/roles/{email:.+}")
+	public ResponseEntity<ImoResponse<RoleUserEnum>> getRolesByEmail(@PathVariable(value = "email") String email);
 
 }

@@ -9,10 +9,9 @@ import java.util.Optional;
 
 /**
  * @author mbalde
- *
  */
 public interface OffreRepository extends OffreBaseRepository<OffreEntity> {
 
-  Optional<OffreEntity> findByCodeOffre(String codeOffre);
+	Optional<OffreEntity> findByCodeOffre(String codeOffre);
 
 }
