@@ -22,7 +22,6 @@ import imo.com.response.ImoResponse;
 @RestController
 public class OffreController implements IOffreApi {
 
-
 	private final IOffre iOffre;
 
 	@Autowired

@@ -15,11 +15,9 @@ import imo.com.response.ImoResponse;
 
 /**
  * @author mbalde
- *
  */
 @RestController
 public class AdresseController implements IAdresseApi {
-	
 
 	private final IAdresse iAdresse;
 
@@ -30,7 +28,7 @@ public class AdresseController implements IAdresseApi {
 
 	@Override
 	public ResponseEntity<ImoResponse<PaysDto>> getListPays() {
-		
+
 		ImoResponse<PaysDto> imoResponse = iAdresse.getListPays();
 		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}

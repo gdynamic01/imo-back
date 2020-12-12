@@ -55,43 +55,25 @@ import imo.com.response.JwtTokenResponse;
 public class UserImpl implements IUser {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserImpl.class);
-
-
 	private final AuthenticationManager authenticationManager;
-
-
-	private final  UsersDetailsServicesImpl userDetailsService;
-
-
-	private  final JwtTokenUtil jwtTokenUtil;
-
-
+	private final UsersDetailsServicesImpl userDetailsService;
+	private final JwtTokenUtil jwtTokenUtil;
 	private final BCryptPasswordEncoder bcrypte;
-
-
-	private final  UserMoralMapper mapperProfessionnel;
-
-
-	private final  RoleRepository roleRepository;
-
-
-	private  final UserMoralRepository userMoralrepo;
-
-
-	private  final UserRepository userRepo;
-
-
+	private final UserMoralMapper mapperProfessionnel;
+	private final RoleRepository roleRepository;
+	private final UserMoralRepository userMoralrepo;
+	private final UserRepository userRepo;
 	private final UserMapper mapperParticulier;
-
 	private final PaysRepository paysRepository;
-
 	private final AdresseMapper adresseMapper;
-
-
-	private  final UserPhysiqueRepository userPhysiqueRepo;
+	private final UserPhysiqueRepository userPhysiqueRepo;
 
 	@Autowired
-	public UserImpl(AuthenticationManager authenticationManager, UsersDetailsServicesImpl userDetailsService, JwtTokenUtil jwtTokenUtil, BCryptPasswordEncoder bcrypte, UserMoralMapper mapperProfessionnel, RoleRepository roleRepository, UserMoralRepository userMoralrepo, UserRepository userRepo, UserMapper mapperParticulier, PaysRepository paysRepository, AdresseMapper adresseMapper, UserPhysiqueRepository userPhysiqueRepo) {
+	public UserImpl(AuthenticationManager authenticationManager, UsersDetailsServicesImpl userDetailsService,
+			JwtTokenUtil jwtTokenUtil, BCryptPasswordEncoder bcrypte, UserMoralMapper mapperProfessionnel,
+			RoleRepository roleRepository, UserMoralRepository userMoralrepo, UserRepository userRepo,
+			UserMapper mapperParticulier, PaysRepository paysRepository, AdresseMapper adresseMapper,
+			UserPhysiqueRepository userPhysiqueRepo) {
 		this.authenticationManager = authenticationManager;
 		this.userDetailsService = userDetailsService;
 		this.jwtTokenUtil = jwtTokenUtil;
@@ -105,7 +87,6 @@ public class UserImpl implements IUser {
 		this.adresseMapper = adresseMapper;
 		this.userPhysiqueRepo = userPhysiqueRepo;
 	}
-
 
 	@Override
 	public ResponseEntity<JwtTokenResponse> authentification(UserDto userDto) {
@@ -142,7 +123,6 @@ public class UserImpl implements IUser {
 			}
 			entity.setRoles(roles);
 			try {
-
 
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
 				this.userMoralrepo.saveAndFlush(entity);
@@ -197,14 +177,6 @@ public class UserImpl implements IUser {
 	@Override
 	public ImoResponse<String> getEmail(String email) {
 		ImoResponse<String> imoEmails = new ImoResponse<>();
-//		AppUser user = userRepo.findByEmail(email);
-//		List<String> result = new ArrayList<>();
-//		int codeStatus = HttpStatus.NO_CONTENT.value();
-//		if (user != null) {
-//			result.add(user.getEmail());
-//			codeStatus = HttpStatus.OK.value();
-//		}
-//		FonctialiterCommunes.setImoResponse(imoResponse, codeStatus, null, result);
 		this.setResponseByEmail(email, imoEmails, null, "");
 		return imoEmails;
 	}
@@ -223,34 +195,35 @@ public class UserImpl implements IUser {
 		this.setResponseByEmail(email, null, imoRoles, "roles");
 		return imoRoles;
 	}
-	
-	private void setResponseByEmail(String email, ImoResponse<String> imoEmails, ImoResponse<RoleUserEnum> imoRoles, String typeResult) {
+
+	private void setResponseByEmail(String email, ImoResponse<String> imoEmails, ImoResponse<RoleUserEnum> imoRoles,
+			String typeResult) {
 		AppUser user = userRepo.findByEmail(email);
 		int codeStatus = user != null ? HttpStatus.OK.value() : HttpStatus.NO_CONTENT.value();
 		if (user != null) {
-			switch(typeResult) {
+			switch (typeResult) {
 			case "roles":
 				List<RoleUserEnum> roles = user.getRoles().stream().map(roleEnum -> {
 					return roleEnum.getRoleEnum();
 				}).collect(Collectors.toList());
 				FonctialiterCommunes.setImoResponse(imoRoles, codeStatus, null, roles);
 				break;
-				default:
-					List<String> emails = new ArrayList<>();
-					emails.add(user.getEmail());
-					FonctialiterCommunes.setImoResponse(imoEmails, codeStatus, null, emails);
+			default:
+				List<String> emails = new ArrayList<>();
+				emails.add(user.getEmail());
+				FonctialiterCommunes.setImoResponse(imoEmails, codeStatus, null, emails);
 			}
 		} else {
-			if(imoRoles != null) {
+			if (imoRoles != null) {
 				FonctialiterCommunes.setImoResponse(imoRoles, codeStatus, null, null);
 			} else {
 				FonctialiterCommunes.setImoResponse(imoEmails, codeStatus, null, null);
 			}
 		}
-		
-	}
-	private void createPays(AdresseDto dto){
 
+	}
+
+	private void createPays(AdresseDto dto) {
 		PaysEntity paysEntity = paysRepository.findByNomPays(dto.getPays());
 		if (paysEntity == null) {
 			// creation Pays d'offre

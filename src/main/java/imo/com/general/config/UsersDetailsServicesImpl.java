@@ -20,12 +20,10 @@ import imo.com.repo.utilisateur.UserRepository;
 
 /**
  * @author balde
- *
  */
 
 @Service
 public class UsersDetailsServicesImpl implements UserDetailsService {
-
 
 	private final UserRepository repository;
 
@@ -37,7 +35,7 @@ public class UsersDetailsServicesImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) {
 		String tokens[] = email.split(" ");
-		email = tokens.length == 1 ? email : tokens[tokens.length-1];
+		email = tokens.length == 1 ? email : tokens[tokens.length - 1];
 		AppUser user = this.repository.findByEnabledTrueAndEmail(email);
 		if (user == null) {
 			throw new UsernameNotFoundException("L'adresse " + email + " N'existe pas");
@@ -46,8 +44,8 @@ public class UsersDetailsServicesImpl implements UserDetailsService {
 		user.getRoles().forEach(r -> {
 			authories.add(new SimpleGrantedAuthority(r.getRoleEnum().name()));
 		});
-		return new User(user.getRepresentantLegal().getNom() + " " + user.getRepresentantLegal().getPrenom()+ " " +user.getEmail(),
-				user.getPassword(), authories);
+		return new User(user.getRepresentantLegal().getNom() + " " + user.getRepresentantLegal().getPrenom() + " "
+				+ user.getEmail(), user.getPassword(), authories);
 	}
 
 }

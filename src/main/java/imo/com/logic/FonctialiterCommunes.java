@@ -14,7 +14,6 @@ import imo.com.logic.utilisateur.dto.AdresseDto;
 import imo.com.model.pays.PaysEntity;
 import imo.com.repo.adresse.PaysRepository;
 import imo.com.response.ImoResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Cette classe gère les methodes communes du projet
@@ -24,9 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class FonctialiterCommunes {
 
 	public static String messageErreur = "";
-
-
-
 
 	/**
 	 * @param imo     objet response
@@ -49,7 +45,8 @@ public abstract class FonctialiterCommunes {
 		}
 	}
 
-	public  static  void createPaysAndVille(AdresseDto adresseDto, PaysRepository paysRepository, AdresseMapper adresseMapper) {
+	public static void createPaysAndVille(AdresseDto adresseDto, PaysRepository paysRepository,
+			AdresseMapper adresseMapper) {
 		List<VilleDto> listVilleDto = new ArrayList<>();
 		PaysDto paysDto = new PaysDto();
 		VilleDto villeDto = new VilleDto();

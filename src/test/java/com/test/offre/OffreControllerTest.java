@@ -25,10 +25,10 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Autowired
 	private UserRepository userRepo;
-
+	
 	@Autowired
 	private RoleRepository roleRepository;
-
+	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPassword;
 	
@@ -131,5 +131,5 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 		creationProfessionnel(userRepo, roleRepository, bcryptPassword);
 		creationImmobilier(userRepo, offreRepository);
 	}
-	
+
 }

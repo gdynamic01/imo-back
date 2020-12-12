@@ -13,27 +13,25 @@ import imo.com.model.utilisateur.UserMoralEntity;
 
 /**
  * @author mbalde
- *
  */
 @Component
 public class UserMoralMapper implements IGeneriqueMapper<UserMoralDto, UserMoralEntity> {
 
+	private final ModelMapper modelMapper;
 
-    private final  ModelMapper modelMapper;
+	@Autowired
+	public UserMoralMapper(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
+	}
 
-    @Autowired
-    public UserMoralMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+	@Override
+	public UserMoralDto asObjectDto(UserMoralEntity in) {
+		return modelMapper.map(in, UserMoralDto.class);
+	}
 
-    @Override
-    public UserMoralDto asObjectDto(UserMoralEntity in) {
-        return modelMapper.map(in, UserMoralDto.class);
-    }
-
-    @Override
-    public UserMoralEntity asObjectEntity(UserMoralDto in) {
-        return modelMapper.map(in, UserMoralEntity.class);
-    }
+	@Override
+	public UserMoralEntity asObjectEntity(UserMoralDto in) {
+		return modelMapper.map(in, UserMoralEntity.class);
+	}
 
 }

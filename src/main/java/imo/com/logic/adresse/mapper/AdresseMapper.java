@@ -13,11 +13,9 @@ import imo.com.model.pays.PaysEntity;
 
 /**
  * @author mbalde
- *
  */
 @Component
 public class AdresseMapper implements IGeneriqueMapper<PaysDto, PaysEntity> {
-	
 
 	private final ModelMapper modelMapper;
 

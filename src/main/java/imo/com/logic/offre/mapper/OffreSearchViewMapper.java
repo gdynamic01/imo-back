@@ -13,13 +13,11 @@ import imo.com.model.view.OffreSearchView;
 
 /**
  * @author mbalde
- *
  */
 @Component
 public class OffreSearchViewMapper implements IGeneriqueMapper<OffreSearchViewDto, OffreSearchView> {
-	
 
-	private final  ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
 	@Autowired
 	public OffreSearchViewMapper(ModelMapper modelMapper) {

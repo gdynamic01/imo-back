@@ -12,11 +12,9 @@ import imo.com.model.utilisateur.UserPhysiqueEntity;
  * Mapper for user physique
  * 
  * @author mbalde
- *
  */
 @Component
 public class UserMapper implements IGeneriqueMapper<UserPhysiqueDto, UserPhysiqueEntity> {
-
 
 	private final ModelMapper modelMapper;
 

@@ -18,8 +18,6 @@ import org.springframework.stereotype.Service;
 
 import imo.com.general.ConstantesUtils;
 import imo.com.logic.FonctialiterCommunes;
-import imo.com.logic.adresse.dto.PaysDto;
-import imo.com.logic.adresse.dto.VilleDto;
 import imo.com.logic.adresse.mapper.AdresseMapper;
 import imo.com.logic.offre.CheckFieldsOffre;
 import imo.com.logic.offre.IOffre;
@@ -42,46 +40,27 @@ import imo.com.repo.utilisateur.UserRepository;
 import imo.com.repo.view.offre.IOffreSearchViewRepositoryCustom;
 import imo.com.response.ImoResponse;
 
-
 @Service
 public class OffreImpl implements IOffre {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OffreImpl.class);
-
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-
 	private final MobileMapper mobileMapper;
-
-
 	private final ImmobilierMapper immobilierMapper;
-
-
-	private  final MobileRepository mobileRepository;
-
-
+	private final MobileRepository mobileRepository;
 	private final ImmobilierRepository immobilierRepository;
-
-
 	private final UserRepository userRepo;
-
-
 	private final PaysRepository paysRepository;
-
-
-	private final  IOffreSearchViewRepositoryCustom iOffreSearchViewRepo;
-
-
-	private final  OffreSearchViewMapper offreSearchViewMapper;
-
-
+	private final IOffreSearchViewRepositoryCustom iOffreSearchViewRepo;
+	private final OffreSearchViewMapper offreSearchViewMapper;
 	private final AdresseMapper adresseMapper;
-
-
-	private final  OffreRepository offreRepository;
+	private final OffreRepository offreRepository;
 
 	@Autowired
-	public OffreImpl(MobileMapper mobileMapper, ImmobilierMapper immobilierMapper, MobileRepository mobileRepository, ImmobilierRepository immobilierRepository, UserRepository userRepo, PaysRepository paysRepository, IOffreSearchViewRepositoryCustom iOffreSearchViewRepo, OffreSearchViewMapper offreSearchViewMapper, AdresseMapper adresseMapper, OffreRepository offreRepository) {
+	public OffreImpl(MobileMapper mobileMapper, ImmobilierMapper immobilierMapper, MobileRepository mobileRepository,
+			ImmobilierRepository immobilierRepository, UserRepository userRepo, PaysRepository paysRepository,
+			IOffreSearchViewRepositoryCustom iOffreSearchViewRepo, OffreSearchViewMapper offreSearchViewMapper,
+			AdresseMapper adresseMapper, OffreRepository offreRepository) {
 		this.mobileMapper = mobileMapper;
 		this.immobilierMapper = immobilierMapper;
 		this.mobileRepository = mobileRepository;
@@ -93,7 +72,6 @@ public class OffreImpl implements IOffre {
 		this.adresseMapper = adresseMapper;
 		this.offreRepository = offreRepository;
 	}
-
 
 	@Override
 	public ImoResponse<OffreGlobalDto> creationOffre(OffreGlobalDto dto) {
@@ -183,11 +161,9 @@ public class OffreImpl implements IOffre {
 		return new ResponseEntity<>(offreEntity.isPresent() ? HttpStatus.OK : HttpStatus.NO_CONTENT);
 	}
 
-
-	
 	private void calculCodeOffre(OffreEntity entity) {
-		entity.setCodeOffre(entity.getId()+entity.getTypeOffre().toString());
-		entity.setCodeOffre(entity.getId()+entity.getTypeOffre().toString());
+		entity.setCodeOffre(entity.getId() + entity.getTypeOffre().toString());
+		entity.setCodeOffre(entity.getId() + entity.getTypeOffre().toString());
 		offreRepository.saveAndFlush(entity);
 	}
 }

@@ -21,16 +21,12 @@ import imo.com.response.ImoResponse;
 
 /**
  * @author mbalde
- *
  */
 @Service
 @Transactional
 public class AdresseImpl implements IAdresse {
-	
 
 	private final PaysRepository paysRepository;
-	
-
 	private final AdresseMapper adresseMapper;
 
 	@Autowired
@@ -41,11 +37,11 @@ public class AdresseImpl implements IAdresse {
 
 	@Override
 	public ImoResponse<PaysDto> getListPays() {
-		
+
 		ImoResponse<PaysDto> response = new ImoResponse<>();
-		
+
 		List<PaysEntity> entities = paysRepository.findAll();
-		if(!entities.isEmpty()) {
+		if (!entities.isEmpty()) {
 			List<PaysDto> pays = entities.stream().map(adresseMapper::asObjectDto).collect(Collectors.toList());
 			FonctialiterCommunes.setImoResponse(response, HttpStatus.OK.value(), null, pays);
 		} else {

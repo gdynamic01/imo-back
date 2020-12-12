@@ -38,13 +38,13 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Autowired
 	private UserRepository userRepo;
-
+	
 	@Autowired
 	private RoleRepository roleRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPassword;
-	
+
 	@MockBean
 	private IOffreSearchViewRepositoryCustom iOffreSearchViewRepository;
 
@@ -54,8 +54,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 	public void should_creation_user_with_field_mandatory_error() throws Exception {
 
 		// --- user professionnel
-		mockMvc.perform(post(uri + "/professionnel").accept(mediaAccept)
-				.contentType(ContentType)
+		mockMvc.perform(post(uri + "/professionnel").accept(mediaAccept).contentType(ContentType)
 				.content(getJsonFromFile(pathUsers + "creation-user-error.json"))).andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(10)))
 				.andExpect(jsonPath("$.champsObligatoires[0]").value("numero"))
@@ -64,8 +63,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 				.andDo(print());
 
 		// --- user particulier
-		mockMvc.perform(post(uri + "/particulier").accept(mediaAccept)
-				.contentType(ContentType)
+		mockMvc.perform(post(uri + "/particulier").accept(mediaAccept).contentType(ContentType)
 				.content(getJsonFromFile(pathUsers + "creation-user-error.json"))).andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.champsObligatoires", hasSize(8)))
 				.andExpect(jsonPath("$.champsObligatoires[0]").value("nom"))
@@ -76,8 +74,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Test
 	public void should_creation_professionnel_with_email_exist_error() throws Exception {
-		mockMvc.perform(post(uri + "/professionnel").accept(mediaAccept)
-				.contentType(ContentType)
+		mockMvc.perform(post(uri + "/professionnel").accept(mediaAccept).contentType(ContentType)
 				.content(getJsonFromFile(pathUsers + "creation-professionnel-email-exists.json")))
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.messageResponse").value("Cet email existe dejà veuillez vous connecter"))
@@ -86,9 +83,8 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Test
 	public void should_creation_particulier_with_email_exists_error() throws Exception {
-		mockMvc.perform(post(uri + "/particulier").accept(mediaAccept)
-				.contentType(ContentType)
-				.content(getJsonFromFile(pathUsers+ "creation-particulier-email-exists.json")))
+		mockMvc.perform(post(uri + "/particulier").accept(mediaAccept).contentType(ContentType)
+				.content(getJsonFromFile(pathUsers + "creation-particulier-email-exists.json")))
 				.andExpect(status().isInternalServerError())
 				.andExpect(jsonPath("$.messageResponse").value("Cet email existe dejà veuillez vous connecter"))
 				.andDo(print());
@@ -96,82 +92,59 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Test
 	public void should_creation_professionnel_with_success() throws Exception {
-		mockMvc.perform(post(uri + "/professionnel").accept(mediaAccept)
-				.contentType(ContentType)
-				.content(getJsonFromFile(pathUsers + "creation-professionnel-success.json")))
-				.andExpect(status().isOk())
+		mockMvc.perform(post(uri + "/professionnel").accept(mediaAccept).contentType(ContentType)
+				.content(getJsonFromFile(pathUsers + "creation-professionnel-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse").value(
 						"<h6>ACTIVATION COMPTE</h6> <p><span>Votre compte a été créé avec succès!</span></p><p><strong>veuillez cliquer sur le lien figurant dans l’email de confirmation que nous venons de vous envoyer.</strong></p>"))
 				.andDo(print());
 	}
-	
+
 	@Test
 	public void should_creation_particulier_with_success() throws Exception {
-		mockMvc.perform(post(uri + "/particulier").accept(mediaAccept)
-				.contentType(ContentType)
-				.content(getJsonFromFile(pathUsers + "creation-particulier-success.json")))
-				.andExpect(status().isOk())
+		mockMvc.perform(post(uri + "/particulier").accept(mediaAccept).contentType(ContentType)
+				.content(getJsonFromFile(pathUsers + "creation-particulier-success.json"))).andExpect(status().isOk())
 				.andExpect(jsonPath("$.messageResponse").value(
 						"<h6>ACTIVATION COMPTE</h6> <p><span>Votre compte a été créé avec succès!</span></p><p><strong>veuillez cliquer sur le lien figurant dans l’email de confirmation que nous venons de vous envoyer.</strong></p>"))
 				.andDo(print());
 	}
-	
+
 	@Test
 	public void should_get_email_with_not_exist() throws Exception {
-		mockMvc.perform(get(uri + "/email/fakeemailnotfound@yahoo.fr")
-				.accept(mediaAccept)
-				.contentType(ContentType)
-				).andExpect(status().isNoContent())
-		.andDo(print());
+		mockMvc.perform(get(uri + "/email/fakeemailnotfound@yahoo.fr").accept(mediaAccept).contentType(ContentType))
+				.andExpect(status().isNoContent()).andDo(print());
 	}
-	
+
 	@Test
 	public void should_get_email_with_success() throws Exception {
-		mockMvc.perform(get(uri + "/email/professionel@yahoo.fr")
-				.accept(mediaAccept)
-				.contentType(ContentType)
-				).andExpect(status().isOk())
-		.andDo(print());
+		mockMvc.perform(get(uri + "/email/professionel@yahoo.fr").accept(mediaAccept).contentType(ContentType))
+				.andExpect(status().isOk()).andDo(print());
 	}
-	
+
 	@Test
 	public void should_authentification_with_success() throws Exception {
-		mockMvc.perform(get(uri + "/authentification/"+emailParticulier+"/testtest")
-				.accept(mediaAccept)
-				.contentType(ContentType)
-				).andExpect(status().isOk())
-		.andDo(print());
+		mockMvc.perform(get(uri + "/authentification/" + emailParticulier + "/testtest").accept(mediaAccept)
+				.contentType(ContentType)).andExpect(status().isOk()).andDo(print());
 	}
-	
+
 	@Test
 	public void should_authentification_with_user_isNotActif_401() throws Exception {
-		mockMvc.perform(get(uri + "/authentification/"+emailParticulierNonActif+"/testtest")
-				.accept(mediaAccept)
-				.contentType(ContentType)
-				).andExpect(status().isUnauthorized())
-		.andDo(print());
+		mockMvc.perform(get(uri + "/authentification/" + emailParticulierNonActif + "/testtest").accept(mediaAccept)
+				.contentType(ContentType)).andExpect(status().isUnauthorized()).andDo(print());
 	}
-	
+
 	@Test
 	public void should_authentification_with_badCredentials_401() throws Exception {
-		mockMvc.perform(get(uri + "/authentification/"+emailBadCredential+"/badCredential")
-				.accept(mediaAccept)
-				.contentType(ContentType)
-				).andExpect(status().isUnauthorized())
-		.andDo(print());
+		mockMvc.perform(get(uri + "/authentification/" + emailBadCredential + "/badCredential").accept(mediaAccept)
+				.contentType(ContentType)).andExpect(status().isUnauthorized()).andDo(print());
 	}
-	
+
 	@Test
 	@WithMockAdminUser
 	public void should_get_roles_by_success() throws Exception {
-		mockMvc.perform(get(uri + "/roles/professionel@yahoo.fr")
-				.accept(mediaAccept)
-				.contentType(ContentType)
-				).andExpect(status().isOk())
-		.andExpect(jsonPath("$.result").value("ROLE_USER_MORAL"))
-		.andDo(print());
+		mockMvc.perform(get(uri + "/roles/professionel@yahoo.fr").accept(mediaAccept).contentType(ContentType))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.result").value("ROLE_USER_MORAL")).andDo(print());
 	}
-	
+
 	@Test
 	public void should_get_all_offres() throws Exception {
 
@@ -192,7 +165,7 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 		creationParticulierNonActif(userRepo, roleRepository, bcryptPassword);
 		creationParticulierAvecMotDePasseNonCrypter(userRepo, roleRepository, bcryptPassword);
 	}
-	
+
 	private void initDataOffreSearchView() {
 		OffreSearchView offreSearchView = new OffreSearchView();
 		offreSearchView.setId(1L);

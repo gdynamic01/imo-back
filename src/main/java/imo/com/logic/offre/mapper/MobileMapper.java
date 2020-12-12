@@ -13,11 +13,9 @@ import imo.com.model.mobile.MobileEntity;
 
 /**
  * @author balde
- *
  */
 @Component
 public class MobileMapper implements IGeneriqueMapper<MobileDto, MobileEntity> {
-
 
 	private final ModelMapper modelMapper;
 

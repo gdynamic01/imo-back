@@ -22,7 +22,6 @@ import org.springframework.web.filter.CorsFilter;
 
 /**
  * @author balde
- *
  */
 
 @Configuration
@@ -30,17 +29,13 @@ import org.springframework.web.filter.CorsFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-
-
 	private final UserDetailsService jwtUserDetailsService;
-
-
 	private final JwtRequestFilter jwtRequestFilter;
 
 	@Autowired
-	public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, UserDetailsService jwtUserDetailsService, JwtRequestFilter jwtRequestFilter) {
+	public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+			UserDetailsService jwtUserDetailsService, JwtRequestFilter jwtRequestFilter) {
 		this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
 		this.jwtUserDetailsService = jwtUserDetailsService;
 		this.jwtRequestFilter = jwtRequestFilter;
@@ -61,9 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		// We don't need CSRF for this example
 		httpSecurity.cors().and().csrf().disable()
-		
+
 				// authenticate this particular request
-				.authorizeRequests().antMatchers("/loumos/offres", "/loumos/authentification/**", "/loumos/professionnel",
+				.authorizeRequests()
+				.antMatchers("/loumos/offres", "/loumos/authentification/**", "/loumos/professionnel",
 						"/loumos/particulier", "/loumos/email/**", "/loumos/pays", "/h2-console/**")
 				.permitAll().
 				// all other requests need to be authenticated
@@ -80,9 +76,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/loumos/offres", "/loumos/authentification/**", "/loumos/professionnel",
 				"/loumos/particulier", "/loumos/email/**", "/resources/**", "/h2-console/**"); // tout url figurant ici sera ignoré par la
-																		// sécurité
+		// sécurité
 	}
-	
+
 	/**
 	 * @return
 	 */
@@ -99,18 +95,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
 	}
-	
+
 	@Bean
 	public CorsFilter corsFilter() {
-	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	    CorsConfiguration config = new CorsConfiguration();
-	    config.setAllowCredentials(true);
-	    config.addAllowedOrigin("*");
-	    config.addAllowedHeader("*");
-	    config.addAllowedMethod("*");
-	    config.addExposedHeader(HttpHeaders.AUTHORIZATION);
-	    source.registerCorsConfiguration("/**", config);
-	    return new CorsFilter(source);
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("*");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
+		config.addExposedHeader(HttpHeaders.AUTHORIZATION);
+		source.registerCorsConfiguration("/**", config);
+		return new CorsFilter(source);
 	}
 
 }

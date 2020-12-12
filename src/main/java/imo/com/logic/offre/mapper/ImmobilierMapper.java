@@ -13,11 +13,9 @@ import imo.com.model.immobilier.ImmobilierEntity;
 
 /**
  * @author balde
- *
  */
 @Component
 public class ImmobilierMapper implements IGeneriqueMapper<ImmobilierDto, ImmobilierEntity> {
-
 
 	private final ModelMapper modelMapper;
 

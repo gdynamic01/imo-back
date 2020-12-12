@@ -3,8 +3,6 @@
  */
 package imo.com.resource.impl.utilisateur;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +23,11 @@ import imo.com.response.JwtTokenResponse;
 
 /**
  * @author balde
- *
  */
 @RestController
 public class UserController implements IUserApi {
 
-
-	 private final IUser user;
+	private final IUser user;
 
 	@Autowired
 	public UserController(IUser user) {
@@ -45,8 +41,7 @@ public class UserController implements IUserApi {
 			dto.setEmail(email);
 			dto.setPassword(password);
 			return user.authentification(dto);
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			return new ResponseEntity<>(new JwtTokenResponse(null, "L'email ou le mot de passe est incorrect",
 					HttpStatus.UNAUTHORIZED.value()), HttpStatus.UNAUTHORIZED);
 		}
