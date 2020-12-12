@@ -22,8 +22,13 @@ import imo.com.response.ImoResponse;
 @RestController
 public class OffreController implements IOffreApi {
 
+
+	private final IOffre iOffre;
+
 	@Autowired
-	private IOffre iOffre;
+	public OffreController(IOffre iOffre) {
+		this.iOffre = iOffre;
+	}
 
 	@Override
 	public ResponseEntity<ImoResponse<OffreGlobalDto>> creationOffre(OffreGlobalDto dto) {

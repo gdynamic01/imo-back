@@ -26,8 +26,13 @@ import imo.com.repo.utilisateur.UserRepository;
 @Service
 public class UsersDetailsServicesImpl implements UserDetailsService {
 
+
+	private final UserRepository repository;
+
 	@Autowired
-	UserRepository repository;
+	public UsersDetailsServicesImpl(UserRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) {

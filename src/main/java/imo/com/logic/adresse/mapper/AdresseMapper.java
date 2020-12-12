@@ -18,8 +18,13 @@ import imo.com.model.pays.PaysEntity;
 @Component
 public class AdresseMapper implements IGeneriqueMapper<PaysDto, PaysEntity> {
 	
+
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	private ModelMapper modelMapper;
+	public AdresseMapper(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
+	}
 
 	@Override
 	public PaysDto asObjectDto(PaysEntity in) {

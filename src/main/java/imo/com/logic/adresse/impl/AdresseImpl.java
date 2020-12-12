@@ -27,11 +27,17 @@ import imo.com.response.ImoResponse;
 @Transactional
 public class AdresseImpl implements IAdresse {
 	
-	@Autowired
-	private PaysRepository paysRepository;
+
+	private final PaysRepository paysRepository;
 	
+
+	private final AdresseMapper adresseMapper;
+
 	@Autowired
-	private AdresseMapper adresseMapper;
+	public AdresseImpl(PaysRepository paysRepository, AdresseMapper adresseMapper) {
+		this.paysRepository = paysRepository;
+		this.adresseMapper = adresseMapper;
+	}
 
 	@Override
 	public ImoResponse<PaysDto> getListPays() {

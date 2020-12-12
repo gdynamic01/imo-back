@@ -17,8 +17,13 @@ import imo.com.model.utilisateur.UserPhysiqueEntity;
 @Component
 public class UserMapper implements IGeneriqueMapper<UserPhysiqueDto, UserPhysiqueEntity> {
 
+
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	ModelMapper modelMapper;
+	public UserMapper(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
+	}
 
 	@Override
 	public UserPhysiqueDto asObjectDto(UserPhysiqueEntity in) {

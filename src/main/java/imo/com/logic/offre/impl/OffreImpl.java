@@ -50,35 +50,50 @@ public class OffreImpl implements IOffre {
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	@Autowired
-	private MobileMapper mobileMapper;
+
+	private final MobileMapper mobileMapper;
+
+
+	private final ImmobilierMapper immobilierMapper;
+
+
+	private  final MobileRepository mobileRepository;
+
+
+	private final ImmobilierRepository immobilierRepository;
+
+
+	private final UserRepository userRepo;
+
+
+	private final PaysRepository paysRepository;
+
+
+	private final  IOffreSearchViewRepositoryCustom iOffreSearchViewRepo;
+
+
+	private final  OffreSearchViewMapper offreSearchViewMapper;
+
+
+	private final AdresseMapper adresseMapper;
+
+
+	private final  OffreRepository offreRepository;
 
 	@Autowired
-	private ImmobilierMapper immobilierMapper;
+	public OffreImpl(MobileMapper mobileMapper, ImmobilierMapper immobilierMapper, MobileRepository mobileRepository, ImmobilierRepository immobilierRepository, UserRepository userRepo, PaysRepository paysRepository, IOffreSearchViewRepositoryCustom iOffreSearchViewRepo, OffreSearchViewMapper offreSearchViewMapper, AdresseMapper adresseMapper, OffreRepository offreRepository) {
+		this.mobileMapper = mobileMapper;
+		this.immobilierMapper = immobilierMapper;
+		this.mobileRepository = mobileRepository;
+		this.immobilierRepository = immobilierRepository;
+		this.userRepo = userRepo;
+		this.paysRepository = paysRepository;
+		this.iOffreSearchViewRepo = iOffreSearchViewRepo;
+		this.offreSearchViewMapper = offreSearchViewMapper;
+		this.adresseMapper = adresseMapper;
+		this.offreRepository = offreRepository;
+	}
 
-	@Autowired
-	private MobileRepository mobileRepository;
-
-	@Autowired
-	private ImmobilierRepository immobilierRepository;
-
-	@Autowired
-	private UserRepository userRepo;
-
-	@Autowired
-	private PaysRepository paysRepository;
-
-	@Autowired
-	private IOffreSearchViewRepositoryCustom iOffreSearchViewRepo;
-
-	@Autowired
-	private OffreSearchViewMapper offreSearchViewMapper;
-
-	@Autowired
-	private AdresseMapper adresseMapper;
-
-	@Autowired
-	private OffreRepository offreRepository;
 
 	@Override
 	public ImoResponse<OffreGlobalDto> creationOffre(OffreGlobalDto dto) {
@@ -118,7 +133,7 @@ public class OffreImpl implements IOffre {
 					PaysEntity paysEntity = paysRepository.findByNomPays(adresseDto.getPays());
 					if (paysEntity == null) {
 						// creation Pays d'offre
-						createPaysAndVille(adresseDto);
+						FonctialiterCommunes.createPaysAndVille(adresseDto, paysRepository, adresseMapper);
 					}
 
 					FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
@@ -168,19 +183,7 @@ public class OffreImpl implements IOffre {
 		return new ResponseEntity<>(offreEntity.isPresent() ? HttpStatus.OK : HttpStatus.NO_CONTENT);
 	}
 
-	private void createPaysAndVille(AdresseDto adresseDto) {
 
-		List<VilleDto> listVilleDto = new ArrayList<>();
-		PaysDto paysDto = new PaysDto();
-		VilleDto villeDto = new VilleDto();
-		paysDto.setNomPays(adresseDto.getPays());
-		villeDto.setCodePostal(adresseDto.getCodePostal());
-		villeDto.setNomVille(adresseDto.getVille());
-		listVilleDto.add(villeDto);
-		paysDto.setVilles(listVilleDto);
-		PaysEntity entity = adresseMapper.asObjectEntity(paysDto);
-		paysRepository.saveAndFlush(entity);
-	}
 	
 	private void calculCodeOffre(OffreEntity entity) {
 		entity.setCodeOffre(entity.getId()+entity.getTypeOffre().toString());

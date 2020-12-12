@@ -20,8 +20,13 @@ import imo.com.response.ImoResponse;
 @RestController
 public class AdresseController implements IAdresseApi {
 	
+
+	private final IAdresse iAdresse;
+
 	@Autowired
-	private IAdresse iAdresse;
+	public AdresseController(IAdresse iAdresse) {
+		this.iAdresse = iAdresse;
+	}
 
 	@Override
 	public ResponseEntity<ImoResponse<PaysDto>> getListPays() {

@@ -5,6 +5,7 @@ package imo.com.resource.impl.utilisateur;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,8 +30,13 @@ import imo.com.response.JwtTokenResponse;
 @RestController
 public class UserController implements IUserApi {
 
-	@Inject
-	IUser user;
+
+	 private final IUser user;
+
+	@Autowired
+	public UserController(IUser user) {
+		this.user = user;
+	}
 
 	@Override
 	public ResponseEntity<JwtTokenResponse> connexion(String email, String password) {

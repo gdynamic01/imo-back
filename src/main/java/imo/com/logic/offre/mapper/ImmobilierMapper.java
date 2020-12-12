@@ -18,8 +18,13 @@ import imo.com.model.immobilier.ImmobilierEntity;
 @Component
 public class ImmobilierMapper implements IGeneriqueMapper<ImmobilierDto, ImmobilierEntity> {
 
+
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	ModelMapper modelMapper;
+	public ImmobilierMapper(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
+	}
 
 	@Override
 	public ImmobilierDto asObjectDto(ImmobilierEntity in) {

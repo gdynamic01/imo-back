@@ -18,8 +18,13 @@ import imo.com.model.view.OffreSearchView;
 @Component
 public class OffreSearchViewMapper implements IGeneriqueMapper<OffreSearchViewDto, OffreSearchView> {
 	
+
+	private final  ModelMapper modelMapper;
+
 	@Autowired
-	private ModelMapper modelMapper;
+	public OffreSearchViewMapper(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
+	}
 
 	@Override
 	public OffreSearchViewDto asObjectDto(OffreSearchView in) {

@@ -18,8 +18,13 @@ import imo.com.model.mobile.MobileEntity;
 @Component
 public class MobileMapper implements IGeneriqueMapper<MobileDto, MobileEntity> {
 
+
+	private final ModelMapper modelMapper;
+
 	@Autowired
-	private ModelMapper modelMapper;
+	public MobileMapper(ModelMapper modelMapper) {
+		this.modelMapper = modelMapper;
+	}
 
 	@Override
 	public MobileDto asObjectDto(MobileEntity in) {

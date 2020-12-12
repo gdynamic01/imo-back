@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-
+import imo.com.logic.adresse.mapper.AdresseMapper;
+import imo.com.logic.utilisateur.dto.AdresseDto;
+import imo.com.model.pays.PaysEntity;
+import imo.com.repo.adresse.PaysRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,35 +56,56 @@ public class UserImpl implements IUser {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserImpl.class);
 
-	@Autowired
-	private AuthenticationManager authenticationManager;
+
+	private final AuthenticationManager authenticationManager;
+
+
+	private final  UsersDetailsServicesImpl userDetailsService;
+
+
+	private  final JwtTokenUtil jwtTokenUtil;
+
+
+	private final BCryptPasswordEncoder bcrypte;
+
+
+	private final  UserMoralMapper mapperProfessionnel;
+
+
+	private final  RoleRepository roleRepository;
+
+
+	private  final UserMoralRepository userMoralrepo;
+
+
+	private  final UserRepository userRepo;
+
+
+	private final UserMapper mapperParticulier;
+
+	private final PaysRepository paysRepository;
+
+	private final AdresseMapper adresseMapper;
+
+
+	private  final UserPhysiqueRepository userPhysiqueRepo;
 
 	@Autowired
-	private UsersDetailsServicesImpl userDetailsService;
+	public UserImpl(AuthenticationManager authenticationManager, UsersDetailsServicesImpl userDetailsService, JwtTokenUtil jwtTokenUtil, BCryptPasswordEncoder bcrypte, UserMoralMapper mapperProfessionnel, RoleRepository roleRepository, UserMoralRepository userMoralrepo, UserRepository userRepo, UserMapper mapperParticulier, PaysRepository paysRepository, AdresseMapper adresseMapper, UserPhysiqueRepository userPhysiqueRepo) {
+		this.authenticationManager = authenticationManager;
+		this.userDetailsService = userDetailsService;
+		this.jwtTokenUtil = jwtTokenUtil;
+		this.bcrypte = bcrypte;
+		this.mapperProfessionnel = mapperProfessionnel;
+		this.roleRepository = roleRepository;
+		this.userMoralrepo = userMoralrepo;
+		this.userRepo = userRepo;
+		this.mapperParticulier = mapperParticulier;
+		this.paysRepository = paysRepository;
+		this.adresseMapper = adresseMapper;
+		this.userPhysiqueRepo = userPhysiqueRepo;
+	}
 
-	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
-
-	@Inject
-	private BCryptPasswordEncoder bcrypte;
-
-	@Inject
-	private UserMoralMapper mapperProfessionnel;
-
-	@Inject
-	private RoleRepository roleRepository;
-
-	@Inject
-	private UserMoralRepository userMoralrepo;
-
-	@Inject
-	private UserRepository userRepo;
-
-	@Inject
-	private UserMapper mapperParticulier;
-
-	@Inject
-	private UserPhysiqueRepository userPhysiqueRepo;
 
 	@Override
 	public ResponseEntity<JwtTokenResponse> authentification(UserDto userDto) {
@@ -119,8 +142,11 @@ public class UserImpl implements IUser {
 			}
 			entity.setRoles(roles);
 			try {
+
+
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
 				this.userMoralrepo.saveAndFlush(entity);
+				createPays(dto.getAdresse());
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
 						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
 			} catch (Exception e) {
@@ -153,6 +179,7 @@ public class UserImpl implements IUser {
 			try {
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
 				this.userPhysiqueRepo.saveAndFlush(entity);
+				createPays(dto.getAdresse());
 				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.OK.value(),
 						ConstantesUtils.MESSAGE_INSCRIPTION_REUSSI, null);
 				LOGGER.info("---------- [ creation de l'utilisateur ] :" + dto.getEmail() + " avec succès");
@@ -221,6 +248,14 @@ public class UserImpl implements IUser {
 			}
 		}
 		
+	}
+	private void createPays(AdresseDto dto){
+
+		PaysEntity paysEntity = paysRepository.findByNomPays(dto.getPays());
+		if (paysEntity == null) {
+			// creation Pays d'offre
+			FonctialiterCommunes.createPaysAndVille(dto, paysRepository, adresseMapper);
+		}
 	}
 
 }

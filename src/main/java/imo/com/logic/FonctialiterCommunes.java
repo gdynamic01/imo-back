@@ -3,10 +3,18 @@
  */
 package imo.com.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import imo.com.logic.adresse.dto.PaysDto;
+import imo.com.logic.adresse.dto.VilleDto;
+import imo.com.logic.adresse.mapper.AdresseMapper;
 import imo.com.logic.offre.dto.OffreDto;
+import imo.com.logic.utilisateur.dto.AdresseDto;
+import imo.com.model.pays.PaysEntity;
+import imo.com.repo.adresse.PaysRepository;
 import imo.com.response.ImoResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Cette classe gère les methodes communes du projet
@@ -16,6 +24,9 @@ import imo.com.response.ImoResponse;
 public abstract class FonctialiterCommunes {
 
 	public static String messageErreur = "";
+
+
+
 
 	/**
 	 * @param imo     objet response
@@ -36,6 +47,19 @@ public abstract class FonctialiterCommunes {
 			imo.setNbOffreParticulier(nbOffreParticulier);
 			imo.setNbOffreProfessionnel(nbOffreProfessionnel);
 		}
+	}
+
+	public  static  void createPaysAndVille(AdresseDto adresseDto, PaysRepository paysRepository, AdresseMapper adresseMapper) {
+		List<VilleDto> listVilleDto = new ArrayList<>();
+		PaysDto paysDto = new PaysDto();
+		VilleDto villeDto = new VilleDto();
+		paysDto.setNomPays(adresseDto.getPays());
+		villeDto.setCodePostal(adresseDto.getCodePostal());
+		villeDto.setNomVille(adresseDto.getVille());
+		listVilleDto.add(villeDto);
+		paysDto.setVilles(listVilleDto);
+		PaysEntity entity = adresseMapper.asObjectEntity(paysDto);
+		paysRepository.saveAndFlush(entity);
 	}
 
 }
