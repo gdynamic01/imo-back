@@ -36,7 +36,7 @@ public interface IOffreApi {
 	 * @return listeOffre
 	 */
 	@GetMapping(path = "/offres")
-	public ResponseEntity<ImoResponse<OffreSearchViewDto>> getListOffres(
+	public ImoResponse<OffreSearchViewDto> getListOffres(
 			@RequestParam(required = false) TypeServiceOffre typesServices,
 			@RequestParam(required = false) String ville, @RequestParam(required = false) String pays,
 			@RequestParam(required = false) String dateDebut, @RequestParam(required = false) String dateFin,

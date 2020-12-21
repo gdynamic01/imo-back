@@ -107,7 +107,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 		mockMvc.perform(get(uri + "/offres").queryParam("typesServices", TypeServiceOffre.VENTE.toString())
 				.queryParam("ville", "FakeVille").queryParam("pays", "FakePays").queryParam("dateDebut", "2019-05-01")
 				.queryParam("dateFin", "2019-09-01").queryParam("categories", categories).accept(mediaAccept)
-				.contentType(ContentType)).andExpect(status().isNoContent()).andDo(print());
+				.contentType(ContentType)).andExpect(jsonPath("$.status").value(204)).andDo(print());
 	}
 
 	@Test

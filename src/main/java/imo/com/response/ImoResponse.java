@@ -22,7 +22,7 @@ public class ImoResponse<T> {
 	private List<T> result = new ArrayList<>();
 
 	/** code http */
-	private int statut;
+	private int status;
 
 	/** nombre d'offre */
 	private long nbOffre;
@@ -57,8 +57,8 @@ public class ImoResponse<T> {
 	/**
 	 * @return the codeResultat
 	 */
-	public int getStatut() {
-		return statut;
+	public int getStatus() {
+		return status;
 	}
 
 	/**
@@ -89,8 +89,8 @@ public class ImoResponse<T> {
 	 * @param codeResultat
 	 *                     the codeResultat to set
 	 */
-	public void setStatut(int codeResultat) {
-		this.statut = codeResultat;
+	public void setStatus(int codeResultat) {
+		this.status = codeResultat;
 	}
 
 	/**

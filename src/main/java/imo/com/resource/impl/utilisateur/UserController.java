@@ -56,7 +56,7 @@ public class UserController implements IUserApi {
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					FonctialiterCommunes.messageErreur, null);
 		}
-		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatus()));
 	}
 
 	@Override
@@ -68,20 +68,20 @@ public class UserController implements IUserApi {
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.INTERNAL_SERVER_ERROR.value(),
 					FonctialiterCommunes.messageErreur, null);
 		}
-		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatus()));
 	}
 
 	@Override
 	public ResponseEntity<ImoResponse<String>> getEmailExist(String email) {
 		ImoResponse<String> imoResponse = user.getEmail(email);
-		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatus()));
 	}
 
 	@Override
 	@PreAuthorize(AuthorisationUser.PROF_OR_PAR)
 	public ResponseEntity<ImoResponse<RoleUserEnum>> getRolesByEmail(String email) {
 		ImoResponse<RoleUserEnum> imoResponse = user.getRolesByEmail(email);
-		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatus()));
 	}
 
 }

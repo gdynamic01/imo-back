@@ -30,7 +30,7 @@ public class AdresseController implements IAdresseApi {
 	public ResponseEntity<ImoResponse<PaysDto>> getListPays() {
 
 		ImoResponse<PaysDto> imoResponse = iAdresse.getListPays();
-		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatus()));
 	}
 
 }

@@ -55,7 +55,7 @@ public class OffreImpl implements IOffre {
 	private final OffreSearchViewMapper offreSearchViewMapper;
 	private final AdresseMapper adresseMapper;
 	private final OffreRepository offreRepository;
-
+	
 	@Autowired
 	public OffreImpl(MobileMapper mobileMapper, ImmobilierMapper immobilierMapper, MobileRepository mobileRepository,
 			ImmobilierRepository immobilierRepository, UserRepository userRepo, PaysRepository paysRepository,

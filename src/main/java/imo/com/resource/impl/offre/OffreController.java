@@ -32,15 +32,14 @@ public class OffreController implements IOffreApi {
 	@Override
 	public ResponseEntity<ImoResponse<OffreGlobalDto>> creationOffre(OffreGlobalDto dto) {
 		ImoResponse<OffreGlobalDto> imoResponse = iOffre.creationOffre(dto);
-		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
+		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatus()));
 	}
 
 	@Override
-	public ResponseEntity<ImoResponse<OffreSearchViewDto>> getListOffres(TypeServiceOffre typesServices, String ville,
+	public ImoResponse<OffreSearchViewDto> getListOffres(TypeServiceOffre typesServices, String ville,
 			String pays, String dateDebut, String dateFin, String categories) {
-		ImoResponse<OffreSearchViewDto> imoResponse = iOffre.getListOffres(typesServices, ville, pays, dateDebut,
+		return iOffre.getListOffres(typesServices, ville, pays, dateDebut,
 				dateFin, categories);
-		return new ResponseEntity<>(imoResponse, HttpStatus.valueOf(imoResponse.getStatut()));
 	}
 
 	@Override

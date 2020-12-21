@@ -31,7 +31,7 @@ public abstract class FonctialiterCommunes {
 	 * @param list    resultat
 	 */
 	public static <D> void setImoResponse(ImoResponse<D> imo, int status, String message, List<D> list) {
-		imo.setStatut(status);
+		imo.setStatus(status);
 		imo.setMessageResponse(message);
 		imo.setResult(list);
 		if (list != null && !list.isEmpty() && list.get(0) instanceof OffreDto) {
