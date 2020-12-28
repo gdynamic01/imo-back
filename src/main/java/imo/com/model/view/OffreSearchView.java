@@ -5,6 +5,7 @@ package imo.com.model.view;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
@@ -45,10 +46,10 @@ public class OffreSearchView implements Serializable {
 	private Long usersId;
 
 	@Column(name = "create_at")
-	private LocalDate createAt = LocalDate.now();
+	private LocalDateTime createAt = LocalDateTime.now();
 
 	@Column(name = "update_at")
-	private LocalDate updateAt = LocalDate.now();
+	private LocalDateTime updateAt = LocalDateTime.now();
 
 	@Column(name = "type_de_Bien")
 	private String typeDebienImmobilier;
@@ -60,10 +61,10 @@ public class OffreSearchView implements Serializable {
 	private Double prix = 0.0;
 
 	@Column(name = "date_debut")
-	public LocalDate dateDebut = LocalDate.now();
+	public LocalDateTime dateDebut = LocalDateTime.now();
 
 	@Column(name = "date_fin")
-	public LocalDate dateFin = LocalDate.now();
+	public LocalDateTime dateFin = LocalDateTime.now();
 
 	@Column(name = "type_offre")
 	@Enumerated(EnumType.STRING)
@@ -202,28 +203,28 @@ public class OffreSearchView implements Serializable {
 	/**
 	 * @return the dateDebut
 	 */
-	public LocalDate getDateDebut() {
+	public LocalDateTime getDateDebut() {
 		return dateDebut;
 	}
 
 	/**
 	 * @param dateDebut the dateDebut to set
 	 */
-	public void setDateDebut(LocalDate dateDebut) {
+	public void setDateDebut(LocalDateTime dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
 	/**
 	 * @return the dateFin
 	 */
-	public LocalDate getDateFin() {
+	public LocalDateTime getDateFin() {
 		return dateFin;
 	}
 
 	/**
 	 * @param dateFin the dateFin to set
 	 */
-	public void setDateFin(LocalDate dateFin) {
+	public void setDateFin(LocalDateTime dateFin) {
 		this.dateFin = dateFin;
 	}
 
@@ -538,28 +539,28 @@ public class OffreSearchView implements Serializable {
 	/**
 	 * @return the createAt
 	 */
-	public LocalDate getCreateAt() {
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
 	/**
 	 * @param createAt the createAt to set
 	 */
-	public void setCreateAt(LocalDate createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
 	/**
 	 * @return the updateAt
 	 */
-	public LocalDate getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
 	/**
 	 * @param updateAt the updateAt to set
 	 */
-	public void setUpdateAt(LocalDate updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 

@@ -3,8 +3,8 @@
 	{
 		"titre":"Titre1",
 		"description":"Description 1",
-		"dateDebut": "2019-03-03",
-		"dateFin": "2019-04-03",
+		"dateDebut": "2019-03-03 07:24",
+		"dateFin": "2019-04-03 07:24",
 		"adresse":
 		{
 			"codePostal":"94140",
@@ -17,8 +17,8 @@
 		"prix":700.5,
 		"typeOffre":"IMMOBILIER",
   		"typeServiceOffre":"LOCATION",
-		"createAt":"2019-07-15",
-		"updateAt":"2019-07-15",
+		"createAt":"2019-07-15 07:24",
+		"updateAt":"2019-07-15 07:24",
 		"nbrePieces":2,
 		"piscine":null,
 		"typeDeBien":"APPARTEMENT",

@@ -1,6 +1,6 @@
 package com.test.allObjects;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,9 +153,9 @@ public interface IGeneralTest {
 		ImmobilierEntity entity = new ImmobilierEntity();
 		entity.setId(200L);
 		entity.setDescription("Immo-description");
-		entity.setCreateAt(LocalDate.parse("2019-10-01"));
-		entity.setDateDebut(LocalDate.parse("2019-10-01"));
-		entity.setDateFin(LocalDate.parse("2019-10-01"));
+		entity.setCreateAt(LocalDateTime.parse("2019-10-01T08:57"));
+		entity.setDateDebut(LocalDateTime.parse("2019-10-01T08:57"));
+		entity.setDateFin(LocalDateTime.parse("2019-10-01T08:57"));
 		entity.setAdresse(createAdresse(new Adresse()));
 		entity.setEau(true);
 		entity.setElectricite(true);
@@ -170,7 +170,7 @@ public interface IGeneralTest {
 		entity.setTypeDeBien(TypeBienImmobilierEnum.APPARTEMENT);
 		entity.setTypeOffre(TypeOffreEnum.IMMOBILIER);
 		entity.setTypeServiceOffre(TypeServiceOffre.LOCATION);
-		entity.setUpdateAt(LocalDate.now());
+		entity.setUpdateAt(LocalDateTime.now());
 		entity.setUser(user);
 		entity.setCodeOffre("200IMMOBILIER");
 
@@ -188,15 +188,15 @@ public interface IGeneralTest {
 
 		MobileEntity entity = new MobileEntity();
 		entity.setDescription("mobile-description");
-		entity.setCreateAt(LocalDate.now());
-		entity.setDateDebut(LocalDate.now());
-		entity.setDateFin(LocalDate.now());
+		entity.setCreateAt(LocalDateTime.now());
+		entity.setDateDebut(LocalDateTime.now());
+		entity.setDateFin(LocalDateTime.now());
 		entity.setAdresse(createAdresse(new Adresse()));
 		entity.setPrix(123.34);
 		entity.setTitre("mobile 1");
 		entity.setTypeOffre(TypeOffreEnum.IMMOBILIER);
 		entity.setTypeServiceOffre(TypeServiceOffre.LOCATION);
-		entity.setUpdateAt(LocalDate.now());
+		entity.setUpdateAt(LocalDateTime.now());
 		entity.setUser(user);
 		
 		PhotosEntity photo_1 = new PhotosEntity();
@@ -210,6 +210,8 @@ public interface IGeneralTest {
 		photos.add(photo_2);
 		
 		entity.setPhotosOffres(photos);
+		
+		
 
 		return entity;
 	}

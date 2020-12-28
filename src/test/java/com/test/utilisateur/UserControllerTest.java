@@ -4,32 +4,23 @@
 package com.test.utilisateur;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.test.allObjects.IGeneralTest;
 import com.test.config.ConfigTestImo;
 import com.test.config.WithMockAdminUser;
 
-import imo.com.model.enums.TypeOffreEnum;
-import imo.com.model.enums.TypeServiceOffre;
-import imo.com.model.view.OffreSearchView;
 import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
-import imo.com.repo.view.offre.IOffreSearchViewRepositoryCustom;
 
 /**
  * @author mbalde
@@ -44,11 +35,6 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPassword;
-
-	@MockBean
-	private IOffreSearchViewRepositoryCustom iOffreSearchViewRepository;
-
-	private List<OffreSearchView> offreSearchViews = new ArrayList<>();
 
 	@Test
 	public void should_creation_user_with_field_mandatory_error() throws Exception {
@@ -145,37 +131,12 @@ public class UserControllerTest extends ConfigTestImo implements IGeneralTest {
 				.andExpect(status().isOk()).andExpect(jsonPath("$.result").value("ROLE_USER_MORAL")).andDo(print());
 	}
 
-	@Test
-	public void should_get_all_offres() throws Exception {
-
-		initDataOffreSearchView();
-		when(iOffreSearchViewRepository.getOffres(TypeServiceOffre.LOCATION, null, null, null, null, null))
-				.thenReturn(offreSearchViews);
-		mockMvc.perform(get(uri + "/offres").queryParam("typesServices", TypeServiceOffre.LOCATION.toString())
-				.accept(mediaAccept).contentType(ContentType)).andExpect(status().isOk())
-				.andExpect(jsonPath("$.result", hasSize(1)))
-				.andExpect(jsonPath("$.result.[0].titre").value("FakeOffre"))
-				.andExpect(jsonPath("$.result.[0].typeServiceOffre").value("LOCATION")).andDo(print());
-	}
-
 	@Before
 	public void initData() {
 		creationProfessionnel(userRepo, roleRepository, bcryptPassword);
 		creationParticulier(userRepo, roleRepository, bcryptPassword);
 		creationParticulierNonActif(userRepo, roleRepository, bcryptPassword);
 		creationParticulierAvecMotDePasseNonCrypter(userRepo, roleRepository, bcryptPassword);
-	}
-
-	private void initDataOffreSearchView() {
-		OffreSearchView offreSearchView = new OffreSearchView();
-		offreSearchView.setId(1L);
-		offreSearchView.setTitre("FakeOffre");
-		offreSearchView.setTypeOffre(TypeOffreEnum.IMMOBILIER);
-		offreSearchView.setTypeServiceOffre(TypeServiceOffre.LOCATION);
-		offreSearchView.setTypeDebienImmobilier("APPARTEMENT");
-		offreSearchView.setUsersId(1L);
-
-		offreSearchViews.add(offreSearchView);
 	}
 
 }

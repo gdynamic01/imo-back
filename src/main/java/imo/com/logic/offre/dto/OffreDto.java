@@ -1,8 +1,11 @@
 package imo.com.logic.offre.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import imo.com.logic.photos.dto.PhotosDto;
@@ -25,12 +28,14 @@ public abstract class OffreDto {
 	private Double prix = 0.0;
 
 	/** date publication */
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate createAt = LocalDate.now();;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
+	private LocalDateTime createAt = LocalDateTime.now();
 
 	/** date mise a jour publication */
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate updateAt = LocalDate.now();;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
+	private LocalDateTime updateAt = LocalDateTime.now();;
 
 	/** type d'offre */
 	private TypeOffreEnum typeOffre;
@@ -48,12 +53,14 @@ public abstract class OffreDto {
 	private String SymboleMonetaire;
 	
 	/** date debut */
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	protected LocalDate dateDebut = LocalDate.now();
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
+	protected LocalDateTime dateDebut = LocalDateTime.now();
 	
 	/** date de fin */
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	protected LocalDate dateFin = LocalDate.now();
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
+	protected LocalDateTime dateFin = LocalDateTime.now();
 	
 	/** nombre de jour ecoulé apres la publication de l'annonce */
 	private long nombreDeJour;
@@ -137,28 +144,28 @@ public abstract class OffreDto {
 	/**
 	 * @return the createAt
 	 */
-	public LocalDate getCreateAt() {
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
 	/**
 	 * @param createAt the createAt to set
 	 */
-	public void setCreateAt(LocalDate createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
 	/**
 	 * @return the updateAt
 	 */
-	public LocalDate getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
 	/**
 	 * @param updateAt the updateAt to set
 	 */
-	public void setUpdateAt(LocalDate updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 
@@ -221,28 +228,28 @@ public abstract class OffreDto {
 	/**
 	 * @return the dateDebut
 	 */
-	public LocalDate getDateDebut() {
+	public LocalDateTime getDateDebut() {
 		return dateDebut;
 	}
 
 	/**
 	 * @param dateDebut the dateDebut to set
 	 */
-	public void setDateDebut(LocalDate dateDebut) {
+	public void setDateDebut(LocalDateTime dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
 	/**
 	 * @return the dateFin
 	 */
-	public LocalDate getDateFin() {
+	public LocalDateTime getDateFin() {
 		return dateFin;
 	}
 
 	/**
 	 * @param dateFin the dateFin to set
 	 */
-	public void setDateFin(LocalDate dateFin) {
+	public void setDateFin(LocalDateTime dateFin) {
 		this.dateFin = dateFin;
 	}
 

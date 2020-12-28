@@ -4,6 +4,7 @@
 package imo.com.logic.offre.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import imo.com.logic.utilisateur.dto.AdresseDto;
@@ -21,9 +22,9 @@ public class OffreSearchViewDto {
 
 	private Long id;
 
-	private LocalDate createAt = LocalDate.now();
+	private LocalDateTime createAt = LocalDateTime.now();
 
-	private LocalDate updateAt = LocalDate.now();
+	private LocalDateTime updateAt = LocalDateTime.now();
 
 	private TypeBienImmobilierEnum typeDebienImmobilier;
 
@@ -31,9 +32,9 @@ public class OffreSearchViewDto {
 
 	private Double prix = 0.0;
 
-	public LocalDate dateDebut = LocalDate.now();
+	public LocalDateTime dateDebut = LocalDateTime.now();
 
-	public LocalDate dateFin = LocalDate.now();
+	public LocalDateTime dateFin = LocalDateTime.now();
 
 	private TypeOffreEnum typeOffre;
 
@@ -84,6 +85,8 @@ public class OffreSearchViewDto {
 	private String siret;
 
 	private String codeOffre;
+	
+	private Long dureeOffre;
 
 	/**
 	 * @return the id
@@ -102,28 +105,28 @@ public class OffreSearchViewDto {
 	/**
 	 * @return the createAt
 	 */
-	public LocalDate getCreateAt() {
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
 	/**
 	 * @param createAt the createAt to set
 	 */
-	public void setCreateAt(LocalDate createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
 	/**
 	 * @return the updateAt
 	 */
-	public LocalDate getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
 	/**
 	 * @param updateAt the updateAt to set
 	 */
-	public void setUpdateAt(LocalDate updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 
@@ -172,28 +175,28 @@ public class OffreSearchViewDto {
 	/**
 	 * @return the dateDebut
 	 */
-	public LocalDate getDateDebut() {
+	public LocalDateTime getDateDebut() {
 		return dateDebut;
 	}
 
 	/**
 	 * @param dateDebut the dateDebut to set
 	 */
-	public void setDateDebut(LocalDate dateDebut) {
+	public void setDateDebut(LocalDateTime dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
 	/**
 	 * @return the dateFin
 	 */
-	public LocalDate getDateFin() {
+	public LocalDateTime getDateFin() {
 		return dateFin;
 	}
 
 	/**
 	 * @param dateFin the dateFin to set
 	 */
-	public void setDateFin(LocalDate dateFin) {
+	public void setDateFin(LocalDateTime dateFin) {
 		this.dateFin = dateFin;
 	}
 
@@ -545,5 +548,19 @@ public class OffreSearchViewDto {
 	 */
 	public void setCodeOffre(String codeOffre) {
 		this.codeOffre = codeOffre;
+	}
+
+	/**
+	 * @return the dureeOffre
+	 */
+	public Long getDureeOffre() {
+		return dureeOffre;
+	}
+
+	/**
+	 * @param dureeOffre the dureeOffre to set
+	 */
+	public void setDureeOffre(Long dureeOffre) {
+		this.dureeOffre = dureeOffre;
 	}
 }

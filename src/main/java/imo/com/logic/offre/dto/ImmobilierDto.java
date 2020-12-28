@@ -3,23 +3,39 @@ package imo.com.logic.offre.dto;
 import imo.com.model.enums.SanitaireEnum;
 import imo.com.model.enums.TypeBienImmobilierEnum;
 
-import java.time.LocalDate;
-
 public class ImmobilierDto extends OffreDto {
 
 	/** surface de l'offre */
 	private Double surface;
+	
+	/** Nombre de piece */
 	public Integer nbrePieces;
+	
+	/** piscine */
 	public Boolean piscine;
+	
+	/** type de bien */
 	private TypeBienImmobilierEnum typeDeBien;
+	
+	/** sanitaire */
 	public SanitaireEnum sanitaire;
+	
+	/** eau */
 	public Boolean eau;
+	
+	/** autreService */
 	public String autreService;
+	
+	/** serviceMenage */
 	public Boolean serviceMenage;
-
+	
+	/** zoneGeographique */
 	public String zoneGeographique;
-
+	
+	/** parking */
 	public Boolean parking;
+	
+	/** electricite */
 	public Boolean electricite;
 
 	public void setEau(Boolean eau) {
@@ -65,22 +81,6 @@ public class ImmobilierDto extends OffreDto {
 	 */
 	public void setSurface(Double surface) {
 		this.surface = surface;
-	}
-
-	public LocalDate getDateDebut() {
-		return dateDebut;
-	}
-
-	public void setDateDebut(LocalDate dateDebut) {
-		this.dateDebut = dateDebut;
-	}
-
-	public LocalDate getDateFin() {
-		return dateFin;
-	}
-
-	public void setDateFin(LocalDate dateFin) {
-		this.dateFin = dateFin;
 	}
 
 	public Integer getNbrePieces() {

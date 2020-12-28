@@ -1,6 +1,6 @@
 package imo.com.logic.offre.impl;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ import imo.com.response.ImoResponse;
 public class OffreImpl implements IOffre {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OffreImpl.class);
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 	private final MobileMapper mobileMapper;
 	private final ImmobilierMapper immobilierMapper;
 	private final MobileRepository mobileRepository;
@@ -138,13 +138,13 @@ public class OffreImpl implements IOffre {
 			String dateDebut, String dateFin, String categories) {
 
 		List<OffreSearchViewDto> listOffreDto = new ArrayList<>();
-		LocalDate fin = null;
-		LocalDate debut = null;
+		LocalDateTime fin = null;
+		LocalDateTime debut = null;
 		if (dateFin != null) {
-			fin = LocalDate.parse(dateFin, formatter);
+			fin = LocalDateTime.parse(dateFin, formatter);
 		}
 		if (dateDebut != null) {
-			debut = LocalDate.parse(dateDebut, formatter);
+			debut = LocalDateTime.parse(dateDebut, formatter);
 		}
 		List<OffreSearchView> offreSearchView = iOffreSearchViewRepo.getOffres(typesServices, ville, pays, debut, fin,
 				categories);

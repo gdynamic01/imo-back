@@ -3,7 +3,7 @@
  */
 package imo.com.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -20,11 +20,11 @@ public abstract class AbstractEntity {
 
 	/** date creation */
 	@Column(name = "create_at")
-	private LocalDate createAt = LocalDate.now();
+	private LocalDateTime createAt = LocalDateTime.now();
 
 	/** date modification */
 	@Column(name = "update_at")
-	private LocalDate updateAt = LocalDate.now();
+	private LocalDateTime updateAt = LocalDateTime.now();
 
 	/** Id entity */
 	@Id
@@ -39,7 +39,7 @@ public abstract class AbstractEntity {
 	/**
 	 * @return the createAt
 	 */
-	public LocalDate getCreateAt() {
+	public LocalDateTime getCreateAt() {
 		return createAt;
 	}
 
@@ -61,7 +61,7 @@ public abstract class AbstractEntity {
 	 * @param createAt
 	 *                 the createAt to set
 	 */
-	public void setCreateAt(LocalDate createAt) {
+	public void setCreateAt(LocalDateTime createAt) {
 		this.createAt = createAt;
 	}
 
@@ -84,14 +84,14 @@ public abstract class AbstractEntity {
 	/**
 	 * @return the updateAt
 	 */
-	public LocalDate getUpdateAt() {
+	public LocalDateTime getUpdateAt() {
 		return updateAt;
 	}
 
 	/**
 	 * @param updateAt the updateAt to set
 	 */
-	public void setUpdateAt(LocalDate updateAt) {
+	public void setUpdateAt(LocalDateTime updateAt) {
 		this.updateAt = updateAt;
 	}
 

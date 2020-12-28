@@ -4,8 +4,8 @@ CREATE SCHEMA IF NOT EXISTS public;
 -- create table users
 create table IF NOT EXISTS public.imo_users(
     id BIGSERIAL NOT NULL,
-    create_at date,
-    update_at date,
+    create_at timestamp without time zone,
+    update_at timestamp without time zone,
     modificationcounter integer,
     email varchar(500) not null CONSTRAINT email_unique UNIQUE,
     password varchar(500) not null,
@@ -28,8 +28,8 @@ create table IF NOT EXISTS public.imo_users(
 -- create table role
 create table IF NOT EXISTS public.imo_role(
     id BIGSERIAL NOT NULL,
-    create_at date,
-    update_at date,
+    create_at timestamp without time zone,
+    update_at timestamp without time zone,
     modificationcounter integer,
     role varchar(60) not null CONSTRAINT role_unique UNIQUE,
     PRIMARY KEY(id)
@@ -48,21 +48,21 @@ create table IF NOT EXISTS public.imo_user_moral(
     kbis text,
     raison_social text,
     siret varchar(20),
-     PRIMARY KEY(id)
+    PRIMARY KEY(id)
 );
 
 -- create table user_physique
 create table IF NOT EXISTS public.imo_user_physique(
     id BIGSERIAL NOT NULL,
-     PRIMARY KEY(id)
+    PRIMARY KEY(id)
 );
 
 -- create table offre
 CREATE TABLE IF NOT EXISTS public.imo_offre (
     id BIGSERIAL NOT NULL,
     modificationcounter integer,
-    create_at date not null,
-    update_at date,
+    create_at timestamp without time zone not null,
+    update_at timestamp without time zone,
     code_postal int,
     complement_adresse character varying(255),
     libelle_rue character varying(255),
@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS public.imo_offre (
     users_id BIGSERIAL NOT NULL,
     type_offre character varying(250) NOT NULL,
     type_service_offre character varying(250) NOT NULL,
-    date_debut date NOT NULL,
-    date_fin date,
+    date_debut timestamp without time zone NOT NULL,
+    date_fin timestamp without time zone,
     code_offre character varying(255),
     PRIMARY KEY(id)
 );
@@ -118,8 +118,8 @@ CREATE TABLE IF NOT EXISTS public.imo_mobile (
 CREATE TABLE IF NOT EXISTS public.imo_photos (
 	id BIGSERIAL NOT NULL,
 	modificationcounter integer,
-	create_at date,
-    update_at date,
+	create_at timestamp without time zone,
+    update_at timestamp without time zone,
 	path_photos text NOT NULL,
 	offre_id BIGSERIAL NOT NULL,
 	CONSTRAINT imo_photos_pkey PRIMARY KEY(id)
@@ -127,9 +127,9 @@ CREATE TABLE IF NOT EXISTS public.imo_photos (
 
 CREATE TABLE IF NOT EXISTS public.imo_ville (
     id bigserial not null,
-    create_at date,
+    create_at timestamp without time zone,
     modificationcounter integer,
-    update_at date,
+    update_at timestamp without time zone,
     code_postal integer,
     nom_ville character varying(255) not null,
     pays_id serial not null,
@@ -137,9 +137,9 @@ CREATE TABLE IF NOT EXISTS public.imo_ville (
  );
  create TABLE IF NOT EXISTS public.imo_pays (
     id  bigserial not null,
-    create_at date,
+    create_at timestamp without time zone,
     modificationcounter integer,
-    update_at date,
+    update_at timestamp without time zone,
     nom_pays character varying(255),
     CONSTRAINT imo_pays_pkey PRIMARY KEY(id)
  );

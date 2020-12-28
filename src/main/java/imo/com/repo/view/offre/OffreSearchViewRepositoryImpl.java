@@ -3,7 +3,7 @@
  */
 package imo.com.repo.view.offre;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +33,7 @@ public class OffreSearchViewRepositoryImpl implements IOffreSearchViewRepository
 
 	@Override
 	public List<OffreSearchView> getOffres(TypeServiceOffre typesServices, String ville, String pays,
-			LocalDate dateDebut, LocalDate dateFin, String categories) {
+			LocalDateTime dateDebut, LocalDateTime dateFin, String categories) {
 		
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<OffreSearchView> cq = cb.createQuery(OffreSearchView.class);

@@ -3,7 +3,7 @@
  */
 package imo.com.repo.view.offre;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import imo.com.model.enums.TypeServiceOffre;
@@ -15,5 +15,5 @@ import imo.com.model.view.OffreSearchView;
  */
 public interface IOffreSearchViewRepositoryCustom {
 	List<OffreSearchView> getOffres(TypeServiceOffre typesServices, String ville,
-			String pays, LocalDate dateDebut, LocalDate dateFin, String categories);
+			String pays, LocalDateTime dateDebut, LocalDateTime dateFin, String categories);
 }

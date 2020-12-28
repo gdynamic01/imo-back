@@ -6,20 +6,29 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.test.allObjects.IGeneralTest;
 import com.test.config.ConfigTestImo;
 import com.test.config.WithMockAdminUser;
 
+import imo.com.model.enums.TypeOffreEnum;
 import imo.com.model.enums.TypeServiceOffre;
+import imo.com.model.view.OffreSearchView;
 import imo.com.repo.offre.OffreRepository;
 import imo.com.repo.utilisateur.RoleRepository;
 import imo.com.repo.utilisateur.UserRepository;
+import imo.com.repo.view.offre.IOffreSearchViewRepositoryCustom;
 
 public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 
@@ -34,6 +43,11 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	
 	@Autowired
 	private OffreRepository offreRepository;
+	
+	@MockBean
+	private IOffreSearchViewRepositoryCustom iOffreSearchViewRepository;
+
+	private List<OffreSearchView> offreSearchViews = new ArrayList<>();
 
 	/**
 	 * @throws Exception
@@ -105,8 +119,8 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 		String categories = "APPARTEMENT_VOITURE";
 
 		mockMvc.perform(get(uri + "/offres").queryParam("typesServices", TypeServiceOffre.VENTE.toString())
-				.queryParam("ville", "FakeVille").queryParam("pays", "FakePays").queryParam("dateDebut", "2019-05-01")
-				.queryParam("dateFin", "2019-09-01").queryParam("categories", categories).accept(mediaAccept)
+				.queryParam("ville", "FakeVille").queryParam("pays", "FakePays").queryParam("dateDebut", "2019-05-01 02:30")
+				.queryParam("dateFin", "2019-09-01 02:30").queryParam("categories", categories).accept(mediaAccept)
 				.contentType(ContentType)).andExpect(jsonPath("$.status").value(204)).andDo(print());
 	}
 
@@ -122,6 +136,32 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 		mockMvc.perform(get(uri + "/23456/offre").accept(mediaAccept).contentType(ContentType))
 				.andExpect(status().isNoContent()).andDo(print());
 
+	}
+	
+	@Test
+	public void should_get_all_offres() throws Exception {
+
+		initDataOffreSearchView();
+		when(iOffreSearchViewRepository.getOffres(TypeServiceOffre.LOCATION, null, null, null, null, null))
+				.thenReturn(offreSearchViews);
+		mockMvc.perform(get(uri + "/offres").queryParam("typesServices", TypeServiceOffre.LOCATION.toString())
+				.accept(mediaAccept).contentType(ContentType)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.result", hasSize(1)))
+				.andExpect(jsonPath("$.result.[0].titre").value("FakeOffre"))
+				.andExpect(jsonPath("$.result.[0].typeServiceOffre").value("LOCATION")).andDo(print());
+	}
+	
+	private void initDataOffreSearchView() {
+		OffreSearchView offreSearchView = new OffreSearchView();
+		offreSearchView.setId(1L);
+		offreSearchView.setTitre("FakeOffre");
+		offreSearchView.setTypeOffre(TypeOffreEnum.IMMOBILIER);
+		offreSearchView.setTypeServiceOffre(TypeServiceOffre.LOCATION);
+		offreSearchView.setTypeDebienImmobilier("APPARTEMENT");
+		offreSearchView.setUsersId(1L);
+		offreSearchView.setCreateAt(LocalDateTime.parse("2020-12-25T05:14"));
+
+		offreSearchViews.add(offreSearchView);
 	}
 
 	@Before
