@@ -134,7 +134,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 	@Test
 	public void should_isOffreByCodeOffre_NoContent() throws Exception {
 		mockMvc.perform(get(uri + "/23456/offre").accept(mediaAccept).contentType(ContentType))
-				.andExpect(status().isNoContent()).andDo(print());
+				.andExpect(status().isNotFound()).andDo(print());
 
 	}
 	
@@ -166,7 +166,6 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 
 	@Before
 	public void initDatas() {
-		userRepo.deleteAll();
 		creationParticulier(userRepo, roleRepository, bcryptPassword);
 		creationProfessionnel(userRepo, roleRepository, bcryptPassword);
 		creationImmobilier(userRepo, offreRepository);

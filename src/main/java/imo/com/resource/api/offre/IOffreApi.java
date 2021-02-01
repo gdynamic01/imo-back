@@ -43,5 +43,5 @@ public interface IOffreApi {
 			@RequestParam(required = false) String categories);
 
 	@GetMapping(path = "/{codeOffre}/offre")
-	public ResponseEntity<?> isOffreByCodeOffre(@PathVariable(value = "codeOffre") String codeOffre);
+	public ResponseEntity<ImoResponse<OffreSearchViewDto>> getOffreByCodeOffre(@PathVariable(value = "codeOffre") String codeOffre);
 }

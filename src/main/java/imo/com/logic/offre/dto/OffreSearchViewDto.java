@@ -87,6 +87,16 @@ public class OffreSearchViewDto {
 	private String codeOffre;
 	
 	private Long dureeOffre;
+	
+	private String raisonSocial;
+	
+	private String telephone;
+	
+	private String nom;
+	
+	private String prenom;
+	
+	private String typeUser;
 
 	/**
 	 * @return the id
@@ -562,5 +572,75 @@ public class OffreSearchViewDto {
 	 */
 	public void setDureeOffre(Long dureeOffre) {
 		this.dureeOffre = dureeOffre;
+	}
+
+	/**
+	 * @return the raisonSocial
+	 */
+	public String getRaisonSocial() {
+		return raisonSocial;
+	}
+
+	/**
+	 * @param raisonSocial the raisonSocial to set
+	 */
+	public void setRaisonSocial(String raisonSocial) {
+		this.raisonSocial = raisonSocial;
+	}
+
+	/**
+	 * @return the telephone
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+
+	/**
+	 * @param telephone the telephone to set
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	/**
+	 * @return the nom
+	 */
+	public String getNom() {
+		return nom;
+	}
+
+	/**
+	 * @param nom the nom to set
+	 */
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	/**
+	 * @return the prenom
+	 */
+	public String getPrenom() {
+		return prenom;
+	}
+
+	/**
+	 * @param prenom the prenom to set
+	 */
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	/**
+	 * @return the typeUser
+	 */
+	public String getTypeUser() {
+		return typeUser;
+	}
+
+	/**
+	 * @param typeUser the typeUser to set
+	 */
+	public void setTypeUser(String typeUser) {
+		this.typeUser = typeUser;
 	}
 }

@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import imo.com.general.ConstantesUtils;
@@ -37,6 +36,7 @@ import imo.com.repo.adresse.PaysRepository;
 import imo.com.repo.offre.ImmobilierRepository;
 import imo.com.repo.offre.MobileRepository;
 import imo.com.repo.utilisateur.UserRepository;
+import imo.com.repo.view.offre.IOffreSearchViewRepository;
 import imo.com.repo.view.offre.IOffreSearchViewRepositoryCustom;
 import imo.com.response.ImoResponse;
 
@@ -51,26 +51,28 @@ public class OffreImpl implements IOffre {
 	private final ImmobilierRepository immobilierRepository;
 	private final UserRepository userRepo;
 	private final PaysRepository paysRepository;
-	private final IOffreSearchViewRepositoryCustom iOffreSearchViewRepo;
+	private final IOffreSearchViewRepositoryCustom iOffreSearchViewRepoCustom;
 	private final OffreSearchViewMapper offreSearchViewMapper;
 	private final AdresseMapper adresseMapper;
 	private final OffreRepository offreRepository;
+	private final IOffreSearchViewRepository iOffreSearchViewRepository;
 	
 	@Autowired
 	public OffreImpl(MobileMapper mobileMapper, ImmobilierMapper immobilierMapper, MobileRepository mobileRepository,
 			ImmobilierRepository immobilierRepository, UserRepository userRepo, PaysRepository paysRepository,
 			IOffreSearchViewRepositoryCustom iOffreSearchViewRepo, OffreSearchViewMapper offreSearchViewMapper,
-			AdresseMapper adresseMapper, OffreRepository offreRepository) {
+			AdresseMapper adresseMapper, OffreRepository offreRepository, IOffreSearchViewRepository iOffreSearchViewRepository) {
 		this.mobileMapper = mobileMapper;
 		this.immobilierMapper = immobilierMapper;
 		this.mobileRepository = mobileRepository;
 		this.immobilierRepository = immobilierRepository;
 		this.userRepo = userRepo;
 		this.paysRepository = paysRepository;
-		this.iOffreSearchViewRepo = iOffreSearchViewRepo;
+		this.iOffreSearchViewRepoCustom = iOffreSearchViewRepo;
 		this.offreSearchViewMapper = offreSearchViewMapper;
 		this.adresseMapper = adresseMapper;
 		this.offreRepository = offreRepository;
+		this.iOffreSearchViewRepository = iOffreSearchViewRepository;
 	}
 
 	@Override
@@ -146,7 +148,7 @@ public class OffreImpl implements IOffre {
 		if (dateDebut != null) {
 			debut = LocalDateTime.parse(dateDebut, formatter);
 		}
-		List<OffreSearchView> offreSearchView = iOffreSearchViewRepo.getOffres(typesServices, ville, pays, debut, fin,
+		List<OffreSearchView> offreSearchView = iOffreSearchViewRepoCustom.getOffres(typesServices, ville, pays, debut, fin,
 				categories);
 		listOffreDto = offreSearchView.stream().map(offreSearchViewMapper::asObjectDto).collect(Collectors.toList());
 		ImoResponse<OffreSearchViewDto> imoResponse = new ImoResponse<>();
@@ -156,9 +158,18 @@ public class OffreImpl implements IOffre {
 		return imoResponse;
 	}
 
-	public ResponseEntity<?> isOffreByCodeOffre(String codeOffre) {
-		Optional<OffreEntity> offreEntity = offreRepository.findByCodeOffre(codeOffre);
-		return new ResponseEntity<>(offreEntity.isPresent() ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+	public ImoResponse<OffreSearchViewDto> getOffreByCodeOffre(String codeOffre) {
+		ImoResponse<OffreSearchViewDto> imoResponse = new ImoResponse<>();
+		Optional<OffreSearchView> offreSearchView = iOffreSearchViewRepository.findByCodeOffre(codeOffre);
+		int status = HttpStatus.NOT_FOUND.value();
+		List<OffreSearchViewDto> result = new ArrayList<>();
+		if(offreSearchView.isPresent()) {
+			OffreSearchViewDto dto = offreSearchViewMapper.asObjectDto(offreSearchView.get());
+			status = HttpStatus.OK.value();
+			result.add(dto);
+		}
+		FonctialiterCommunes.setImoResponse(imoResponse, status, null,result);
+		return imoResponse;
 	}
 
 	private void calculCodeOffre(OffreEntity entity) {

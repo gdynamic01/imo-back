@@ -6,11 +6,12 @@ package imo.com.logic.offre.mapper;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import imo.com.logic.IGeneriqueMapper;
+import imo.com.logic.IGeneriqueObjectDtoMapper;
 import imo.com.logic.offre.dto.OffreSearchViewDto;
 import imo.com.model.view.OffreSearchView;
 
@@ -18,7 +19,7 @@ import imo.com.model.view.OffreSearchView;
  * @author mbalde
  */
 @Component
-public class OffreSearchViewMapper implements IGeneriqueMapper<OffreSearchViewDto, OffreSearchView> {
+public class OffreSearchViewMapper implements IGeneriqueObjectDtoMapper<OffreSearchViewDto, OffreSearchView> {
 
 	private final ModelMapper modelMapper;
 
@@ -32,12 +33,10 @@ public class OffreSearchViewMapper implements IGeneriqueMapper<OffreSearchViewDt
 		OffreSearchViewDto offreSearchViewDto = modelMapper.map(in, OffreSearchViewDto.class);
 		// Calcule de la durée de l'offre
 		calculDureeOffre(offreSearchViewDto);
+		String typeUser = offreSearchViewDto.getTypeUser();
+		typeUser = StringUtils.substring(offreSearchViewDto.getTypeUser(), 0, 3);
+		offreSearchViewDto.setTypeUser(typeUser != null ? StringUtils.capitalize(typeUser.toLowerCase()) : null);
 		return offreSearchViewDto;
-	}
-
-	@Override
-	public OffreSearchView asObjectEntity(OffreSearchViewDto in) {
-		return modelMapper.map(in, OffreSearchView.class);
 	}
 	
 	private void calculDureeOffre(OffreSearchViewDto offreSearchViewDto) {

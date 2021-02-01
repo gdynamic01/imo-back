@@ -58,5 +58,4 @@ public abstract class FonctialiterCommunes {
 		PaysEntity entity = adresseMapper.asObjectEntity(paysDto);
 		paysRepository.saveAndFlush(entity);
 	}
-
 }
