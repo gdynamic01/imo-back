@@ -272,34 +272,6 @@ public class OffreSearchView implements Serializable {
 	}
 
 	/**
-	 * @return the titre
-	 */
-	public String getTitre() {
-		return titre;
-	}
-
-	/**
-	 * @param titre the titre to set
-	 */
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
 	 * @return the surface
 	 */
 	public Double getSurface() {
@@ -353,20 +325,6 @@ public class OffreSearchView implements Serializable {
 	 */
 	public void setSanitaire(SanitaireEnum sanitaire) {
 		this.sanitaire = sanitaire;
-	}
-
-	/**
-	 * @return the autreService
-	 */
-	public String getAutreService() {
-		return autreService;
-	}
-
-	/**
-	 * @param autreService the autreService to set
-	 */
-	public void setAutreService(String autreService) {
-		this.autreService = autreService;
 	}
 
 	/**
@@ -468,20 +426,6 @@ public class OffreSearchView implements Serializable {
 	}
 
 	/**
-	 * @return the model
-	 */
-	public String getModel() {
-		return model;
-	}
-
-	/**
-	 * @param model the model to set
-	 */
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	/**
 	 * @return the nbPorte
 	 */
 	public Integer getNbPorte() {
@@ -521,20 +465,6 @@ public class OffreSearchView implements Serializable {
 	 */
 	public void setTypeMobileMoteur(TypeMobileMoteurEnum typeMobileMoteur) {
 		this.typeMobileMoteur = typeMobileMoteur;
-	}
-
-	/**
-	 * @return the batterie
-	 */
-	public String getBatterie() {
-		return batterie;
-	}
-
-	/**
-	 * @param batterie the batterie to set
-	 */
-	public void setBatterie(String batterie) {
-		this.batterie = batterie;
 	}
 
 	/**
@@ -591,6 +521,76 @@ public class OffreSearchView implements Serializable {
 	 */
 	public void setUsersId(Long usersId) {
 		this.usersId = usersId;
+	}
+
+	/**
+	 * @return the titre
+	 */
+	public String getTitre() {
+		return titre;
+	}
+
+	/**
+	 * @param titre the titre to set
+	 */
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * @return the autreService
+	 */
+	public String getAutreService() {
+		return autreService;
+	}
+
+	/**
+	 * @param autreService the autreService to set
+	 */
+	public void setAutreService(String autreService) {
+		this.autreService = autreService;
+	}
+
+	/**
+	 * @return the model
+	 */
+	public String getModel() {
+		return model;
+	}
+
+	/**
+	 * @param model the model to set
+	 */
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	/**
+	 * @return the batterie
+	 */
+	public String getBatterie() {
+		return batterie;
+	}
+
+	/**
+	 * @param batterie the batterie to set
+	 */
+	public void setBatterie(String batterie) {
+		this.batterie = batterie;
 	}
 
 	/**

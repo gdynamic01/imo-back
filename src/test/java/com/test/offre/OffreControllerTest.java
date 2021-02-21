@@ -148,7 +148,7 @@ public class OffreControllerTest extends ConfigTestImo implements IGeneralTest {
 				.accept(mediaAccept).contentType(ContentType)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.result", hasSize(1)))
 				.andExpect(jsonPath("$.result.[0].titre").value("FakeOffre"))
-				.andExpect(jsonPath("$.result.[0].typeServiceOffre").value("LOCATION")).andDo(print());
+				.andExpect(jsonPath("$.result.[0].typeServiceOffre").value("Location")).andDo(print());
 	}
 	
 	private void initDataOffreSearchView() {

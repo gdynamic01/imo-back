@@ -18,7 +18,6 @@ import imo.com.response.ImoResponse;
  */
 public class CheckFieldsOffre implements ICheckFieldsObject {
 
-	@SuppressWarnings("unused")
 	private String champsObligatoires;
 
 	@Override

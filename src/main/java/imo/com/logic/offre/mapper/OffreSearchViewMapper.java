@@ -31,6 +31,7 @@ public class OffreSearchViewMapper implements IGeneriqueObjectDtoMapper<OffreSea
 	@Override
 	public OffreSearchViewDto asObjectDto(OffreSearchView in) {
 		OffreSearchViewDto offreSearchViewDto = modelMapper.map(in, OffreSearchViewDto.class);
+		offreSearchViewDto.setTypeServiceOffre(in.getTypeServiceOffre().getLibelle());
 		// Calcule de la durée de l'offre
 		calculDureeOffre(offreSearchViewDto);
 		String typeUser = offreSearchViewDto.getTypeUser();

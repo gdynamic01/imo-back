@@ -13,7 +13,6 @@ import imo.com.model.enums.TypeBienImmobilierEnum;
 import imo.com.model.enums.TypeBienMobileEnum;
 import imo.com.model.enums.TypeMobileMoteurEnum;
 import imo.com.model.enums.TypeOffreEnum;
-import imo.com.model.enums.TypeServiceOffre;
 
 /**
  * @author mbalde
@@ -37,8 +36,6 @@ public class OffreSearchViewDto {
 	public LocalDateTime dateFin = LocalDateTime.now();
 
 	private TypeOffreEnum typeOffre;
-
-	private TypeServiceOffre typeServiceOffre;
 
 	private String titre;
 
@@ -97,6 +94,8 @@ public class OffreSearchViewDto {
 	private String prenom;
 	
 	private String typeUser;
+	
+	private String typeServiceOffre;
 
 	/**
 	 * @return the id
@@ -222,20 +221,6 @@ public class OffreSearchViewDto {
 	 */
 	public void setTypeOffre(TypeOffreEnum typeOffre) {
 		this.typeOffre = typeOffre;
-	}
-
-	/**
-	 * @return the typeServiceOffre
-	 */
-	public TypeServiceOffre getTypeServiceOffre() {
-		return typeServiceOffre;
-	}
-
-	/**
-	 * @param typeServiceOffre the typeServiceOffre to set
-	 */
-	public void setTypeServiceOffre(TypeServiceOffre typeServiceOffre) {
-		this.typeServiceOffre = typeServiceOffre;
 	}
 
 	/**
@@ -642,5 +627,19 @@ public class OffreSearchViewDto {
 	 */
 	public void setTypeUser(String typeUser) {
 		this.typeUser = typeUser;
+	}
+
+	/**
+	 * @return the typeServiceOffre
+	 */
+	public String getTypeServiceOffre() {
+		return typeServiceOffre;
+	}
+
+	/**
+	 * @param typeServiceOffre the typeServiceOffre to set
+	 */
+	public void setTypeServiceOffre(String typeServiceOffre) {
+		this.typeServiceOffre = typeServiceOffre;
 	}
 }
