@@ -3,17 +3,32 @@
  */
 package imo.com.logic.utilisateur.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import imo.com.general.ConstantesUtils;
+import imo.com.general.config.JwtTokenUtil;
+import imo.com.general.config.UsersDetailsServicesImpl;
+import imo.com.logic.FonctialiterCommunes;
 import imo.com.logic.adresse.mapper.AdresseMapper;
+import imo.com.logic.utilisateur.CheckFieldsUser;
+import imo.com.logic.utilisateur.IUser;
 import imo.com.logic.utilisateur.dto.AdresseDto;
+import imo.com.logic.utilisateur.dto.UserDto;
+import imo.com.logic.utilisateur.dto.UserMoralDto;
+import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
+import imo.com.logic.utilisateur.mapper.UserMapper;
+import imo.com.logic.utilisateur.mapper.UserMoralMapper;
 import imo.com.model.pays.PaysEntity;
+import imo.com.model.utilisateur.*;
 import imo.com.repo.adresse.PaysRepository;
+import imo.com.repo.utilisateur.RoleRepository;
+import imo.com.repo.utilisateur.UserRepository;
+import imo.com.repo.utilisateur.moral.UserMoralRepository;
+import imo.com.repo.utilisateur.physique.UserPhysiqueRepository;
+import imo.com.response.ImoResponse;
+import imo.com.response.JwtTokenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,28 +40,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
 
-import imo.com.general.ConstantesUtils;
-import imo.com.general.config.JwtTokenUtil;
-import imo.com.general.config.UsersDetailsServicesImpl;
-import imo.com.logic.FonctialiterCommunes;
-import imo.com.logic.utilisateur.CheckFieldsUser;
-import imo.com.logic.utilisateur.IUser;
-import imo.com.logic.utilisateur.dto.UserDto;
-import imo.com.logic.utilisateur.dto.UserMoralDto;
-import imo.com.logic.utilisateur.dto.UserPhysiqueDto;
-import imo.com.logic.utilisateur.mapper.UserMapper;
-import imo.com.logic.utilisateur.mapper.UserMoralMapper;
-import imo.com.model.utilisateur.AppUser;
-import imo.com.model.utilisateur.Role;
-import imo.com.model.utilisateur.RoleUserEnum;
-import imo.com.model.utilisateur.UserMoralEntity;
-import imo.com.model.utilisateur.UserPhysiqueEntity;
-import imo.com.repo.utilisateur.RoleRepository;
-import imo.com.repo.utilisateur.UserRepository;
-import imo.com.repo.utilisateur.moral.UserMoralRepository;
-import imo.com.repo.utilisateur.physique.UserPhysiqueRepository;
-import imo.com.response.ImoResponse;
-import imo.com.response.JwtTokenResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author balde
@@ -67,6 +65,9 @@ public class UserImpl implements IUser {
 	private final PaysRepository paysRepository;
 	private final AdresseMapper adresseMapper;
 	private final UserPhysiqueRepository userPhysiqueRepo;
+
+	@Value("${loumo.password.regex}")
+	private String loumoPasswordRegrex;
 
 	@Autowired
 	public UserImpl(AuthenticationManager authenticationManager, UsersDetailsServicesImpl userDetailsService,
@@ -106,6 +107,12 @@ public class UserImpl implements IUser {
 
 	}
 
+	private boolean isPasswordValid(String password, String regex) {
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(password);
+		return matcher.matches();
+	}
+
 	@Override
 	@Transactional
 	public ImoResponse<UserMoralDto> registration(UserMoralDto dto) throws UnexpectedRollbackException {
@@ -122,6 +129,11 @@ public class UserImpl implements IUser {
 				roles = roleRepository.findByRoleEnumIn(dto.getRoles());
 			}
 			entity.setRoles(roles);
+			if (!isPasswordValid(dto.getPassword(), loumoPasswordRegrex)) {
+				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
+						ConstantesUtils.INVALID_PASSWORD_FORMAT, null);
+				return imoResponse;
+			}
 			try {
 
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
@@ -150,12 +162,20 @@ public class UserImpl implements IUser {
 		if (checkUser.checkObjectDto(dto, imoResponse))
 			FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
 					ConstantesUtils.MESSAGE_ERREUR_FORMULAIRE_INSCRIPTION, null);
+
+
 		else {
 			UserPhysiqueEntity entity = this.mapperParticulier.asObjectEntity(dto);
 			List<Role> roles = new ArrayList<>();
 			if (dto.getRoles() != null && !dto.getRoles().isEmpty())
 				roles = roleRepository.findByRoleEnumIn(dto.getRoles());
 			entity.setRoles(roles);
+			if (!isPasswordValid(dto.getPassword(), loumoPasswordRegrex)) {
+				FonctialiterCommunes.setImoResponse(imoResponse, HttpStatus.BAD_REQUEST.value(),
+						ConstantesUtils.INVALID_PASSWORD_FORMAT, null);
+				return imoResponse;
+			}
+
 			try {
 				entity.setPassword(this.bcrypte.encode(entity.getPassword()));
 				this.userPhysiqueRepo.saveAndFlush(entity);

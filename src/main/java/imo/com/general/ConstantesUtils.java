@@ -31,6 +31,8 @@ public abstract class ConstantesUtils {
 	
 	public static final String MESSAGE_EMPTY = "<h4>Aucune annonce n'est disponible</h4>";
 
+	public static final String INVALID_PASSWORD_FORMAT = "le format de mot de passe est invalide,veuillez reéssayer";
+
 	/**
 	 * cette methode doit etre enrichie au fur et a mesure pour le traitement des
 	 * messages de contraintes
